@@ -1,0 +1,2 @@
+dlib
+face_recognition
