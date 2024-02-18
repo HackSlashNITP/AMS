@@ -2,7 +2,7 @@ import cv2
 import numpy as np
 
 # Load the image
-image = cv2.imread("subhdiv.jpg")  # Replace "subhdiv.jpg" with the path to your image
+image = cv2.imread("test_imgs\subhdiv.jpg")  # Replace "subhdiv.jpg" with the path to your image
 
 # Define the text and font properties
 text = "Abdul Subhan - 2206270"
@@ -25,7 +25,7 @@ text_position = ((image_with_border.shape[1] - text_size[0]) // 2, border_size -
 cv2.putText(image_with_border, text, text_position, font, font_scale, font_color, font_thickness)
 
 # Save the modified image to a file
-output_path = "modified_image.jpg"
+output_path = "output_imgs\modified_image.jpg"
 cv2.imwrite(output_path, image_with_border)
 
 print(f"Modified image saved to {output_path}")
