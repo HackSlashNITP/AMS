@@ -2,7 +2,7 @@
 
 
 import face_recognition
-import os
+# import os
 
 class Person:
     def __init__(self, name, roll_no, image_path):
