@@ -1,2 +1,4 @@
 dlib
 face_recognition
+opencv-python
+pytesseract

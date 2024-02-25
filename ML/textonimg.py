@@ -1,7 +1,5 @@
 import cv2
 import numpy as np
-from facer import Person
-from facer import recognise
 # recognise()
 # apply_watermark.py
 import cv2
