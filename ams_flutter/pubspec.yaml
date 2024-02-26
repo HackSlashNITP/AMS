@@ -7,8 +7,12 @@ environment:
   sdk: '>=3.2.3 <4.0.0'
 
 dependencies:
+  equatable: ^2.0.5
   flutter:
     sdk: flutter
+  flutter_bloc: ^8.1.4
+  flutter_screenutil: ^5.9.0
+  internet_connection_checker: ^1.0.0+1
 
 dev_dependencies:
   flutter_test:
@@ -16,4 +20,7 @@ dev_dependencies:
   flutter_lints: ^2.0.0
 
 flutter:
+  assets:
+     - Assets/images/
+     - Assets/icons/
   uses-material-design: true
