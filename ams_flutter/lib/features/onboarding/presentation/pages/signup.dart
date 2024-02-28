@@ -89,11 +89,9 @@ class _SignUpState extends State<SignUp> {
                   color: AppColors.darkgrey),
             ),
             OtherLoginBox(
-                text: "Sign in with Google",
-                path: 'Assets/icons/google_icon.png'),
+                text: "Sign in with Google", path: Appimages.google_icon),
             OtherLoginBox(
-                text: "Sign in with Facebook",
-                path: 'Assets/icons/facebook_icon.png'),
+                text: "Sign in with Facebook", path: Appimages.facebook_icon),
           ]),
         ),
       ),
