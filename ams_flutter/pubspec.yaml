@@ -12,6 +12,8 @@ dependencies:
     sdk: flutter
   flutter_bloc: ^8.1.4
   flutter_screenutil: ^5.9.0
+  google_fonts: ^6.1.0
+  image_picker: ^1.0.7
   internet_connection_checker: ^1.0.0+1
 
 dev_dependencies:
