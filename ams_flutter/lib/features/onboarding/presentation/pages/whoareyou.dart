@@ -1,3 +1,4 @@
+import 'package:ams_flutter/core/constants/images.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -29,7 +30,7 @@ class _WhoAreYouState extends State<WhoAreYou> {
               width: 48 * fem,
               height: 48 * fem,
               child: Image.asset(
-                'Assets/images/splash_screen.png',
+                AppImages.splash_image,
                 width: 48 * fem,
                 height: 48 * fem,
               ),
@@ -105,7 +106,7 @@ class _WhoAreYouState extends State<WhoAreYou> {
                         width: 130 * fem,
                         height: 202 * fem,
                         child: Image.asset(
-                          'Assets/images/teacher.png',
+                          AppImages.teacher_image,
                           width: 130 * fem,
                           height: 202 * fem,
                         ),
@@ -173,7 +174,7 @@ class _WhoAreYouState extends State<WhoAreYou> {
                         width: 152 * fem,
                         height: 185 * fem,
                         child: Image.asset(
-                          'Assets/images/student.png',
+                          AppImages.student_image,
                           width: 152 * fem,
                           height: 185 * fem,
                         ),
