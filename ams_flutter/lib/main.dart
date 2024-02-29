@@ -1,25 +1,17 @@
-import 'package:ams_flutter/features/onboarding/presentation/pages/splash.dart';
+import 'package:ams_flutter/features/onboarding/presentation/pages/signup.dart';
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp( MainApp());
+  runApp(const MainApp());
 }
 
 class MainApp extends StatelessWidget {
-   MainApp({super.key});
+  const MainApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return  MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        body: Center(
-          // child: Text('Hello World!'),
-          // child: Image.asset('Assets/images/splash_screen.png'),
-          child: SplashScreen(),
-
-        ),
-      ),
+    return const MaterialApp(
+      home: signup_page(),
     );
   }
 }
