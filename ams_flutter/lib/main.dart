@@ -1,18 +1,23 @@
+import 'package:ams_flutter/features/onboarding/presentation/pages/splash.dart';
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(const MainApp());
+  runApp( MainApp());
 }
 
 class MainApp extends StatelessWidget {
-  const MainApp({super.key});
+   MainApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return  MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
         body: Center(
-          child: Text('Hello World!'),
+          // child: Text('Hello World!'),
+          // child: Image.asset('Assets/images/splash_screen.png'),
+          child: SplashScreen(),
+
         ),
       ),
     );
