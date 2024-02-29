@@ -1,4 +1,8 @@
+import 'package:ams_flutter/core/constants/app_colors.dart';
 import 'package:flutter/material.dart';
+
+import '../../../../core/constants/app_icons.dart';
+import '../../../../core/constants/app_string.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
@@ -18,7 +22,7 @@ class SignUpPageState extends State<SignUpPage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Image.asset(
-              'Assets/images/img.png',
+              AppIcons.app_icon,
               height: 48,
               width: 48,
             )
@@ -34,7 +38,7 @@ class SignUpPageState extends State<SignUpPage> {
               Padding(
                 padding: const EdgeInsets.only(right: 110),
                 child: Text(
-                  "Good to see you!",
+                  WELCOME_TEXT,
                   style: TextStyle(fontSize: 32, fontWeight: FontWeight.w700),
                 ),
               ),
@@ -43,7 +47,7 @@ class SignUpPageState extends State<SignUpPage> {
                 padding: const EdgeInsets.all(8.0),
                 child: TextFormField(
                   decoration: InputDecoration(
-                      labelText: 'Email Address',
+                      labelText: EMAIL_TEXT_FIELD,
                       border: OutlineInputBorder(
                         borderRadius: const BorderRadius.all(
                           const Radius.circular(5.0),
@@ -58,7 +62,7 @@ class SignUpPageState extends State<SignUpPage> {
                 child: TextField(
                   obscureText: _obscureText,
                   decoration: InputDecoration(
-                      labelText: 'Password',
+                      labelText: PASSWORD_TEXT_FIELD,
                       border: OutlineInputBorder(
                         borderRadius: const BorderRadius.all(
                           const Radius.circular(5.0),
@@ -81,7 +85,7 @@ class SignUpPageState extends State<SignUpPage> {
                 children: [
                   Checkbox(
                       side: BorderSide(
-                        color: Colors.grey,
+                        color: AppColors.borderColor,
                       ),
                       value: _rememberMe,
                       onChanged: (value) {
@@ -90,15 +94,17 @@ class SignUpPageState extends State<SignUpPage> {
                         });
                       }),
                   Text(
-                    'Remember me',
-                    style: TextStyle(color: Colors.grey, fontSize: 13),
+                    REMEMBER_TEXT_FIELD,
+                    style:
+                        TextStyle(color: AppColors.borderColor, fontSize: 13),
                   ),
                   Spacer(),
                   TextButton(
                     onPressed: () {},
                     child: Text(
-                      'Forgot Password?',
-                      style: TextStyle(color: Colors.grey, fontSize: 13),
+                      FORGET_PASSWORD_TEXT_FIELD,
+                      style:
+                          TextStyle(color: AppColors.borderColor, fontSize: 13),
                     ),
                   )
                 ],
@@ -106,15 +112,15 @@ class SignUpPageState extends State<SignUpPage> {
               SizedBox(height: 16),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                    foregroundColor: Colors.white,
-                    backgroundColor: Colors.green,
+                    foregroundColor: AppColors.navIconColor,
+                    backgroundColor: AppColors.tabBackgroundColor,
                     padding: EdgeInsets.symmetric(horizontal: 120, vertical: 7),
                     textStyle: TextStyle(fontSize: 15),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(5.0),
                     )),
                 child: Text(
-                  'Sign In',
+                  SIGNIN_TEXT_FIELD,
                   style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.w700,
@@ -130,9 +136,9 @@ class SignUpPageState extends State<SignUpPage> {
                     style: TextStyle(fontSize: 13, fontWeight: FontWeight.w700),
                   ),
                   Text(
-                    ' Create Account',
+                    CREATE_ACCOUNT_TEXT_FIELD,
                     style: TextStyle(
-                        color: Colors.green,
+                        color: AppColors.tabBackgroundColor,
                         fontSize: 13,
                         fontWeight: FontWeight.w700),
                   )
@@ -140,9 +146,9 @@ class SignUpPageState extends State<SignUpPage> {
               ),
               SizedBox(height: 40),
               Text(
-                'Sign In',
+                SIGNIN_TEXT_FIELD,
                 style: TextStyle(
-                    color: Colors.grey,
+                    color: AppColors.borderColor,
                     fontSize: 20,
                     fontWeight: FontWeight.w800),
               ),
@@ -154,8 +160,8 @@ class SignUpPageState extends State<SignUpPage> {
                 children: [
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                        foregroundColor: Colors.grey,
-                        backgroundColor: Colors.white,
+                        foregroundColor: AppColors.borderColor,
+                        backgroundColor: AppColors.navIconColor,
                         padding:
                             EdgeInsets.symmetric(horizontal: 30, vertical: 3),
                         textStyle: TextStyle(fontSize: 15),
@@ -171,7 +177,7 @@ class SignUpPageState extends State<SignUpPage> {
                         ),
                         SizedBox(width: 20),
                         Text(
-                          'Sign in with Google',
+                          GOOGLE_SIGIN_TEXT_FIELD,
                           style: TextStyle(fontWeight: FontWeight.w600),
                         ),
                       ],
@@ -187,8 +193,8 @@ class SignUpPageState extends State<SignUpPage> {
                 children: [
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                        foregroundColor: Colors.grey,
-                        backgroundColor: Colors.white,
+                        foregroundColor: AppColors.borderColor,
+                        backgroundColor: AppColors.navIconColor,
                         padding:
                             EdgeInsets.symmetric(horizontal: 30, vertical: 3),
                         textStyle: TextStyle(fontSize: 15),
@@ -202,7 +208,7 @@ class SignUpPageState extends State<SignUpPage> {
                         Icon(Icons.facebook),
                         SizedBox(width: 20),
                         Text(
-                          'Sign in with Facebook',
+                          FACEBOOK_SIGIN_TEXT_FIELD,
                           style: TextStyle(fontWeight: FontWeight.w600),
                         ),
                       ],
