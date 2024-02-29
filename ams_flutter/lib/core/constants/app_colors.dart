@@ -11,6 +11,13 @@ class AppColors {
   static const Color black = Color.fromRGBO(21, 21, 23, 1);
   static const Color white = Color.fromRGBO(255, 255, 255, 1);
   static const Color title_black = Color.fromRGBO(21, 21, 23, 1);
+
+  // BottomNavBar Colors
+  static const Color navIconColor = Colors.white;
+  static const Color navActiveIconColor = Colors.white;
+  static const Color tabBackgroundColor = Colors.green;
+  static const Color navBackgroundColor = Colors.black;
+
   //shadow colours
   static const Shadow shadow = Shadow(
       color: Color.fromRGBO(0, 0, 0, 0.15),
