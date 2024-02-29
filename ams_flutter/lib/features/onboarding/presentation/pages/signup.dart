@@ -79,7 +79,7 @@ class _SignUpState extends State<SignUp> {
                 textEditingController: _namecontroller,
                 hinttext: "Enrollment No",
                 textInputType: TextInputType.number),
-            button(text: "Next"),
+            SignupLoginButton(text: "Next"),
             Text(
               "Sign in",
               style: TextStyle(
