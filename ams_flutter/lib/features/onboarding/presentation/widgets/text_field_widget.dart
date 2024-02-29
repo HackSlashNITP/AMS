@@ -1,13 +1,13 @@
 import 'package:ams_flutter/core/constants/app_colors.dart';
 import 'package:flutter/material.dart';
 
-class text_field_widget extends StatelessWidget {
+class TextFieldController extends StatelessWidget {
   final TextEditingController textEditingController;
   final String hinttext;
   final TextInputType textInputType;
   final border = 1;
 
-  const text_field_widget(
+  const TextFieldController(
       {super.key,
       required this.textEditingController,
       required this.hinttext,

@@ -1,6 +1,5 @@
 import 'package:ams_flutter/core/constants/app_colors.dart';
 import 'package:ams_flutter/core/constants/app_images.dart';
-import 'package:ams_flutter/core/constants/app_strings.dart';
 import 'package:ams_flutter/core/constants/app_text_styles.dart';
 import 'package:ams_flutter/features/onboarding/presentation/widgets/button.dart';
 import 'package:ams_flutter/features/onboarding/presentation/widgets/elevated_button.dart';
@@ -15,72 +14,74 @@ class SignUp extends StatefulWidget {
 }
 
 class _SignUpState extends State<SignUp> {
-  TextEditingController _emailcontroller = TextEditingController();
-  TextEditingController _namecontroller = TextEditingController();
-  TextEditingController _contactcontroller = TextEditingController();
-  TextEditingController _rollcontroller = TextEditingController();
-  TextEditingController _enrollcontroller = TextEditingController();
+  final List<TextEditingController> _controllers = [];
+
+  @override
+  void initState() {
+    super.initState();
+    for (int i = 0; i < 3; i++) {
+      _controllers.add(TextEditingController());
+    }
+  }
 
   @override
   void dispose() {
     super.dispose();
-    _emailcontroller.dispose();
-    _namecontroller.dispose();
-    _contactcontroller.dispose();
-    _rollcontroller.dispose();
-    _enrollcontroller.dispose();
+    for (var controller in _controllers) {
+      controller.dispose();
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        padding: EdgeInsets.only(top: 21, left: 33, right: 33),
+        padding: const EdgeInsets.only(top: 21, left: 33, right: 33),
         width: double.infinity,
         height: MediaQuery.of(context).size.height,
         child: SingleChildScrollView(
           child: Column(children: [
             Image.asset(
-              Appimages.logo_icon,
+              AppImages.logo_icon,
               height: 48,
               width: 48,
             ),
-            Padding(
-                padding: const EdgeInsets.only(top: 15, bottom: 10),
+            const Padding(
+                padding: EdgeInsets.only(top: 15, bottom: 10),
                 child: Text("Provide Your Details",
                     style: TextStyle(
                         fontSize: 28,
                         fontWeight: FontWeight.w700,
                         fontFamily: AppFontFamily.poppins))),
-            CircleAvatar(
+            const CircleAvatar(
               radius: 47,
             ),
-            Text(
+            const Text(
               "Add Your Photo",
               style: TextStyle(fontSize: 12, color: AppColors.grey),
             ),
-            text_field_widget(
-                textEditingController: _namecontroller,
+            TextFieldController(
+                textEditingController: _controllers[0],
                 hinttext: "Name",
                 textInputType: TextInputType.name),
-            text_field_widget(
-                textEditingController: _namecontroller,
+            TextFieldController(
+                textEditingController: _controllers[1],
                 hinttext: "Email",
                 textInputType: TextInputType.emailAddress),
-            text_field_widget(
-                textEditingController: _namecontroller,
+            TextFieldController(
+                textEditingController: _controllers[2],
                 hinttext: "Phone",
                 textInputType: TextInputType.phone),
-            text_field_widget(
-                textEditingController: _namecontroller,
+            TextFieldController(
+                textEditingController: _controllers[3],
                 hinttext: "Roll",
                 textInputType: TextInputType.number),
-            text_field_widget(
-                textEditingController: _namecontroller,
+            TextFieldController(
+                textEditingController: _controllers[4],
                 hinttext: "Enrollment No",
                 textInputType: TextInputType.number),
             SignupLoginButton(text: "Next"),
-            Text(
+            const Text(
               "Sign in",
               style: TextStyle(
                   fontWeight: FontWeight.w600,
@@ -88,10 +89,10 @@ class _SignUpState extends State<SignUp> {
                   fontFamily: AppFontFamily.poppins,
                   color: AppColors.darkgrey),
             ),
-            OtherLoginBox(
+            const OtherLoginBox(
                 text: "Sign in with Google",
                 path: 'Assets/icons/google_icon.png'),
-            OtherLoginBox(
+            const OtherLoginBox(
                 text: "Sign in with Facebook",
                 path: 'Assets/icons/facebook_icon.png'),
           ]),
