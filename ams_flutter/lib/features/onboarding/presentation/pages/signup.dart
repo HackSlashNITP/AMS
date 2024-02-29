@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class signup_page extends StatefulWidget {
-  const signup_page({super.key});
+class SignUpPage extends StatefulWidget {
+  const SignUpPage({super.key});
 
   @override
-  State<signup_page> createState() => _signup_pageState();
+  State<SignUpPage> createState() => SignUpPageState();
 }
 
-class _signup_pageState extends State<signup_page> {
+class SignUpPageState extends State<SignUpPage> {
   bool _rememberMe = false;
   bool _obscureText = true;
   @override
