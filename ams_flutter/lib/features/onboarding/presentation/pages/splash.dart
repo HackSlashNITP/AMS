@@ -3,21 +3,25 @@ import 'package:ams_flutter/features/onboarding/presentation/pages/whoareyou.dar
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import '../../../../route/app_pages.dart';
+import '../../../../route/custom_navigator.dart';
+
 class SplashScreen extends StatefulWidget {
   @override
   _SplashScreenState createState() => _SplashScreenState();
 }
-
 class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
     Timer(
         const Duration(seconds: 3),
-        () => Navigator.pushReplacement(context,
-            MaterialPageRoute(builder: (context) =>  WhoAreYou())));
+        () => CustomNavigator.pushReplace(
+          context,
+          AppPages.whoAreYou,
+        )
+    );
   }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
