@@ -1,100 +1,223 @@
 import 'package:ams_flutter/core/constants/app_colors.dart';
-import 'package:ams_flutter/core/constants/app_images.dart';
-import 'package:ams_flutter/core/constants/app_strings.dart';
-import 'package:ams_flutter/core/constants/app_text_styles.dart';
-import 'package:ams_flutter/features/onboarding/presentation/widgets/button.dart';
-import 'package:ams_flutter/features/onboarding/presentation/widgets/elevated_button.dart';
-import 'package:ams_flutter/features/onboarding/presentation/widgets/text_field_widget.dart';
 import 'package:flutter/material.dart';
 
-class SignUp extends StatefulWidget {
-  const SignUp({super.key});
+import '../../../../core/constants/app_icons.dart';
+import '../../../../core/constants/app_string.dart';
+
+class SignUpPage extends StatefulWidget {
+  const SignUpPage({super.key});
 
   @override
-  State<SignUp> createState() => _SignUpState();
+  State<SignUpPage> createState() => SignUpPageState();
 }
 
-class _SignUpState extends State<SignUp> {
-  TextEditingController _emailcontroller = TextEditingController();
-  TextEditingController _namecontroller = TextEditingController();
-  TextEditingController _contactcontroller = TextEditingController();
-  TextEditingController _rollcontroller = TextEditingController();
-  TextEditingController _enrollcontroller = TextEditingController();
-
-  @override
-  void dispose() {
-    super.dispose();
-    _emailcontroller.dispose();
-    _namecontroller.dispose();
-    _contactcontroller.dispose();
-    _rollcontroller.dispose();
-    _enrollcontroller.dispose();
-  }
-
+class SignUpPageState extends State<SignUpPage> {
+  bool _rememberMe = false;
+  bool _obscureText = true;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        padding: EdgeInsets.only(top: 21, left: 33, right: 33),
-        width: double.infinity,
-        height: MediaQuery.of(context).size.height,
-        child: SingleChildScrollView(
-          child: Column(children: [
+      appBar: AppBar(
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
             Image.asset(
-              Appimages.logo_icon,
+              AppIcons.app_icon,
               height: 48,
               width: 48,
-            ),
-            Padding(
-                padding: const EdgeInsets.only(top: 15, bottom: 10),
-                child: Text("Provide Your Details",
+            )
+          ],
+        ),
+      ),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: Column(
+            children: [
+              SizedBox(height: 50),
+              Padding(
+                padding: const EdgeInsets.only(right: 110),
+                child: Text(
+                  WELCOME_TEXT,
+                  style: TextStyle(fontSize: 32, fontWeight: FontWeight.w700),
+                ),
+              ),
+              SizedBox(height: 15),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: TextFormField(
+                  decoration: InputDecoration(
+                      labelText: EMAIL_TEXT_FIELD,
+                      border: OutlineInputBorder(
+                        borderRadius: const BorderRadius.all(
+                          const Radius.circular(5.0),
+                        ),
+                      ),
+                      contentPadding: EdgeInsets.symmetric(vertical: 10.0)),
+                ),
+              ),
+              SizedBox(height: 10),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: TextField(
+                  obscureText: _obscureText,
+                  decoration: InputDecoration(
+                      labelText: PASSWORD_TEXT_FIELD,
+                      border: OutlineInputBorder(
+                        borderRadius: const BorderRadius.all(
+                          const Radius.circular(5.0),
+                        ),
+                      ),
+                      contentPadding: EdgeInsets.symmetric(vertical: 10.0),
+                      suffixIcon: IconButton(
+                        icon: Icon(_obscureText
+                            ? Icons.visibility
+                            : Icons.visibility_off),
+                        onPressed: () {
+                          setState(() {
+                            _obscureText = !_obscureText;
+                          });
+                        },
+                      )),
+                ),
+              ),
+              Row(
+                children: [
+                  Checkbox(
+                      side: BorderSide(
+                        color: AppColors.borderColor,
+                      ),
+                      value: _rememberMe,
+                      onChanged: (value) {
+                        setState(() {
+                          _rememberMe = value!;
+                        });
+                      }),
+                  Text(
+                    REMEMBER_TEXT_FIELD,
+                    style:
+                        TextStyle(color: AppColors.borderColor, fontSize: 13),
+                  ),
+                  Spacer(),
+                  TextButton(
+                    onPressed: () {},
+                    child: Text(
+                      FORGET_PASSWORD_TEXT_FIELD,
+                      style:
+                          TextStyle(color: AppColors.borderColor, fontSize: 13),
+                    ),
+                  )
+                ],
+              ),
+              SizedBox(height: 16),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                    foregroundColor: AppColors.navIconColor,
+                    backgroundColor: AppColors.tabBackgroundColor,
+                    padding: EdgeInsets.symmetric(horizontal: 120, vertical: 7),
+                    textStyle: TextStyle(fontSize: 15),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(5.0),
+                    )),
+                child: Text(
+                  SIGNIN_TEXT_FIELD,
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+                onPressed: () {},
+              ),
+              SizedBox(height: 13),
+              Row(
+                children: [
+                  Text(
+                    '    New Here ?',
+                    style: TextStyle(fontSize: 13, fontWeight: FontWeight.w700),
+                  ),
+                  Text(
+                    CREATE_ACCOUNT_TEXT_FIELD,
                     style: TextStyle(
-                        fontSize: 28,
-                        fontWeight: FontWeight.w700,
-                        fontFamily: AppFontFamily.poppins))),
-            CircleAvatar(
-              radius: 47,
-            ),
-            Text(
-              "Add Your Photo",
-              style: TextStyle(fontSize: 12, color: AppColors.grey),
-            ),
-            text_field_widget(
-                textEditingController: _namecontroller,
-                hinttext: "Name",
-                textInputType: TextInputType.name),
-            text_field_widget(
-                textEditingController: _namecontroller,
-                hinttext: "Email",
-                textInputType: TextInputType.emailAddress),
-            text_field_widget(
-                textEditingController: _namecontroller,
-                hinttext: "Phone",
-                textInputType: TextInputType.phone),
-            text_field_widget(
-                textEditingController: _namecontroller,
-                hinttext: "Roll",
-                textInputType: TextInputType.number),
-            text_field_widget(
-                textEditingController: _namecontroller,
-                hinttext: "Enrollment No",
-                textInputType: TextInputType.number),
-            button(text: "Next"),
-            Text(
-              "Sign in",
-              style: TextStyle(
-                  fontWeight: FontWeight.w600,
-                  fontSize: 17,
-                  fontFamily: AppFontFamily.poppins,
-                  color: AppColors.darkgrey),
-            ),
-            OtherLoginBox(
-                text: "Sign in with Google",
-                path: 'Assets/icons/google_icon.png'),
-            OtherLoginBox(
-                text: "Sign in with Facebook",
-                path: 'Assets/icons/facebook_icon.png'),
-          ]),
+                        color: AppColors.tabBackgroundColor,
+                        fontSize: 13,
+                        fontWeight: FontWeight.w700),
+                  )
+                ],
+              ),
+              SizedBox(height: 40),
+              Text(
+                SIGNIN_TEXT_FIELD,
+                style: TextStyle(
+                    color: AppColors.borderColor,
+                    fontSize: 20,
+                    fontWeight: FontWeight.w800),
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                        foregroundColor: AppColors.borderColor,
+                        backgroundColor: AppColors.navIconColor,
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 30, vertical: 3),
+                        textStyle: TextStyle(fontSize: 15),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(5.0),
+                        )),
+                    onPressed: () {},
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.g_translate,
+                        ),
+                        SizedBox(width: 20),
+                        Text(
+                          GOOGLE_SIGIN_TEXT_FIELD,
+                          style: TextStyle(fontWeight: FontWeight.w600),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: 8,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                        foregroundColor: AppColors.borderColor,
+                        backgroundColor: AppColors.navIconColor,
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 30, vertical: 3),
+                        textStyle: TextStyle(fontSize: 15),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(5.0),
+                        )),
+                    onPressed: () {},
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(Icons.facebook),
+                        SizedBox(width: 20),
+                        Text(
+                          FACEBOOK_SIGIN_TEXT_FIELD,
+                          style: TextStyle(fontWeight: FontWeight.w600),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );
