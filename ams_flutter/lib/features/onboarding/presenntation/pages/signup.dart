@@ -91,10 +91,10 @@ class _SignUpState extends State<SignUp> {
             ),
             const OtherLoginBox(
                 text: "Sign in with Google",
-                path: 'Assets/icons/google_icon.png'),
+                path: AppIcons.google_icon),
             const OtherLoginBox(
                 text: "Sign in with Facebook",
-                path: 'Assets/icons/facebook_icon.png'),
+                path: AppIcons.facebook_icon),
           ]),
         ),
       ),
