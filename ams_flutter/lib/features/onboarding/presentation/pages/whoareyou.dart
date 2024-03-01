@@ -1,4 +1,4 @@
-import 'package:ams_flutter/core/constants/images.dart';
+import 'package:ams_flutter/core/constants/app_images.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -17,7 +17,8 @@ class _WhoAreYouState extends State<WhoAreYou> {
     return Container(
       width: double.infinity,
       child: Container(
-        padding: EdgeInsets.fromLTRB(45 * fem, 21 * fem, 63 * fem, 216 * fem), // Adjusted bottom padding
+        padding: EdgeInsets.fromLTRB(
+            45 * fem, 21 * fem, 63 * fem, 216 * fem), // Adjusted bottom padding
         width: double.infinity,
         decoration: BoxDecoration(
           color: Color(0xffffffff),
