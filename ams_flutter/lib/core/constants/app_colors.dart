@@ -17,6 +17,8 @@ class AppColors {
   static const Color navActiveIconColor = Colors.white;
   static const Color tabBackgroundColor = Colors.green;
   static const Color navBackgroundColor = Colors.black;
+  //signup page color
+  static const Color borderColor = Colors.grey;
 
   //shadow colours
   static const Shadow shadow = Shadow(
