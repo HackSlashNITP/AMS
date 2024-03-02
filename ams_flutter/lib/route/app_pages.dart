@@ -6,8 +6,8 @@ class AppPages {
   static const String signUp = '/signUp';
   static const String markAttendance = '/markAttendance';
   static const String loading = '/loading';
+  static const String whoAreYou = '/whoAreYou';
   static const String signUpLanding = '/signUpLanding';
-
   static const String createProfile = '/createProfile';
   static const String editProfile = '/editProfile';
   static const String updateProfile = '/updateProfile';
