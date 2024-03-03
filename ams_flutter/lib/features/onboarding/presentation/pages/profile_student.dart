@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:ams_flutter/core/constants/app_text_styles.dart';
 import 'package:ams_flutter/core/constants/app_images.dart';
 import 'package:ams_flutter/features/onboarding/presentation/widgets/bottom_navbar.dart';
-void main() {
-  runApp( ProfilePage1());
-}
+
 class ProfilePage1 extends StatefulWidget {
   @override
   State<ProfilePage1> createState() => _ProfilePage1State();
@@ -16,7 +14,7 @@ class _ProfilePage1State extends State<ProfilePage1> {
     return Scaffold(
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(20.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
@@ -44,7 +42,7 @@ class _ProfilePage1State extends State<ProfilePage1> {
         ),
         Text(
           'Your Profile',
-          style: AppTextStyles.profilePageHeader,
+          style: TextStyles.profilePageHeader,
         ),
         Image.asset(
           AppImages.bell_image,
@@ -90,7 +88,8 @@ class _ProfilePage1State extends State<ProfilePage1> {
           _buildProfileRow('Designation', 'Teacher'),
           _buildProfileRow('Social Media', 'https://www.instagram.com'),
           SizedBox(height: 8.0),
-          Row(mainAxisAlignment: MainAxisAlignment.end,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
             children: [
               ElevatedButton.icon(
                 onPressed: () {},
@@ -110,11 +109,11 @@ class _ProfilePage1State extends State<ProfilePage1> {
       children: [
         Text(
           title,
-          style: AppTextStyles.profilePageStyle1,
+          style: TextStyles.profilePageStyle1,
         ),
         Text(
           value,
-          style: AppTextStyles.profilePageStyle2,
+          style: TextStyles.profilePageStyle2,
         ),
       ],
     );
@@ -136,7 +135,7 @@ class _ProfilePage1State extends State<ProfilePage1> {
             children: [
               Text(
                 'Attendance',
-                style: AppTextStyles.profilePageStyle2,
+                style: TextStyles.profilePageStyle2,
               ),
               // Image.asset(
               //   AppImages.rightarrow_image,
@@ -153,7 +152,7 @@ class _ProfilePage1State extends State<ProfilePage1> {
           _buildProfileRow('Recent Month', '60%'),
           SizedBox(height: 8.0),
           Container(
-            width: MediaQuery.of(context).size.width * 0.72,
+            width: MediaQuery.of(context).size.width * 1,
             height: MediaQuery.of(context).size.width * 0.06,
             decoration: BoxDecoration(
               color: Color(0xffd9d9d9),
