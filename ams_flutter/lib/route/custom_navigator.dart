@@ -1,11 +1,48 @@
+import 'package:ams_flutter/features/onboarding/presentation/pages/create_password.dart';
+import 'package:ams_flutter/features/onboarding/presentation/pages/providedetailspage.dart';
+import 'package:ams_flutter/features/onboarding/presentation/pages/signup.dart';
+import 'package:ams_flutter/features/onboarding/presentation/pages/whoareyou.dart';
+
 import 'app_pages.dart';
 import 'package:flutter/material.dart';
+import 'package:ams_flutter/features/onboarding/presentation/pages/splash.dart';
 final kNavigatorKey = GlobalKey<NavigatorState>();
-
 class CustomNavigator {
+
+
   static Route<dynamic> controller(RouteSettings settings) {
     //use settings.arguments to pass arguments in pages
     switch (settings.name) {
+      case AppPages.appEntry:
+        return MaterialPageRoute(
+          builder: (context) =>SplashScreen(),
+          settings: settings,
+        );
+      case AppPages.signUp:
+        return MaterialPageRoute(
+          builder: (context) => SignUpPage(),
+          settings: settings,
+        );
+      case AppPages.createNewPassword:
+        return MaterialPageRoute(
+          builder: (context) => const CreatePassword(),
+          settings: settings,
+        );
+      case AppPages.createProfile:
+        return MaterialPageRoute(
+          builder: (context) => const DetailsPage(),
+          settings: settings,
+        );
+      case AppPages.createProfile:
+        return MaterialPageRoute(
+          builder: (context) => const DetailsPage(),
+          settings: settings,
+        );
+      case AppPages.whoAreYou:
+        return MaterialPageRoute(
+          builder: (context) =>WhoAreYou(),
+          settings: settings,
+        );
       default:    throw ('This route name does not exit');
     }
   }
