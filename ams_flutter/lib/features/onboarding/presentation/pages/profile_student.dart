@@ -1,3 +1,4 @@
+import 'package:ams_flutter/core/constants/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:ams_flutter/core/constants/app_text_styles.dart';
 import 'package:ams_flutter/core/constants/app_images.dart';
@@ -57,8 +58,9 @@ class _ProfilePage1State extends State<ProfilePage1> {
     return Container(
       padding: EdgeInsets.all(16.0),
       decoration: BoxDecoration(
-        border: Border.all(color: Color(0xff9b9b9b)),
-        color: Color(0xfff8faf9),
+        border: Border.all(color: AppColors.border1),
+        // color: Color(0xfff8faf9),
+        color: AppColors.white,
         borderRadius: BorderRadius.circular(10.0),
       ),
       child: Column(
@@ -70,7 +72,7 @@ class _ProfilePage1State extends State<ProfilePage1> {
               height: MediaQuery.of(context).size.width * 0.25,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(50),
-                border: Border.all(color: Color(0xffb4b4b4)),
+                border: Border.all(color: AppColors.border2),
                 image: DecorationImage(
                   fit: BoxFit.cover,
                   image: AssetImage(
