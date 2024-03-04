@@ -10,6 +10,14 @@ class ProfilePage1 extends StatefulWidget {
 }
 
 class _ProfilePage1State extends State<ProfilePage1> {
+    List<Map<String, String>> profileDetails = [
+    {'title': 'Name', 'value': 'Steve'},
+    {'title': 'ID', 'value': '12342143'},
+    {'title': 'Email', 'value': 'nit@nit.ac.in'},
+    {'title': 'Contact', 'value': '78XXXXXXX'},
+    {'title': 'Designation', 'value': 'Teacher'},
+    {'title': 'Social Media', 'value': 'https://www.instagram.com'},
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -83,12 +91,18 @@ class _ProfilePage1State extends State<ProfilePage1> {
             ),
           ),
           SizedBox(height: 16.0),
-          _buildProfileRow('Name', 'Steve'),
-          _buildProfileRow('ID', '12342143'),
-          _buildProfileRow('Email', 'nit@nit.ac.in'),
-          _buildProfileRow('Contact', '78XXXXXXX'),
-          _buildProfileRow('Designation', 'Teacher'),
-          _buildProfileRow('Social Media', 'https://www.instagram.com'),
+          // _buildProfileRow('Name', 'Steve'),
+          // _buildProfileRow('ID', '12342143'),
+          // _buildProfileRow('Email', 'nit@nit.ac.in'),
+          // _buildProfileRow('Contact', '78XXXXXXX'),
+          // _buildProfileRow('Designation', 'Teacher'),
+          // _buildProfileRow('Social Media', 'https://www.instagram.com'),
+           Column(
+            children: profileDetails
+                .map((detail) => _buildProfileRow(detail['title']!, detail['value']!))
+                .toList(),
+          ),
+
           SizedBox(height: 8.0),
           Row(
             mainAxisAlignment: MainAxisAlignment.end,
