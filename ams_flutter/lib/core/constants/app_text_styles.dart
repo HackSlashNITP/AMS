@@ -17,4 +17,20 @@ class TextStyles {
       fontWeight: FontWeight.w700,
       fontSize: 32,
       color: AppColors.title_black);
+    static const profilePageStyle1 = TextStyle(
+    fontSize: 11.36,
+    fontWeight: FontWeight.w600,
+    color: Color(0xff5c5c5c),
+  );
+  static const profilePageStyle2 = TextStyle(
+    fontSize: 11.36,
+    fontWeight: FontWeight.w600,
+    color: Color(0xff171717),
+  );
+    static const profilePageHeader = TextStyle(
+      fontSize: 18.06 ,
+      fontWeight: FontWeight.w600,
+      height: 1.5 ,
+      color: Color(0xff098b06),
+);    
 }
