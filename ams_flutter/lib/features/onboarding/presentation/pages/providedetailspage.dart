@@ -7,7 +7,6 @@ import 'package:ams_flutter/features/onboarding/presentation/widgets/elevated_bu
 import 'package:ams_flutter/features/onboarding/presentation/widgets/text_field_widget.dart';
 import 'package:flutter/material.dart';
 
-
 class DetailsPage extends StatefulWidget {
   const DetailsPage({super.key});
 
@@ -21,7 +20,7 @@ class _DetailsPageState extends State<DetailsPage> {
   @override
   void initState() {
     super.initState();
-    for (int i = 0; i < 3; i++) {
+    for (int i = 0; i < 5; i++) {
       _controllers.add(TextEditingController());
     }
   }

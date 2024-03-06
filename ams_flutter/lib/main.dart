@@ -1,3 +1,6 @@
+import 'package:ams_flutter/features/onboarding/presentation/pages/mark_attendance.dart';
+import 'package:ams_flutter/features/onboarding/presentation/pages/providedetailspage.dart';
+import 'package:ams_flutter/features/onboarding/presentation/pages/whoareyou.dart';
 import 'package:ams_flutter/route/app_pages.dart';
 import 'package:ams_flutter/route/custom_navigator.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +18,7 @@ class MainApp extends StatelessWidget {
       onGenerateRoute: CustomNavigator.controller,
       home: Scaffold(
         body: Center(
-          child: Text('Hello World!'),
+          child: MarkAttendance(),
         ),
       ),
     );
