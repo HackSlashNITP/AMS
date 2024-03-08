@@ -13,3 +13,16 @@ const String SIGNIN_TEXT_FIELD = "Sign In";
 const String CREATE_ACCOUNT_TEXT_FIELD = "' Create Account";
 const String FACEBOOK_SIGIN_TEXT_FIELD = "Sign in with Facebbok";
 const String GOOGLE_SIGIN_TEXT_FIELD = "Sign in with Google";
+//for profile page
+const String PROFILE = "Your Profile";
+const String EDIT_PROFILE = "Edit Profile";
+const String ATTENDANCE = "Attendance";
+
+//for provide detail page
+const String PROVIDE_YOUR_DETAIL = "Provide Your Details";
+const String ADD_PHOTO = "Add Your Photo";
+const String NAME = "Name";
+const String EMAIL = "Email";
+const String PHONE = "Phone";
+const String ROLL = "Roll";
+const String ENROLLMENT = "Enrollment No";
