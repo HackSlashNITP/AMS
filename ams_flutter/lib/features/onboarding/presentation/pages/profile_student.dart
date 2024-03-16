@@ -1,8 +1,11 @@
 import 'package:ams_flutter/core/constants/app_colors.dart';
-import 'package:flutter/material.dart';
-import 'package:ams_flutter/core/constants/app_text_styles.dart';
 import 'package:ams_flutter/core/constants/app_images.dart';
+import 'package:ams_flutter/core/constants/app_text_styles.dart';
+import 'package:ams_flutter/core/constants/dummy_models.dart';
 import 'package:ams_flutter/features/onboarding/presentation/widgets/bottom_navbar.dart';
+import 'package:flutter/material.dart';
+
+import '../../../../core/constants/app_string.dart';
 
 class ProfilePage1 extends StatefulWidget {
   @override
@@ -10,16 +13,10 @@ class ProfilePage1 extends StatefulWidget {
 }
 
 class _ProfilePage1State extends State<ProfilePage1> {
-    List<Map<String, String>> profileDetails = [
-    {'title': 'Name', 'value': 'Steve'},
-    {'title': 'ID', 'value': '12342143'},
-    {'title': 'Email', 'value': 'nit@nit.ac.in'},
-    {'title': 'Contact', 'value': '78XXXXXXX'},
-    {'title': 'Designation', 'value': 'Teacher'},
-    {'title': 'Social Media', 'value': 'https://www.instagram.com'},
-  ];
+  late Size mq;
   @override
   Widget build(BuildContext context) {
+    mq = MediaQuery.of(context).size;
     return Scaffold(
       body: SingleChildScrollView(
         child: Padding(
@@ -46,17 +43,17 @@ class _ProfilePage1State extends State<ProfilePage1> {
       children: [
         Image.asset(
           AppImages.arrow_image,
-          width: MediaQuery.of(context).size.width * 0.06,
-          height: MediaQuery.of(context).size.width * 0.06,
+          width: mq.width * 0.06,
+          height: mq.width * 0.06,
         ),
         Text(
-          'Your Profile',
+          PROFILE,
           style: TextStyles.profilePageHeader,
         ),
         Image.asset(
           AppImages.bell_image,
-          width: MediaQuery.of(context).size.width * 0.06,
-          height: MediaQuery.of(context).size.width * 0.06,
+          width: mq.width * 0.06,
+          height: mq.width * 0.06,
         ),
       ],
     );
@@ -76,8 +73,8 @@ class _ProfilePage1State extends State<ProfilePage1> {
         children: [
           Center(
             child: Container(
-              width: MediaQuery.of(context).size.width * 0.25,
-              height: MediaQuery.of(context).size.width * 0.25,
+              width: mq.width * 0.25,
+              height: mq.width * 0.25,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(50),
                 border: Border.all(color: AppColors.border2),
@@ -97,9 +94,10 @@ class _ProfilePage1State extends State<ProfilePage1> {
           // _buildProfileRow('Contact', '78XXXXXXX'),
           // _buildProfileRow('Designation', 'Teacher'),
           // _buildProfileRow('Social Media', 'https://www.instagram.com'),
-           Column(
-            children: profileDetails
-                .map((detail) => _buildProfileRow(detail['title']!, detail['value']!))
+          Column(
+            children: AppInfo.profileDetails
+                .map((detail) =>
+                    _buildProfileRow(detail['title']!, detail['value']!))
                 .toList(),
           ),
 
@@ -110,7 +108,7 @@ class _ProfilePage1State extends State<ProfilePage1> {
               ElevatedButton.icon(
                 onPressed: () {},
                 icon: Icon(Icons.edit),
-                label: Text('Edit details'),
+                label: Text(EDIT_PROFILE),
               ),
             ],
           ),
@@ -150,7 +148,7 @@ class _ProfilePage1State extends State<ProfilePage1> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                'Attendance',
+                ATTENDANCE,
                 style: TextStyles.profilePageStyle2,
               ),
               // Image.asset(
@@ -160,7 +158,7 @@ class _ProfilePage1State extends State<ProfilePage1> {
               // ),
               Icon(
                 Icons.arrow_circle_right_outlined,
-                size: MediaQuery.of(context).size.width * 0.05,
+                size: mq.width * 0.05,
               ),
             ],
           ),
@@ -168,20 +166,18 @@ class _ProfilePage1State extends State<ProfilePage1> {
           _buildProfileRow('Recent Month', '60%'),
           SizedBox(height: 8.0),
           Container(
-            width: MediaQuery.of(context).size.width * 1,
-            height: MediaQuery.of(context).size.width * 0.06,
+            width: mq.width * 1,
+            height: mq.width * 0.06,
             decoration: BoxDecoration(
               color: Color(0xffd9d9d9),
-              borderRadius: BorderRadius.circular(
-                  MediaQuery.of(context).size.width * 0.06),
+              borderRadius: BorderRadius.circular(mq.width * 0.06),
             ),
             child: FractionallySizedBox(
               alignment: Alignment.topLeft,
               widthFactor: 0.6,
               child: Container(
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(
-                      MediaQuery.of(context).size.width * 0.06),
+                  borderRadius: BorderRadius.circular(mq.width * 0.06),
                   gradient: LinearGradient(
                     begin: Alignment.centerRight,
                     end: Alignment.centerLeft,
