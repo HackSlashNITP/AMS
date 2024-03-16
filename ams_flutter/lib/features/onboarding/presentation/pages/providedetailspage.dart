@@ -1,12 +1,12 @@
 import 'package:ams_flutter/core/constants/app_colors.dart';
 import 'package:ams_flutter/core/constants/app_icons.dart';
 import 'package:ams_flutter/core/constants/app_images.dart';
+import 'package:ams_flutter/core/constants/app_string.dart';
 import 'package:ams_flutter/core/constants/app_text_styles.dart';
 import 'package:ams_flutter/features/onboarding/presentation/widgets/button.dart';
 import 'package:ams_flutter/features/onboarding/presentation/widgets/elevated_button.dart';
 import 'package:ams_flutter/features/onboarding/presentation/widgets/text_field_widget.dart';
 import 'package:flutter/material.dart';
-
 
 class DetailsPage extends StatefulWidget {
   const DetailsPage({super.key});
@@ -50,7 +50,7 @@ class _DetailsPageState extends State<DetailsPage> {
             ),
             const Padding(
                 padding: EdgeInsets.only(top: 15, bottom: 10),
-                child: Text("Provide Your Details",
+                child: Text(PROVIDE_YOUR_DETAIL,
                     style: TextStyle(
                         fontSize: 28,
                         fontWeight: FontWeight.w700,
@@ -59,32 +59,32 @@ class _DetailsPageState extends State<DetailsPage> {
               radius: 47,
             ),
             const Text(
-              "Add Your Photo",
+              ADD_PHOTO,
               style: TextStyle(fontSize: 12, color: AppColors.grey),
             ),
             TextFieldController(
                 textEditingController: _controllers[0],
-                hinttext: "Name",
+                hinttext: NAME,
                 textInputType: TextInputType.name),
             TextFieldController(
                 textEditingController: _controllers[1],
-                hinttext: "Email",
+                hinttext: EMAIL,
                 textInputType: TextInputType.emailAddress),
             TextFieldController(
                 textEditingController: _controllers[2],
-                hinttext: "Phone",
+                hinttext: PHONE,
                 textInputType: TextInputType.phone),
             TextFieldController(
                 textEditingController: _controllers[3],
-                hinttext: "Roll",
+                hinttext: ROLL,
                 textInputType: TextInputType.number),
             TextFieldController(
                 textEditingController: _controllers[4],
-                hinttext: "Enrollment No",
+                hinttext: ENROLLMENT,
                 textInputType: TextInputType.number),
             SignupLoginButton(text: "Next"),
             const Text(
-              "Sign in",
+              SIGNIN_TEXT_FIELD,
               style: TextStyle(
                   fontWeight: FontWeight.w600,
                   fontSize: 17,
@@ -92,9 +92,9 @@ class _DetailsPageState extends State<DetailsPage> {
                   color: AppColors.darkgrey),
             ),
             const OtherLoginBox(
-                text: "Sign in with Google", path: AppIcons.google_icon),
+                text: GOOGLE_SIGIN_TEXT_FIELD, path: AppIcons.google_icon),
             const OtherLoginBox(
-                text: "Sign in with Facebook", path: AppIcons.facebook_icon),
+                text: FACEBOOK_SIGIN_TEXT_FIELD, path: AppIcons.facebook_icon),
           ]),
         ),
       ),

@@ -27,6 +27,11 @@ class AppColors {
       offset: Offset(1, 2),
       blurRadius: 5.800000190734863);
 
+  //Profile_Page colors
+  static const Color border1 = Color(0xff9b9b9b);
+  static const Color border2 = Color(0xffb4b4b4);
+  static const Color pwhite = Color(0xfff8faf9);
+
   // HomePage Colors
   static const classComponentBgColor = Color(0xFF151517);
   static const classComponentBtnBgColor = Color(0xFF2F2F2F);
