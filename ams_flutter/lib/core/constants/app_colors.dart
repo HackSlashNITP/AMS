@@ -4,6 +4,7 @@ class AppColors {
   //Brand primary colors
   static const Color primary = Color.fromRGBO(247, 198, 69, 1);
   static const Color secondary = Color.fromRGBO(78, 159, 61, 1);
+  static const Color professorThemeColor = Color(0xFF0FAE0C);
 
   //neutral colours
   static const Color grey = Color.fromRGBO(179, 179, 179, 1);
@@ -25,4 +26,11 @@ class AppColors {
       color: Color.fromRGBO(0, 0, 0, 0.15),
       offset: Offset(1, 2),
       blurRadius: 5.800000190734863);
+
+  // HomePage Colors
+  static const classComponentBgColor = Color(0xFF151517);
+  static const classComponentBtnBgColor = Color(0xFF2F2F2F);
+  static const classComponentTimingColor = Color(0xFF909090);
+  static const classComponentNotMarkedColor = Color(0xFFDF1F1F);
+  static const classComponentOvelBtnColor = Color(0xFF8C8C8C);
 }
