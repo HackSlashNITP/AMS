@@ -23,33 +23,36 @@ class _MarkAttendanceState extends State<MarkAttendance> {
   Widget build(BuildContext context) {
     mq = MediaQuery.of(context).size;
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(20.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              _buildHeader(context),
-              SizedBox(height: 16.0),
-              _buildDropDown(context),
-              // SizedBox(height: 16),
-              TextFieldController(
-                  textEditingController: TextEditingController(),
-                  hinttext: "SearchStudent",
-                  textInputType: TextInputType.name,
-                  prefixIcon: Icon(Icons.search),
-                  borderRadius: 40),
-              StudentList(
-                students: dummyStudents
-                    .map((student) => Student(
-                          name: student['name'],
-                          rollno: student['rollno'],
-                          photoUrl: student['photoUrl'],
-                        ))
-                    .toList(),
+      body: Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            _buildHeader(context),
+            SizedBox(height: 16.0),
+            _buildDropDown(context),
+            SizedBox(height: 4),
+            TextFieldController(
+                textEditingController: TextEditingController(),
+                hinttext: "SearchStudent",
+                textInputType: TextInputType.name,
+                prefixIcon: Icon(Icons.search),
+                borderRadius: 40),
+                // SizedBox(height: 4.0),
+            Expanded(
+              child: SingleChildScrollView(
+                child: StudentList(
+                  students: dummyStudents
+                      .map((student) => Student(
+                            name: student['name'],
+                            rollno: student['rollno'],
+                            photoUrl: student['photoUrl'],
+                          ))
+                      .toList(),
+                ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
       bottomNavigationBar: BottomNavBar(),
