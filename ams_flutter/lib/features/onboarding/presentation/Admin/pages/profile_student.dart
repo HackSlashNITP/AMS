@@ -5,7 +5,7 @@ import 'package:ams_flutter/core/constants/dummy_models.dart';
 import 'package:ams_flutter/features/onboarding/presentation/widgets/bottom_navbar.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../core/constants/app_string.dart';
+import '../../../../../core/constants/app_string.dart';
 
 class ProfilePage1 extends StatefulWidget {
   @override

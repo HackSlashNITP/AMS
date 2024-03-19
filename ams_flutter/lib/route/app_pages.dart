@@ -3,6 +3,7 @@ class AppPages {
   static const String appEntryPage = '/appEntryPage';
   static const String onBoarding = '/onBoarding';
   static const String login = '/login';
+  static const String HomeStudent = '/HomeStudent';
   static const String signUp = '/signUp';
   static const String markAttendance = '/markAttendance';
   static const String loading = '/loading';

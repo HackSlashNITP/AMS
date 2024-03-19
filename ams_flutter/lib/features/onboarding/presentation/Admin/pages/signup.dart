@@ -1,8 +1,8 @@
 import 'package:ams_flutter/core/constants/app_colors.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../core/constants/app_icons.dart';
-import '../../../../core/constants/app_string.dart';
+import '../../../../../core/constants/app_icons.dart';
+import '../../../../../core/constants/app_string.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
