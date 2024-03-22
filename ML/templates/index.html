@@ -6,15 +6,17 @@
     <title>Upload Image</title>
     <style>
         body {
-            background: linear-gradient(to bottom right, #4CAF50, #2196F3); /* Gradient background */
+            background-color: black; /* Black background */
             height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
             margin: 0;
+            overflow: hidden; /* Hide overflow to prevent scroll bars */
         }
-
         form {
+            position: relative;
+            z-index: 1;
             background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
             padding: 20px;
             border-radius: 10px;
@@ -41,7 +43,7 @@
     </style>
 </head>
 <body>
-    <h1 style="color: white; text-align: center;">Upload Image</h1>
+    <div class="fireworks"></div>
     <form action="/recognize" method="post" enctype="multipart/form-data">
         <input type="file" name="file" accept="image/*">
         <br>

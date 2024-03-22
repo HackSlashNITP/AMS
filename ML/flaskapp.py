@@ -2,10 +2,12 @@ from facer import Person
 from flask import Flask, request, jsonify, render_template
 from textonimg import apply_watermark
 from flask_cors import CORS
+from functools import lru_cache
 
 app = Flask(__name__)
 CORS(app)  
 
+@lru_cache(maxsize=None)
 def get_persons():
     ##when database will be connected here we will fetch all persons information.
     persons = []
