@@ -26,3 +26,10 @@ const String EMAIL = "Email";
 const String PHONE = "Phone";
 const String ROLL = "Roll";
 const String ENROLLMENT = "Enrollment No";
+
+//for create_instant_class
+const String CREATE_INSTANT_CLASS = "Create Instant Class";
+const String ENTER_SUB_CODE = "Enter Subject Code";
+const String CLASSROOM = "Select Classroom";
+const String DAY = "Select Day";
+const String SELECT_TIME = "Select Time";
