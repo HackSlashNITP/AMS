@@ -13,37 +13,32 @@ class DummyModels {
     {
       'name': 'Shakti',
       'rollno': '2206201',
-      'photoUrl': 'https://randomuser.me/api/portraits/men/1.jpg',
+      'photoUrl': '',
     },
     {
       'name': 'Mahima',
       'rollno': '2206201',
-      'photoUrl': 'https://randomuser.me/api/portraits/women/2.jpg',
+      'photoUrl': '',
     },
     {
       'name': 'Piyush',
       'rollno': '2206201',
-      'photoUrl': 'https://randomuser.me/api/portraits/men/3.jpg',
+      'photoUrl': '',
     },
     {
       'name': 'Shradha',
       'rollno': '2206201',
-      'photoUrl': 'https://randomuser.me/api/portraits/women/4.jpg',
+      'photoUrl': '',
     },
     {
       'name': 'Dev',
       'rollno': '2206201',
-      'photoUrl': 'https://randomuser.me/api/portraits/men/5.jpg',
+      'photoUrl': '',
     },
     {
       'name': 'Utkarsh',
       'rollno': '2206201',
-      'photoUrl': 'https://randomuser.me/api/portraits/men/6.jpg',
-    },
-       {
-      'name': 'Divyansh',
-      'rollno': '2206201',
-      'photoUrl': 'https://randomuser.me/api/portraits/men/7.jpg',
+      'photoUrl': '',
     },
   ];
 }

@@ -14,10 +14,8 @@ class MarkAttendance extends StatefulWidget {
   @override
   State<MarkAttendance> createState() => _MarkAttendanceState();
 }
-
 class _MarkAttendanceState extends State<MarkAttendance> {
   late Size mq;
-
   List<Map<String, dynamic>> dummyStudents = DummyModels.dummyStudents;
   @override
   Widget build(BuildContext context) {
@@ -62,16 +60,31 @@ class _MarkAttendanceState extends State<MarkAttendance> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Image.asset(
-          AppImages.arrow_image,
-          width: mq.width * 0.06,
-          height: mq.width * 0.06,
-        ),
-        Image.asset(
-          AppImages.bell_image,
-          width: mq.width * 0.06,
-          height: mq.width * 0.06,
-        ),
+        // Image.asset(
+        //   AppImages.arrow_image,
+        //   width: mq.width * 0.06,
+        //   height: mq.width * 0.06,
+        // ),
+                    IconButton(
+        icon: Icon(Icons.arrow_back,
+        color: Colors.green,
+        size: mq.width * 0.07,),
+        onPressed: () {    
+        },
+      ),
+        // Image.asset(
+        //   AppImages.bell_image,
+        //   width: mq.width * 0.06,
+        //   height: mq.width * 0.06,
+        // ),  
+      IconButton(
+        icon: Icon(Icons.notifications,
+
+        color: Colors.green,
+        size: mq.width * 0.07,),
+        onPressed: () {
+        },
+      ),
       ],
     );
   }
