@@ -2,7 +2,7 @@ import 'package:ams_flutter/core/constants/app_colors.dart';
 import 'package:ams_flutter/core/constants/app_images.dart';
 import 'package:ams_flutter/core/constants/app_text_styles.dart';
 import 'package:ams_flutter/core/constants/dummy_models.dart';
-import 'package:ams_flutter/features/onboarding/presentation/widgets/bottom_navbar.dart';
+import 'package:ams_flutter/features/onboarding/presentation/Admin/widgets/bottom_navbar.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../core/constants/app_string.dart';

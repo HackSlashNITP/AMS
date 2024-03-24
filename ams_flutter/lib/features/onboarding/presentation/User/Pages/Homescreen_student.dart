@@ -1,6 +1,6 @@
 import 'package:ams_flutter/core/constants/app_colors.dart';
 import 'package:ams_flutter/core/constants/app_text_styles.dart';
-import 'package:ams_flutter/features/onboarding/presentation/widgets/student_class_widget.dart';
+import 'package:ams_flutter/features/onboarding/presentation/User/widget/student_class_widget.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreenStudent extends StatefulWidget {

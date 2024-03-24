@@ -1,6 +1,7 @@
 import 'package:ams_flutter/core/constants/app_colors.dart';
-import 'package:ams_flutter/features/onboarding/presentation/pages/homescreen_student.dart';
-import 'package:ams_flutter/features/onboarding/presentation/pages/signup.dart';
+import 'package:ams_flutter/features/onboarding/presentation/Admin/pages/signup.dart';
+import 'package:ams_flutter/features/onboarding/presentation/User/Pages/Homescreen_student.dart';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 

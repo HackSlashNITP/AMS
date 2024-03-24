@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'package:ams_flutter/features/onboarding/presentation//pages/whoareyou.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../../../../../route/app_pages.dart';

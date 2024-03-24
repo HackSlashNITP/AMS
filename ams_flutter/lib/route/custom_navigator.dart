@@ -1,12 +1,13 @@
-import 'package:ams_flutter/features/onboarding/presentation/pages/providedetailspage.dart';
-import 'package:ams_flutter/features/onboarding/presentation/pages/signup.dart';
-import 'package:ams_flutter/features/onboarding/presentation/pages/whoareyou.dart';
-import 'package:ams_flutter/features/onboarding/presentation/pages/Pageview_student.dart';
-import 'package:ams_flutter/features/onboarding/presentation/pages/create_password.dart';
+import 'package:ams_flutter/features/onboarding/presentation/Admin/pages/create_password.dart';
+import 'package:ams_flutter/features/onboarding/presentation/Admin/pages/providedetailspage.dart';
+import 'package:ams_flutter/features/onboarding/presentation/Admin/pages/signup.dart';
+import 'package:ams_flutter/features/onboarding/presentation/Admin/pages/splash.dart';
+import 'package:ams_flutter/features/onboarding/presentation/Admin/pages/whoareyou.dart';
+import 'package:ams_flutter/features/onboarding/presentation/User/Pages/Pageview_student.dart';
+
+import 'package:flutter/material.dart';
 
 import 'app_pages.dart';
-import 'package:flutter/material.dart';
-import 'package:ams_flutter/features/onboarding/presentation/pages/splash.dart';
 
 final kNavigatorKey = GlobalKey<NavigatorState>();
 
