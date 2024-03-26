@@ -3,17 +3,16 @@ import 'package:ams_flutter/core/constants/app_icons.dart';
 import 'package:ams_flutter/core/constants/app_images.dart';
 import 'package:ams_flutter/core/constants/app_text_styles.dart';
 import 'package:ams_flutter/core/constants/dummy_models.dart';
-import 'package:ams_flutter/features/onboarding/presentation/widgets/bottom_navbar.dart';
-import 'package:ams_flutter/features/onboarding/presentation/widgets/text_field_widget.dart';
+import 'package:ams_flutter/features/onboarding/presentation/Admin/widgets/bottom_navbar.dart';
+import 'package:ams_flutter/features/onboarding/presentation/Admin/widgets/text_field_widget.dart';
 import 'package:flutter/material.dart';
-import '../../../../core/constants/app_string.dart';
-import '../../../../core/constants/dummy_models.dart';
 import '../widgets/studentlist.dart';
 
 class MarkAttendance extends StatefulWidget {
   @override
   State<MarkAttendance> createState() => _MarkAttendanceState();
 }
+
 class _MarkAttendanceState extends State<MarkAttendance> {
   late Size mq;
   List<Map<String, dynamic>> dummyStudents = DummyModels.dummyStudents;
@@ -36,7 +35,7 @@ class _MarkAttendanceState extends State<MarkAttendance> {
                 textInputType: TextInputType.name,
                 prefixIcon: Icon(Icons.search),
                 borderRadius: 40),
-                // SizedBox(height: 4.0),
+            // SizedBox(height: 4.0),
             Expanded(
               child: SingleChildScrollView(
                 child: StudentList(
@@ -56,6 +55,7 @@ class _MarkAttendanceState extends State<MarkAttendance> {
       bottomNavigationBar: BottomNavBar(),
     );
   }
+
   Widget _buildHeader(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -65,26 +65,27 @@ class _MarkAttendanceState extends State<MarkAttendance> {
         //   width: mq.width * 0.06,
         //   height: mq.width * 0.06,
         // ),
-                    IconButton(
-        icon: Icon(Icons.arrow_back,
-        color: Colors.green,
-        size: mq.width * 0.07,),
-        onPressed: () {    
-        },
-      ),
+        IconButton(
+          icon: Icon(
+            Icons.arrow_back,
+            color: Colors.green,
+            size: mq.width * 0.07,
+          ),
+          onPressed: () {},
+        ),
         // Image.asset(
         //   AppImages.bell_image,
         //   width: mq.width * 0.06,
         //   height: mq.width * 0.06,
-        // ),  
-      IconButton(
-        icon: Icon(Icons.notifications,
-
-        color: Colors.green,
-        size: mq.width * 0.07,),
-        onPressed: () {
-        },
-      ),
+        // ),
+        IconButton(
+          icon: Icon(
+            Icons.notifications,
+            color: Colors.green,
+            size: mq.width * 0.07,
+          ),
+          onPressed: () {},
+        ),
       ],
     );
   }
@@ -111,6 +112,4 @@ class _MarkAttendanceState extends State<MarkAttendance> {
       ],
     );
   }
-
 }
-

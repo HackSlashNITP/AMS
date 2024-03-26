@@ -1,7 +1,8 @@
 import 'package:ams_flutter/core/constants/app_colors.dart';
 import 'package:ams_flutter/core/constants/app_images.dart';
-import 'package:ams_flutter/features/onboarding/presentation/widgets/class_component.dart';
-import 'package:ams_flutter/features/onboarding/presentation/widgets/ovel_datebutton.dart';
+import 'package:ams_flutter/features/onboarding/presentation/Admin/widgets/class_component.dart';
+import 'package:ams_flutter/features/onboarding/presentation/Admin/widgets/ovel_datebutton.dart';
+
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {

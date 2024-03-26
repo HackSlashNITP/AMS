@@ -1,5 +1,5 @@
-import "package:ams_flutter/features/onboarding/presentation/widgets/bottom_navbar.dart";
-import "package:ams_flutter/features/onboarding/presentation/widgets/student_widget.dart";
+import "package:ams_flutter/features/onboarding/presentation/Admin/widgets/bottom_navbar.dart";
+import "package:ams_flutter/features/onboarding/presentation/Admin/widgets/student_widget.dart";
 import "package:flutter/material.dart";
 
 const List<String> list1 = <String>['B.Tech', 'M.Tech', 'PhD'];
