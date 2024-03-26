@@ -5,13 +5,18 @@ class TextFieldController extends StatelessWidget {
   final TextEditingController textEditingController;
   final String hinttext;
   final TextInputType textInputType;
+  final Icon? prefixIcon;
+  final double borderRadius;
   final border = 1;
 
-  const TextFieldController(
-      {super.key,
-      required this.textEditingController,
-      required this.hinttext,
-      required this.textInputType});
+  const TextFieldController({
+    super.key,
+    required this.textEditingController,
+    required this.hinttext,
+    required this.textInputType,
+    this.prefixIcon,
+    this.borderRadius = 8.0,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -23,13 +28,15 @@ class TextFieldController extends StatelessWidget {
           controller: textEditingController,
           keyboardType: textInputType,
           decoration: InputDecoration(
+              prefixIcon: prefixIcon != null ? prefixIcon : null, 
               contentPadding:
                   EdgeInsets.symmetric(vertical: 15, horizontal: 15),
               hintText: hinttext,
               hintStyle: TextStyle(color: AppColors.grey),
               focusColor: AppColors.grey,
               enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(8)),
+                  // borderRadius: BorderRadius.all(Radius.circular(8)),
+                  borderRadius: BorderRadius.all(Radius.circular(borderRadius)),
                   borderSide: BorderSide(color: AppColors.grey)),
               focusedBorder: OutlineInputBorder(
                   borderSide: BorderSide(color: AppColors.grey))),
