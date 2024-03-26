@@ -11,7 +11,11 @@ class Person:
 
   def recognise(self, image_path):
     unknown_image = face_recognition.load_image_file(image_path)
-    unknown_encoding = face_recognition.face_encodings(unknown_image)[0]
+    unknown_encoding = face_recognition.face_encodings(unknown_image)
+    if len(unknown_encoding)>0:
+      unknown_encoding = unknown_encoding[0]
+    else:
+      return None
     results = face_recognition.compare_faces([self.encoding], unknown_encoding)
 
     if results[0]:
