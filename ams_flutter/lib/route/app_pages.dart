@@ -5,7 +5,7 @@ class AppPages {
   static const String login = '/login';
   static const String HomeStudent = '/HomeStudent';
   static const String signUp = '/signUp';
-  static const String markAttendance = '/markAttendance';
+  static const String MarkAttendance = '/MarkAttendance';
   static const String loading = '/loading';
   static const String whoAreYou = '/whoAreYou';
   static const String signUpLanding = '/signUpLanding';

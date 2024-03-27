@@ -17,6 +17,7 @@ dependencies:
   google_fonts: ^6.1.0
   internet_connection_checker: ^1.0.0+1
   getwidget: ^4.0.0
+  image_picker: ^1.0.7
 
 dev_dependencies:
   flutter_test:
