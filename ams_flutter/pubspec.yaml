@@ -14,7 +14,7 @@ dependencies:
   flutter_screenutil: ^5.9.0
   font_awesome_flutter: ^10.7.0
   google_nav_bar: ^5.0.6
-  google_fonts: ^6.1.0
+  google_fonts: 6.1.0
   internet_connection_checker: ^1.0.0+1
   getwidget: ^4.0.0
   image_picker: ^1.0.7

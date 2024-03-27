@@ -12,12 +12,8 @@ class MarkAttendance extends StatefulWidget {
 }
 
 class _MarkAttendanceState extends State<MarkAttendance> {
-  Uint8List? _image;
-
-  void SelectImage() async {
-    Uint8List img = await ImagePickHelper().pickimage(ImageSource.camera);
-    _image = img;
-  }
+  Uint8List? _image1;
+  Uint8List? _image2;
 
   @override
   Widget build(BuildContext context) {
@@ -34,48 +30,72 @@ class _MarkAttendanceState extends State<MarkAttendance> {
           ),
           title: const Text('Mark Attendance'),
         ),
-        body: Column(
-          children: [
-            Card(
-              child: ListTile(
-                  title: const Text("Student's Photo"),
-                  subtitle: const Text('Upload Your photo'),
-                  trailing: (_image == null)
-                      ? Icon(Icons.camera_alt_outlined)
-                      : Icon(
-                          Icons.check_circle,
-                          color: Colors.green,
-                        ),
-                  onTap: () => SelectImage()),
-            ),
-            Card(
-              child: ListTile(
-                  title: const Text("Professor's Photo"),
-                  subtitle: const Text('Upload Professor photo'),
-                  trailing: (_image == null)
-                      ? Icon(Icons.camera_alt_outlined)
-                      : Icon(
-                          Icons.check_circle,
-                          color: Colors.green,
-                        ),
-                  onTap: () => SelectImage()),
-            ),
-            Spacer(),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                Expanded(
-                  child: ElevatedButton(
-                    onPressed: () {},
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: AppColors.primary,
-                    ),
-                    child: const Text('Mark Attendance'),
+        body: SafeArea(
+          top: true,
+          bottom: true,
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Card(
+                  child: ListTile(
+                      title: const Text("Student's Photo",
+                          style: TextStyle(
+                              fontWeight: FontWeight.w500, fontSize: 18)),
+                      subtitle: const Text('Upload Your photo',
+                          style: TextStyle(fontSize: 13)),
+                      trailing: (_image1 == null)
+                          ? Icon(Icons.camera_alt_outlined)
+                          : Icon(
+                              Icons.check_circle,
+                              color: Colors.green,
+                            ),
+                      onTap: () async {
+                        Uint8List img = await ImagePickHelper()
+                            .pickimage(ImageSource.camera);
+                        setState(() {
+                          _image1 = img;
+                        });
+                      }),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Card(
+                  child: ListTile(
+                      title: const Text("Professor's Photo",
+                          style: TextStyle(
+                              fontWeight: FontWeight.w500, fontSize: 18)),
+                      subtitle: const Text('Upload Professor photo',
+                          style: TextStyle(fontSize: 13)),
+                      trailing: (_image2 == null)
+                          ? Icon(Icons.camera_alt_outlined)
+                          : Icon(
+                              Icons.check_circle,
+                              color: Colors.green,
+                            ),
+                      onTap: () async {
+                        Uint8List img = await ImagePickHelper()
+                            .pickimage(ImageSource.camera);
+                        setState(() {
+                          _image2 = img;
+                        });
+                      }),
+                ),
+              ),
+              Spacer(),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: ElevatedButton(
+                  onPressed: () {},
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: AppColors.primary,
                   ),
-                )
-              ],
-            )
-          ],
+                  child: const Text('Mark Attendance'),
+                ),
+              ),
+            ],
+          ),
         ));
   }
 }
