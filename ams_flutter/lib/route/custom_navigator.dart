@@ -4,6 +4,7 @@ import 'package:ams_flutter/features/onboarding/presentation/Admin/pages/signup.
 import 'package:ams_flutter/features/onboarding/presentation/Admin/pages/splash.dart';
 import 'package:ams_flutter/features/onboarding/presentation/Admin/pages/whoareyou.dart';
 import 'package:ams_flutter/features/onboarding/presentation/User/Pages/Pageview_student.dart';
+import 'package:ams_flutter/features/onboarding/presentation/User/Pages/showattendance_student.dart';
 
 import 'package:flutter/material.dart';
 
@@ -43,6 +44,11 @@ class CustomNavigator {
       case AppPages.HomeStudent:
         return MaterialPageRoute(
           builder: (context) => ViewStudentScreen(),
+          settings: settings,
+        );
+      case AppPages.showAttendance:
+        return MaterialPageRoute(
+          builder: (context) => ShowAttendance(),
           settings: settings,
         );
       default:

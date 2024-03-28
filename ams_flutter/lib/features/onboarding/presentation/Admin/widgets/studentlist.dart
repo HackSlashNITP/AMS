@@ -82,11 +82,17 @@ class BuildButton extends StatefulWidget {
   final Text text;
   final Color color;
   final double borderRadius;
+  final double? width;
+  final double? height;
+  
   const BuildButton({
     Key? key,
     required this.text,
     required this.color,
     this.borderRadius = 8.0,
+    this.width, 
+    this.height,
+    
   }) : super(key: key);
 
   @override
@@ -98,14 +104,18 @@ class _BuildButtonState extends State<BuildButton> {
   Widget build(BuildContext context) {
     return GestureDetector(
       child: Container(
+        height: widget.height,
+        width: widget.width,
         padding: EdgeInsets.symmetric(vertical: 4, horizontal: 10),
         decoration: BoxDecoration(
           color: widget.color,
           borderRadius: BorderRadius.all(Radius.circular(widget.borderRadius)),
         ),
-        child: Text(
-          widget.text.data!,
-          style: TextStyle(color: Colors.white),
+        child: Align(alignment: Alignment.centerLeft,
+          child: Text(
+            widget.text.data!,
+            style: TextStyle(color: Colors.white),
+          ),
         ),
       ),
     );
