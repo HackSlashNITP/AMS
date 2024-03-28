@@ -6,6 +6,8 @@ import 'package:ams_flutter/core/constants/app_text_styles.dart';
 import 'package:ams_flutter/features/onboarding/presentation/Admin/widgets/button.dart';
 import 'package:ams_flutter/features/onboarding/presentation/Admin/widgets/elevated_button.dart';
 import 'package:ams_flutter/features/onboarding/presentation/Admin/widgets/text_field_widget.dart';
+import 'package:ams_flutter/route/app_pages.dart';
+import 'package:ams_flutter/route/custom_navigator.dart';
 
 import 'package:flutter/material.dart';
 
@@ -83,7 +85,25 @@ class _DetailsPageState extends State<DetailsPage> {
                 textEditingController: _controllers[4],
                 hinttext: ENROLLMENT,
                 textInputType: TextInputType.number),
-            SignupLoginButton(text: "Next"),
+    GestureDetector(
+      onTap: (){CustomNavigator.pushReplace(context, AppPages.signUpStudent);},
+      child: Container(
+      height: 45,
+      width: double.infinity,
+      alignment: Alignment.center,
+      decoration: BoxDecoration(
+      borderRadius: BorderRadius.circular(7), color: AppColors.studentThemeColor),
+      margin: EdgeInsets.only(left: 4.5, right: 4.5, top: 30, bottom: 20),
+      child: Text("Next",
+      style: TextStyle(
+      color: AppColors.white,
+      fontWeight: FontWeight.w500,
+      fontSize: 24,
+      )),
+      ),
+    ),
+
+
             const Text(
               SIGNIN_TEXT_FIELD,
               style: TextStyle(

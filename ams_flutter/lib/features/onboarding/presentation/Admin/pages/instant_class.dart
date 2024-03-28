@@ -1,7 +1,10 @@
 import 'package:ams_flutter/core/constants/app_colors.dart';
 import 'package:ams_flutter/core/constants/app_string.dart';
 import 'package:ams_flutter/core/constants/dummy_models.dart';
+import 'package:ams_flutter/route/app_pages.dart';
 import 'package:flutter/material.dart';
+
+import '../../../../../route/custom_navigator.dart';
 
 class InstantClassCreation extends StatefulWidget {
   @override
@@ -23,7 +26,7 @@ class _InstantClassCreationState extends State<InstantClassCreation> {
             size: 28,
             color: AppColors.tabBackgroundColor,
           ),
-          onPressed: () {},
+          onPressed: () {CustomNavigator.pop(context);},
         ),
       ),
       body: SingleChildScrollView(
@@ -111,6 +114,7 @@ class _InstantClassCreationState extends State<InstantClassCreation> {
                   child: TextButton(
                       onPressed: () {
                         // Add functionality for submit button
+                        CustomNavigator.pushReplace(context, AppPages.homeProfessor);
                       },
                       child: Text(
                         SUBMIT_BUTTON,

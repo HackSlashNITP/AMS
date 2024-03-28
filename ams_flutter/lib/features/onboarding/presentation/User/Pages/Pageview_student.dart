@@ -10,17 +10,14 @@ class ViewStudentScreen extends StatefulWidget {
   @override
   State<ViewStudentScreen> createState() => _ViewStudentScreenState();
 }
-
 class _ViewStudentScreenState extends State<ViewStudentScreen> {
   int _page = 0;
   late PageController pageController;
-
   @override
   void initState() {
     super.initState();
     pageController = PageController();
   }
-
   @override
   void dispose() {
     super.dispose();

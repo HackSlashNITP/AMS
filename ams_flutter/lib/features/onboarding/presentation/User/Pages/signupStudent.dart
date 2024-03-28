@@ -6,14 +6,14 @@ import '../../../../../core/constants/app_string.dart';
 import '../../../../../route/app_pages.dart';
 import '../../../../../route/custom_navigator.dart';
 
-class SignUpPage extends StatefulWidget {
-  const SignUpPage({super.key});
+class SignUpPageStudent extends StatefulWidget {
+  const SignUpPageStudent({super.key});
 
   @override
-  State<SignUpPage> createState() => SignUpPageState();
+  State<SignUpPageStudent> createState() => SignUpPageStudentState();
 }
 
-class SignUpPageState extends State<SignUpPage> {
+class SignUpPageStudentState extends State<SignUpPageStudent> {
   bool _rememberMe = false;
   bool _obscureText = true;
   @override
@@ -114,8 +114,7 @@ class SignUpPageState extends State<SignUpPage> {
               SizedBox(height: 16),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                    foregroundColor: AppColors.navIconColor,
-                    backgroundColor: AppColors.tabBackgroundColor,
+                    backgroundColor: AppColors.studentThemeColor,
                     padding: EdgeInsets.symmetric(horizontal: 120, vertical: 7),
                     textStyle: TextStyle(fontSize: 15),
                     shape: RoundedRectangleBorder(
@@ -126,18 +125,39 @@ class SignUpPageState extends State<SignUpPage> {
                   style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.w700,
+                    color: AppColors.white
                   ),
                 ),
                 onPressed:
-                     (){CustomNavigator.pushReplace(
-                  context,
-                  AppPages.homeProfessor, // Pass user type as argument
-                );
-                },
+                  (){CustomNavigator.pushTo(
+        context,
+        AppPages.homeStudent, // Pass user type as argument
+        );
+        },
               ),
               SizedBox(height: 13),
-
-
+              Row(
+                children: [
+                      Text(
+                        '    New Here ?',
+                        style: TextStyle(fontSize: 13, fontWeight: FontWeight.w700),
+                      ),
+                 GestureDetector(
+                      child:
+                      Text(
+                        CREATE_ACCOUNT_TEXT_FIELD,
+                        style: TextStyle(
+                            color: AppColors.tabBackgroundColor,
+                            fontSize: 13,
+                            fontWeight: FontWeight.w700),
+                      ), onTap: ()
+                      {CustomNavigator.pushTo(
+                    context,
+                    AppPages.createProfile, // Pass user type as argument
+                  );},
+                  )
+                ],
+              ),
               SizedBox(height: 40),
               Text(
                 SIGNIN_TEXT_FIELD,

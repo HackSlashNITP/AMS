@@ -28,7 +28,7 @@ class _HomeScreenStudentState extends State<HomeScreenStudent> {
           title: Text(
             'Hey Piyush',
             style: TextStyle(
-              color: AppColors.primary,
+              color: AppColors.studentThemeColor,
               fontSize: 30,
               fontWeight: FontWeight.w600,
             ),
@@ -37,7 +37,7 @@ class _HomeScreenStudentState extends State<HomeScreenStudent> {
             children: [
               Text(
                 "B.Tech (Electronics Engineering)",
-                style: TextStyle(fontSize: 12),
+                style: TextStyle(fontSize: 12,color: Color(0xff866100)),
               )
             ],
           ),

@@ -4,8 +4,9 @@ import 'package:flutter/material.dart';
 
 class SignupLoginButton extends StatelessWidget {
   final String text;
+  final String color;
 
-  const SignupLoginButton({super.key, required this.text});
+  const SignupLoginButton({super.key, required this.text,required this.color});
 
   @override
   Widget build(BuildContext context) {

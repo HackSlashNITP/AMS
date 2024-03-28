@@ -5,6 +5,7 @@ class AppColors {
   static const Color primary = Color.fromRGBO(185, 198, 0, 1);
   static const Color secondary = Color.fromRGBO(78, 159, 61, 1);
   static const Color professorThemeColor = Color(0xFF0FAE0C);
+  static const Color studentThemeColor = Color(0xffE1A300);
 
   //neutral colours
   static const Color grey = Color.fromRGBO(179, 179, 179, 1);

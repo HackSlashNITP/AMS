@@ -6,6 +6,7 @@ import 'package:ams_flutter/core/constants/dummy_models.dart';
 import 'package:ams_flutter/features/onboarding/presentation/Admin/widgets/bottom_navbar.dart';
 import 'package:ams_flutter/features/onboarding/presentation/Admin/widgets/text_field_widget.dart';
 import 'package:flutter/material.dart';
+import '../../../../../route/custom_navigator.dart';
 import '../widgets/studentlist.dart';
 
 class MarkAttendance extends StatefulWidget {
@@ -55,7 +56,6 @@ class _MarkAttendanceState extends State<MarkAttendance> {
       bottomNavigationBar: BottomNavBar(),
     );
   }
-
   Widget _buildHeader(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -71,7 +71,7 @@ class _MarkAttendanceState extends State<MarkAttendance> {
             color: Colors.green,
             size: mq.width * 0.07,
           ),
-          onPressed: () {},
+          onPressed: () {CustomNavigator.pop(context);},
         ),
         // Image.asset(
         //   AppImages.bell_image,
