@@ -13,7 +13,8 @@ class MainApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       navigatorKey: kNavigatorKey,
-      initialRoute: AppPages.appEntry,
+      // initialRoute: AppPages.appEntry,
+      initialRoute: AppPages.showAttendance,
       onGenerateRoute: CustomNavigator.controller,
     );
   }

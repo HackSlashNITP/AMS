@@ -17,4 +17,5 @@ class AppPages {
   static const String forgotPAssword = '/forgotPassword';
   static const String forgotPAsswordVerifyOtp = '/forgotPasswordVerifyOtp';
   static const String createNewPassword = '/createNewPassword';
+  static const String showAttendance = '/showAttendance';
 }
