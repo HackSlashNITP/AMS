@@ -1,13 +1,12 @@
 import 'package:ams_flutter/core/constants/app_colors.dart';
-import 'package:ams_flutter/core/constants/app_icons.dart';
-import 'package:ams_flutter/core/constants/app_images.dart';
-import 'package:ams_flutter/core/constants/app_text_styles.dart';
 import 'package:ams_flutter/core/constants/dummy_models.dart';
-import 'package:ams_flutter/features/onboarding/presentation/Admin/widgets/bottom_navbar.dart';
 import 'package:ams_flutter/features/onboarding/presentation/Admin/widgets/studentlist.dart';
-import 'package:ams_flutter/features/onboarding/presentation/Admin/widgets/text_field_widget.dart';
+import 'package:ams_flutter/features/onboarding/presentation/User/widget/attendance_calender.dart';
+import 'package:ams_flutter/features/onboarding/presentation/User/widget/bottom_navbar.dart';
+import 'package:ams_flutter/features/onboarding/presentation/User/widget/monthselector.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-// import '../widgets/studentlist.dart';
+import 'package:flutter/widgets.dart';
 
 class ShowAttendance extends StatefulWidget {
   @override
@@ -29,31 +28,61 @@ class _ShowAttendanceState extends State<ShowAttendance> {
             _buildHeader(context),
             SizedBox(height: 16.0),
             _buildDropDown(context),
-            SizedBox(height: 4),
-            TextFieldController(
-                textEditingController: TextEditingController(),
-                hinttext: "SearchStudent",
-                textInputType: TextInputType.name,
-                prefixIcon: Icon(Icons.search),
-                borderRadius: 40),
-            // SizedBox(height: 4.0),
-            // Expanded(
-            //   child: SingleChildScrollView(
-            //     child: StudentList(
-            //       students: dummyStudents
-            //           .map((student) => Student(
-            //                 name: student['name'],
-            //                 rollno: student['rollno'],
-            //                 photoUrl: student['photoUrl'],
-            //               ))
-            //           .toList(),
-            //     ),
-            //   ),
-            // ),
+            SizedBox(height: 16),
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Container(
+                // color: Colors.black12,
+                width: mq.width * 0.5,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Your Attendance",
+                      style:
+                          TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            AttendanceCalendar(attendanceStatus: [
+              true,
+              true,
+              false,
+              true,
+              false,
+              true,
+              true,
+              false,
+              false,
+              true,
+              true,
+              false,
+              true,
+              false,
+              true,
+              false,
+              true,
+              true,
+              false,
+              false,
+              true,
+              false,
+              true,
+              true,
+              true,
+              true,
+              false,
+              true,
+              false,
+              true,
+              false
+            ])
           ],
         ),
       ),
-      bottomNavigationBar: BottomNavBar(),
+      bottomNavigationBar: const BottomNavBar_user(),
     );
   }
 
@@ -64,7 +93,7 @@ class _ShowAttendanceState extends State<ShowAttendance> {
         IconButton(
           icon: Icon(
             Icons.arrow_back,
-            color: Colors.green,
+            color: AppColors.user_tabBackgroundColor,
             size: mq.width * 0.07,
           ),
           onPressed: () {},
@@ -72,7 +101,7 @@ class _ShowAttendanceState extends State<ShowAttendance> {
         IconButton(
           icon: Icon(
             Icons.notifications,
-            color: Colors.green,
+            color: AppColors.user_tabBackgroundColor,
             size: mq.width * 0.07,
           ),
           onPressed: () {},
@@ -82,58 +111,49 @@ class _ShowAttendanceState extends State<ShowAttendance> {
   }
 
   Widget _buildDropDown(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    List<String> months = [
+      'Jan',
+      'Feb',
+      'Mar',
+      'Apr',
+      'May',
+      'Jun',
+      'Jul',
+      'Aug',
+      'Sep',
+      'Oct',
+      'Nov',
+      'Dec'
+    ];
+
+    return Column(
       children: [
-        BuildButton(
-          text: Text("B.Tech"),
-          color: Colors.black,
-          borderRadius: 16.0,
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Expanded(
+              child: BuildButton(
+                text: Text("B.Tech"),
+                color: AppColors.studentThemeColor,
+                borderRadius: 16.0,
+                height: 41,
+              ),
+            ),
+            SizedBox(width: 10),
+            Expanded(
+              flex: 2,
+              child: BuildButton(
+                text: Text("Subject - 1"),
+                color: AppColors.studentThemeColor,
+                borderRadius: 16.0,
+                height: 41,
+              ),
+            ),
+          ],
         ),
-        BuildButton(
-          text: Text("B.Tech"),
-          color: Colors.black,
-          borderRadius: 16.0,
-        ),
-        BuildButton(
-          text: Text("13:30PM-14:30PM"),
-          color: Colors.black,
-          borderRadius: 16.0,
-        ),
+        SizedBox(height: 20),
+        MonthSelector(months: months),
       ],
     );
   }
 }
-// class BuildButton extends StatefulWidget {
-//   final Text text;
-//   final Color color;
-//   final double borderRadius;
-//   const BuildButton({
-//     Key? key,
-//     required this.text,
-//     required this.color,
-//     this.borderRadius = 8.0,
-//   }) : super(key: key);
-
-//   @override
-//   State<BuildButton> createState() => _BuildButtonState();
-// }
-
-// class _BuildButtonState extends State<BuildButton> {
-//   @override
-//   Widget build(BuildContext context) {
-//     return GestureDetector(
-//       child: Container(
-//         padding: EdgeInsets.symmetric(vertical: 4, horizontal: 10),
-//         decoration: BoxDecoration(
-//           color: widget.color,
-//           borderRadius: BorderRadius.all(Radius.circular(widget.borderRadius)),
-//         ),
-//         child: Text(
-//           widget.text.data!,
-//           style: TextStyle(color: Colors.white),
-//         ),
-//       ),
-//     );
-//   }
-// }

@@ -5,6 +5,7 @@ class AppColors {
   static const Color primary = Color.fromRGBO(185, 198, 0, 1);
   static const Color secondary = Color.fromRGBO(78, 159, 61, 1);
   static const Color professorThemeColor = Color(0xFF0FAE0C);
+  static const Color studentThemeColor = Color.fromRGBO(225, 163, 0, 1);
 
   //neutral colours
   static const Color grey = Color.fromRGBO(179, 179, 179, 1);
@@ -17,6 +18,8 @@ class AppColors {
   static const Color navIconColor = Colors.white;
   static const Color navActiveIconColor = Colors.white;
   static const Color tabBackgroundColor = Colors.green;
+  static const Color user_tabBackgroundColor = Color.fromRGBO(225, 163, 0, 1);
+
   static const Color navBackgroundColor = Colors.black;
   //signup page color
   static const Color borderColor = Colors.grey;

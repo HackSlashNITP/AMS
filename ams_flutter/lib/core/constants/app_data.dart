@@ -20,4 +20,15 @@ class AppData {
       text: 'Profile',
     ),
   ];
+  static List<GButton> user_bottomNavItems = [
+    const GButton(
+      icon: Icons.home,
+    ),
+    const GButton(
+      icon: Icons.list_rounded,
+    ),
+    const GButton(
+      icon: Icons.person,
+    ), 
+  ];
 }
