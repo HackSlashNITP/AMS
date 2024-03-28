@@ -23,12 +23,15 @@ class AppData {
   static List<GButton> user_bottomNavItems = [
     const GButton(
       icon: Icons.home,
+      text: 'Home',
     ),
     const GButton(
       icon: Icons.list_rounded,
+      text: 'List',
     ),
     const GButton(
       icon: Icons.person,
+      text: 'Profile',
     ), 
   ];
 }

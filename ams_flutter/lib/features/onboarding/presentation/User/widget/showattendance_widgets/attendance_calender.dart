@@ -1,22 +1,32 @@
 import 'package:ams_flutter/core/constants/app_colors.dart';
 import 'package:flutter/material.dart';
 
-class AttendanceCalendar extends StatelessWidget {
+class AttendanceCalendar extends StatefulWidget {
   final List<bool> attendanceStatus;
 
   const AttendanceCalendar({Key? key, required this.attendanceStatus}) : super(key: key);
 
   @override
+  State<AttendanceCalendar> createState() => _AttendanceCalendarState();
+}
+
+class _AttendanceCalendarState extends State<AttendanceCalendar> {
+  @override
   Widget build(BuildContext context) {
+       final Size mq = MediaQuery.of(context).size;
+    final double screenWidth = mq.width;
+    final double screenHeight = mq.height;
+    
+    final double cellSize = (screenWidth - 20 - 8 * 6) / 7;
     return Container(
       
-      margin: EdgeInsets.all(10),
+      margin: EdgeInsets.symmetric(vertical: 8),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
         color: Color.fromRGBO(246, 246, 246, 1),
       ),
-      width: 378,
-      height: 376,
+     width: screenWidth - 20,
+      height: cellSize * 6 + 8 * 5 + 8 * 2,
       padding: EdgeInsets.all(8),
       child: GridView.builder(
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -30,7 +40,7 @@ class AttendanceCalendar extends StatelessWidget {
             return _buildDayOfWeekCell(index);
           } else {
             final date = index - 6;
-            return _buildDateCell(date, attendanceStatus[date - 1]);
+            return _buildDateCell(date, widget.attendanceStatus[date - 1]);
           }
         },
       ),
@@ -45,7 +55,9 @@ class AttendanceCalendar extends StatelessWidget {
         // color: Colors.grey[300],
         borderRadius: BorderRadius.circular(8),
       ),
-      child: Text(daysOfWeek[index]),
+      child: Text(daysOfWeek[index],style: TextStyle(
+        fontWeight: FontWeight.w600,fontSize: 20
+      ),),
     );
   }
 

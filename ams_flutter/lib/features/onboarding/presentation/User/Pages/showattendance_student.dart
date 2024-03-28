@@ -1,9 +1,10 @@
 import 'package:ams_flutter/core/constants/app_colors.dart';
 import 'package:ams_flutter/core/constants/dummy_models.dart';
-import 'package:ams_flutter/features/onboarding/presentation/Admin/widgets/studentlist.dart';
-import 'package:ams_flutter/features/onboarding/presentation/User/widget/attendance_calender.dart';
+import 'package:ams_flutter/features/onboarding/presentation/User/widget/showattendance_widgets/attendance_calender.dart';
 import 'package:ams_flutter/features/onboarding/presentation/User/widget/bottom_navbar.dart';
-import 'package:ams_flutter/features/onboarding/presentation/User/widget/monthselector.dart';
+import 'package:ams_flutter/features/onboarding/presentation/User/widget/showattendance_widgets/buildButton_user.dart';
+import 'package:ams_flutter/features/onboarding/presentation/User/widget/showattendance_widgets/debarredstatus.dart';
+import 'package:ams_flutter/features/onboarding/presentation/User/widget/showattendance_widgets/monthselector.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -16,6 +17,7 @@ class ShowAttendance extends StatefulWidget {
 class _ShowAttendanceState extends State<ShowAttendance> {
   late Size mq;
   List<Map<String, dynamic>> dummyStudents = DummyModels.dummyStudents;
+  bool isDebarred = true; 
   @override
   Widget build(BuildContext context) {
     mq = MediaQuery.of(context).size;
@@ -46,39 +48,50 @@ class _ShowAttendanceState extends State<ShowAttendance> {
                 ),
               ),
             ),
-            AttendanceCalendar(attendanceStatus: [
-              true,
-              true,
-              false,
-              true,
-              false,
-              true,
-              true,
-              false,
-              false,
-              true,
-              true,
-              false,
-              true,
-              false,
-              true,
-              false,
-              true,
-              true,
-              false,
-              false,
-              true,
-              false,
-              true,
-              true,
-              true,
-              true,
-              false,
-              true,
-              false,
-              true,
-              false
-            ])
+            Expanded(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  AttendanceCalendar(attendanceStatus: 
+                  [
+                    true,
+                    true,
+                    false,
+                    true,
+                    false,
+                    true,
+                    true,
+                    false,
+                    false,
+                    true,
+                    true,
+                    false,
+                    true,
+                    false,
+                    true,
+                    false,
+                    true,
+                    true,
+                    false,
+                    false,
+                    true,
+                    false,
+                    true,
+                    true,
+                    true,
+                    true,
+                    false,
+                    true,
+                    false,
+                    true,
+                    false
+                  ]),
+               SizedBox(height: 20,),
+              DebarredStatusWidget(isDebarred: true),
+                ],
+              ),
+            ),
+           
           ],
         ),
       ),
@@ -157,3 +170,4 @@ class _ShowAttendanceState extends State<ShowAttendance> {
     );
   }
 }
+
