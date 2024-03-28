@@ -26,3 +26,37 @@ class AppInfo {
     '3:00 PM - 4:00 PM'
   ];
 }
+class DummyModels {
+  static List<Map<String, dynamic>> dummyStudents = [
+    {
+      'name': 'Shakti',
+      'rollno': '2206201',
+      'photoUrl': '',
+    },
+    {
+      'name': 'Mahima',
+      'rollno': '2206201',
+      'photoUrl': '',
+    },
+    {
+      'name': 'Piyush',
+      'rollno': '2206201',
+      'photoUrl': '',
+    },
+    {
+      'name': 'Shradha',
+      'rollno': '2206201',
+      'photoUrl': '',
+    },
+    {
+      'name': 'Dev',
+      'rollno': '2206201',
+      'photoUrl': '',
+    },
+    {
+      'name': 'Utkarsh',
+      'rollno': '2206201',
+      'photoUrl': '',
+    },
+  ];
+}

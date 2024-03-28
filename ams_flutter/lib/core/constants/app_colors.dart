@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class AppColors {
   //Brand primary colors
-  static const Color primary = Color.fromRGBO(247, 198, 69, 1);
+  static const Color primary = Color.fromRGBO(185, 198, 0, 1);
   static const Color secondary = Color.fromRGBO(78, 159, 61, 1);
   static const Color professorThemeColor = Color(0xFF0FAE0C);
 

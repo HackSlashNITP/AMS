@@ -15,11 +15,6 @@ class MainApp extends StatelessWidget {
       navigatorKey: kNavigatorKey,
       initialRoute: AppPages.appEntry,
       onGenerateRoute: CustomNavigator.controller,
-      home: Scaffold(
-        body: Center(
-          child: Text('Hello World!'),
-        ),
-      ),
     );
   }
 }
