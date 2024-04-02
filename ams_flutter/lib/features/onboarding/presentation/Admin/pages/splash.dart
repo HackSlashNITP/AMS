@@ -17,7 +17,7 @@ class _SplashScreenState extends State<SplashScreen> {
         const Duration(seconds: 3),
         () => CustomNavigator.pushReplace(
               context,
-              AppPages.HomeStudent,
+              AppPages.whoAreYou,
             ));
   }
 

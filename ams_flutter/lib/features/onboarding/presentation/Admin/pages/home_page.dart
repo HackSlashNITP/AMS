@@ -2,16 +2,14 @@ import 'package:ams_flutter/core/constants/app_colors.dart';
 import 'package:ams_flutter/core/constants/app_images.dart';
 import 'package:ams_flutter/features/onboarding/presentation/Admin/widgets/class_component.dart';
 import 'package:ams_flutter/features/onboarding/presentation/Admin/widgets/ovel_datebutton.dart';
-
 import 'package:flutter/material.dart';
-
+import '../../../../../route/app_pages.dart';
+import '../../../../../route/custom_navigator.dart';
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
-
   @override
   State<HomePage> createState() => _HomePageState();
 }
-
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
@@ -114,7 +112,12 @@ class _HomePageState extends State<HomePage> {
         ),
         floatingActionButton: IconButton(
           color: AppColors.professorThemeColor,
-          onPressed: () {},
+          onPressed: ()
+         {CustomNavigator.pushTo(
+              context,
+              AppPages.instantClass, // Pass user type as argument
+            );
+            },
           icon: const Icon(
             Icons.add_circle_outline_outlined,
             size: 40,

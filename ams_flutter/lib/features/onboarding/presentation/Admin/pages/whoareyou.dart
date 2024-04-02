@@ -2,6 +2,9 @@ import 'package:ams_flutter/core/constants/app_images.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../../../../route/app_pages.dart';
+import '../../../../../route/custom_navigator.dart';
+
 class WhoAreYou extends StatefulWidget {
   @override
   _WhoAreYouState createState() => _WhoAreYouState();
@@ -50,7 +53,14 @@ class _WhoAreYouState extends State<WhoAreYou> {
                   ),
                 ),
               ),
-              Container(
+            ),
+            GestureDetector(
+                onTap: (){CustomNavigator.pushReplace(
+                  context,
+                  AppPages.signUpProfessor,
+                );
+                },
+              child: Container(
                 margin: EdgeInsets.fromLTRB(18 * fem, 0, 0, 39 * fem),
                 width: 298 * fem,
                 height: 202 * fem,
@@ -118,7 +128,15 @@ class _WhoAreYouState extends State<WhoAreYou> {
                   ],
                 ),
               ),
-              Container(
+            ),
+              
+            GestureDetector(
+                onTap: (){CustomNavigator.pushReplace(
+                  context,
+                  AppPages.signUpStudent,
+                );
+                },
+              child: Container(
                 margin: EdgeInsets.fromLTRB(21 * fem, 10 * fem, 0, 0),
                 width: 301 * fem,
                 height: 236 * fem,
