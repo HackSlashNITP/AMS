@@ -17,38 +17,40 @@ class _WhoAreYouState extends State<WhoAreYou> {
     final double fem = MediaQuery.of(context).size.width / baseWidth;
     final double ffem = fem * 0.97;
 
-    return Container(
-      width: double.infinity,
+    return SingleChildScrollView(
       child: Container(
-        padding: EdgeInsets.fromLTRB(
-            45 * fem, 21 * fem, 63 * fem, 216 * fem), // Adjusted bottom padding
         width: double.infinity,
-        decoration: BoxDecoration(
-          color: Color(0xffffffff),
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Container(
-              margin: EdgeInsets.fromLTRB(18 * fem, 0, 0, 18 * fem),
-              width: 48 * fem,
-              height: 48 * fem,
-              child: Image.asset(
-                AppImages.splash_image,
+        child: Container(
+          padding: EdgeInsets.fromLTRB(45 * fem, 100 * fem, 63 * fem,
+              216 * fem), // Adjusted bottom padding
+          width: double.infinity,
+          decoration: BoxDecoration(
+            color: Color(0xffffffff),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Container(
+                margin: EdgeInsets.fromLTRB(18 * fem, 0, 0, 18 * fem),
                 width: 48 * fem,
                 height: 48 * fem,
+                child: Image.asset(
+                  AppImages.splash_image,
+                  width: 48 * fem,
+                  height: 48 * fem,
+                ),
               ),
-            ),
-            Container(
-              margin: EdgeInsets.fromLTRB(0, 30 * fem, 0, 38 * fem),
-              child: Text(
-                'Who Are You?',
-                style: GoogleFonts.poppins(
-                  fontSize: 32 * ffem,
-                  fontWeight: FontWeight.w700,
-                  height: 1.5 * ffem / fem,
-                  color: Color(0xff151517),
-                  decoration: TextDecoration.none,
+              Container(
+                margin: EdgeInsets.fromLTRB(0, 30 * fem, 0, 38 * fem),
+                child: Text(
+                  'Who Are You?',
+                  style: GoogleFonts.poppins(
+                    fontSize: 32 * ffem,
+                    fontWeight: FontWeight.w700,
+                    height: 1.5 * ffem / fem,
+                    color: Color(0xff151517),
+                    decoration: TextDecoration.none,
+                  ),
                 ),
               ),
             ),
@@ -127,6 +129,7 @@ class _WhoAreYouState extends State<WhoAreYou> {
                 ),
               ),
             ),
+              
             GestureDetector(
                 onTap: (){CustomNavigator.pushReplace(
                   context,
@@ -201,8 +204,8 @@ class _WhoAreYouState extends State<WhoAreYou> {
                   ],
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
