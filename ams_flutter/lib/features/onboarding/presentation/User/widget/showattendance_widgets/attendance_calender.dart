@@ -16,11 +16,12 @@ class _AttendanceCalendarState extends State<AttendanceCalendar> {
        final Size mq = MediaQuery.of(context).size;
     final double screenWidth = mq.width;
     final double screenHeight = mq.height;
+     
     
     final double cellSize = (screenWidth - 20 - 8 * 6) / 7;
     return Container(
       
-      margin: EdgeInsets.symmetric(vertical: 8),
+      margin: EdgeInsets.symmetric(vertical: 2),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
         color: Color.fromRGBO(246, 246, 246, 1),
@@ -60,33 +61,40 @@ class _AttendanceCalendarState extends State<AttendanceCalendar> {
       ),),
     );
   }
+Widget _buildDateCell(int date, bool isPresent) {
+  return LayoutBuilder(
+    builder: (context, constraints) {
+      double containerSize = constraints.maxWidth; 
+      
+     
+      double fontSize = containerSize * 0.3;
 
-  Widget _buildDateCell(int date, bool isPresent) {
-    return Container(
-      alignment: Alignment.center,
-      child: TextButton(
-        onPressed: () {
-        
-        },
-        style: ButtonStyle(
-          backgroundColor: MaterialStateProperty.resolveWith<Color>((states) {
-            if (states.contains(MaterialState.disabled)) {
-              return Colors.red;
-            }
-            return isPresent ? AppColors.studentThemeColor : Colors.red; 
-          }),
-          shape: MaterialStateProperty.all<OutlinedBorder>(
-            CircleBorder(),
+      return Container(
+        alignment: Alignment.center,
+        child: TextButton(
+          onPressed: () {},
+          style: ButtonStyle(
+            backgroundColor: MaterialStateProperty.resolveWith<Color>((states) {
+              if (states.contains(MaterialState.disabled)) {
+                return Colors.red;
+              }
+              return isPresent ? AppColors.studentThemeColor : Colors.red;
+            }),
+            shape: MaterialStateProperty.all<OutlinedBorder>(
+              CircleBorder(),
+            ),
+          ),
+          child: Text(
+            '$date',
+            style: TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+              fontSize: fontSize,
+            ),
           ),
         ),
-        child: Text(
-          '$date',
-          style: TextStyle(
-            color: Colors.white,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-      ),
-    );
-  }
+      );
+    },
+  );
+}
 }

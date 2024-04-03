@@ -18,6 +18,7 @@ class BuildButton extends StatefulWidget {
 
   @override
   State<BuildButton> createState() => _BuildButtonState();
+  
 }
 
 class _BuildButtonState extends State<BuildButton> {
@@ -34,7 +35,7 @@ class _BuildButtonState extends State<BuildButton> {
         children: [
           Expanded(
             child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 10),
+              padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
               child: Align(
                 alignment: Alignment.centerLeft,
                 child: Text(

@@ -8,19 +8,13 @@ import 'package:ams_flutter/features/onboarding/presentation/User/widget/showatt
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-
 class ShowAttendance extends StatefulWidget {
   @override
   State<ShowAttendance> createState() => _ShowAttendanceState();
 }
-
 class _ShowAttendanceState extends State<ShowAttendance> {
-  late Size mq;
-  List<Map<String, dynamic>> dummyStudents = DummyModels.dummyStudents;
-  bool isDebarred = true; 
   @override
   Widget build(BuildContext context) {
-    mq = MediaQuery.of(context).size;
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(20.0),
@@ -34,64 +28,66 @@ class _ShowAttendanceState extends State<ShowAttendance> {
             Align(
               alignment: Alignment.centerLeft,
               child: Container(
-                // color: Colors.black12,
-                width: mq.width * 0.5,
+                // width: MediaQuery.of(context).size.width * 0.5,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Text(
                       "Your Attendance",
-                      style:
-                          TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+                      style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
                     ),
                   ],
                 ),
               ),
             ),
             Expanded(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  AttendanceCalendar(attendanceStatus: 
-                  [
-                    true,
-                    true,
-                    false,
-                    true,
-                    false,
-                    true,
-                    true,
-                    false,
-                    false,
-                    true,
-                    true,
-                    false,
-                    true,
-                    false,
-                    true,
-                    false,
-                    true,
-                    true,
-                    false,
-                    false,
-                    true,
-                    false,
-                    true,
-                    true,
-                    true,
-                    true,
-                    false,
-                    true,
-                    false,
-                    true,
-                    false
-                  ]),
-               SizedBox(height: 20,),
-              DebarredStatusWidget(isDebarred: true),
-                ],
+              child: SingleChildScrollView(
+                scrollDirection: Axis.vertical,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    AttendanceCalendar(attendanceStatus: 
+                    [
+                      true,
+                      true,
+                      false,
+                      true,
+                      false,
+                      true,
+                      true,
+                      false,
+                      false,
+                      true,
+                      true,
+                      false,
+                      true,
+                      false,
+                      true,
+                      false,
+                      true,
+                      true,
+                      false,
+                      false,
+                      true,
+                      false,
+                      true,
+                      true,
+                      true,
+                      true,
+                      false,
+                      true,
+                      false,
+                      true,
+                      false
+                    ]),
+                    SizedBox(height: MediaQuery.of(context).size.height * 0.02),
+                      // Spacer(),
+                    DebarredStatusWidget(isDebarred: true),
+                   
+                  ],
+                ),
               ),
             ),
-           
           ],
         ),
       ),
@@ -107,7 +103,7 @@ class _ShowAttendanceState extends State<ShowAttendance> {
           icon: Icon(
             Icons.arrow_back,
             color: AppColors.user_tabBackgroundColor,
-            size: mq.width * 0.07,
+            size: MediaQuery.of(context).size.width * 0.07,
           ),
           onPressed: () {},
         ),
@@ -115,7 +111,7 @@ class _ShowAttendanceState extends State<ShowAttendance> {
           icon: Icon(
             Icons.notifications,
             color: AppColors.user_tabBackgroundColor,
-            size: mq.width * 0.07,
+            size: MediaQuery.of(context).size.width * 0.07,
           ),
           onPressed: () {},
         ),
@@ -125,18 +121,7 @@ class _ShowAttendanceState extends State<ShowAttendance> {
 
   Widget _buildDropDown(BuildContext context) {
     List<String> months = [
-      'Jan',
-      'Feb',
-      'Mar',
-      'Apr',
-      'May',
-      'Jun',
-      'Jul',
-      'Aug',
-      'Sep',
-      'Oct',
-      'Nov',
-      'Dec'
+      'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
     ];
 
     return Column(
@@ -152,7 +137,7 @@ class _ShowAttendanceState extends State<ShowAttendance> {
                 height: 41,
               ),
             ),
-            SizedBox(width: 10),
+            SizedBox(width: MediaQuery.of(context).size.width * 0.02),
             Expanded(
               flex: 2,
               child: BuildButton(
@@ -164,10 +149,9 @@ class _ShowAttendanceState extends State<ShowAttendance> {
             ),
           ],
         ),
-        SizedBox(height: 20),
+        SizedBox(height: MediaQuery.of(context).size.height * 0.02),
         MonthSelector(months: months),
       ],
     );
   }
 }
-
