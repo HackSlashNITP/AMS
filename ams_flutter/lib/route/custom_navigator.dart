@@ -1,10 +1,14 @@
 import 'package:ams_flutter/features/onboarding/presentation/Admin/pages/create_password.dart';
-import 'package:ams_flutter/features/onboarding/presentation/Admin/pages/providedetailspage.dart';
+import 'package:ams_flutter/features/onboarding/presentation/Admin/pages/home_page.dart';
+import 'package:ams_flutter/features/onboarding/presentation/Admin/pages/instant_class.dart';
+import 'package:ams_flutter/features/onboarding/presentation/Admin/pages/markAttendance.dart';
+import 'package:ams_flutter/features/onboarding/presentation/User/Pages/providedetailspage.dart';
 import 'package:ams_flutter/features/onboarding/presentation/Admin/pages/signup.dart';
 import 'package:ams_flutter/features/onboarding/presentation/Admin/pages/splash.dart';
 import 'package:ams_flutter/features/onboarding/presentation/Admin/pages/whoareyou.dart';
 import 'package:ams_flutter/features/onboarding/presentation/User/Pages/Pageview_student.dart';
 import 'package:ams_flutter/features/onboarding/presentation/User/Pages/showattendance_student.dart';
+import 'package:ams_flutter/features/onboarding/presentation/User/Pages/signupStudent.dart';
 
 import 'package:flutter/material.dart';
 
@@ -21,7 +25,7 @@ class CustomNavigator {
           builder: (context) => SplashScreen(),
           settings: settings,
         );
-      case AppPages.signUp:
+      case AppPages.signUpProfessor:
         return MaterialPageRoute(
           builder: (context) => SignUpPage(),
           settings: settings,
@@ -41,7 +45,7 @@ class CustomNavigator {
           builder: (context) => WhoAreYou(),
           settings: settings,
         );
-      case AppPages.HomeStudent:
+      case AppPages.homeStudent:
         return MaterialPageRoute(
           builder: (context) => ViewStudentScreen(),
           settings: settings,
@@ -49,6 +53,27 @@ class CustomNavigator {
       case AppPages.showAttendance:
         return MaterialPageRoute(
           builder: (context) => ShowAttendance(),
+            settings: settings,
+        );
+      case AppPages.homeProfessor:
+        return MaterialPageRoute(
+          builder: (context) => HomePage(),
+          settings: settings,
+        );
+      case AppPages.signUpStudent:
+        return MaterialPageRoute(
+          builder: (context) => SignUpPageStudent(),
+          settings: settings,
+        );
+       case AppPages.markAttendance:
+        return MaterialPageRoute(
+          builder: (context) => MarkAttendance(),
+          settings: settings,
+        );
+
+      case AppPages.instantClass:
+        return MaterialPageRoute(
+          builder: (context) => InstantClassCreation(),
           settings: settings,
         );
       default:

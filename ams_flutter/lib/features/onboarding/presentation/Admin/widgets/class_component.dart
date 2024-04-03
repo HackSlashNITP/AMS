@@ -4,6 +4,9 @@ import 'package:ams_flutter/core/helpers/media_query.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+import '../../../../../route/app_pages.dart';
+import '../../../../../route/custom_navigator.dart';
+
 class ClassComponent extends StatefulWidget {
   final bool isMarked;
   const ClassComponent({
@@ -153,11 +156,16 @@ class _ClassComponentState extends State<ClassComponent> {
             width: MyMediaQuery.screenWidth * 0.51,
             height: MyMediaQuery.screenHeight * 0.05,
             child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
+    style: ElevatedButton.styleFrom(
                     shape: const RoundedRectangleBorder(
                         borderRadius: BorderRadius.all(Radius.circular(25))),
                     backgroundColor: AppColors.professorThemeColor),
-                onPressed: () {},
+                onPressed: ()
+      {CustomNavigator.pushTo(
+                  context,
+                  AppPages.markAttendance, // Pass user type as argument
+                );
+                },
                 child: const Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
