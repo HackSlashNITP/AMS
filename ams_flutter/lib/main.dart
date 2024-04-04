@@ -1,9 +1,14 @@
 import 'package:ams_flutter/features/onboarding/presentation/Admin/pages/whoareyou.dart';
 import 'package:ams_flutter/route/app_pages.dart';
 import 'package:ams_flutter/route/custom_navigator.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
-void main() async {
+import 'firebase_options.dart';
+
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(MainApp());
 }
 
