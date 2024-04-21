@@ -4,7 +4,7 @@ import 'package:ams_flutter/core/constants/app_text_styles.dart';
 import 'package:ams_flutter/core/constants/dummy_models.dart';
 import 'package:ams_flutter/features/onboarding/presentation/Admin/widgets/bottom_navbar.dart';
 import 'package:flutter/material.dart';
-
+import '../../../../../route/custom_navigator.dart';
 import '../../../../../core/constants/app_string.dart';
 
 class ProfilePage1 extends StatefulWidget {
@@ -41,10 +41,13 @@ class _ProfilePage1State extends State<ProfilePage1> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Image.asset(
-          AppImages.arrow_image,
-          width: mq.width * 0.06,
-          height: mq.width * 0.06,
+        IconButton(
+          icon: Icon(
+            Icons.arrow_back,
+            color: Colors.green,
+            size: mq.width * 0.07,
+          ),
+          onPressed: () {CustomNavigator.pop(context);},
         ),
         Text(
           PROFILE,
@@ -58,7 +61,6 @@ class _ProfilePage1State extends State<ProfilePage1> {
       ],
     );
   }
-
   Widget _buildProfileDetails(BuildContext context) {
     return Container(
       padding: EdgeInsets.all(16.0),
