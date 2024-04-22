@@ -5,7 +5,8 @@ import 'package:flutter/material.dart';
 
 import '../../../../../core/constants/app_icons.dart';
 import '../../../../../core/constants/app_string.dart';
-import '../../Admin/pages/home_page.dart';
+import '../../../../../route/app_pages.dart';
+import '../../../../../route/custom_navigator.dart';
 import '../../Admin/widgets/auth_widgets.dart';
 
 class SignUpPageStudent extends StatefulWidget {
@@ -20,6 +21,7 @@ class SignUpPageStudentState extends State<SignUpPageStudent> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   final String allowedDomain = "nitp.ac.in";
+
   bool isChecked = false;
 
   Future<void> _signIn() async {
@@ -30,8 +32,11 @@ class SignUpPageStudentState extends State<SignUpPageStudent> {
       );
       if (userCredential.user != null && userCredential.user!.email != null) {
         if (userCredential.user!.email!.endsWith("@" + allowedDomain)) {
-          Navigator.of(context).pushReplacement(
-              MaterialPageRoute(builder: (context) => const HomePage()));
+          CustomNavigator.pushReplace(
+            context,
+            AppPages.homeStudent, // Pass user type as argument
+          );
+
           showToast("User Signed In Successfully");
         } else {
           _showErrorDialoge("Please use an Valid email of $allowedDomain");

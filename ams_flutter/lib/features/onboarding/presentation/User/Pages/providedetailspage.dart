@@ -8,7 +8,8 @@ import 'package:ams_flutter/features/onboarding/presentation/Admin/widgets/text_
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-import '../../Admin/pages/home_page.dart';
+import '../../../../../route/app_pages.dart';
+import '../../../../../route/custom_navigator.dart';
 import '../../Admin/widgets/auth_widgets.dart';
 
 class DetailsPage extends StatefulWidget {
@@ -39,8 +40,10 @@ class _DetailsPageState extends State<DetailsPage> {
         //checking the email and other signup credential
         if (userCredential.user != null && userCredential.user!.email != null) {
           if (userCredential.user!.email!.endsWith("@" + allowedDomain)) {
-            Navigator.of(context).pushReplacement(
-                MaterialPageRoute(builder: (context) => const HomePage()));
+            CustomNavigator.pushReplace(
+              context,
+              AppPages.homeStudent, // Pass user type as argument
+            );
             String name = nameController.text;
 
             showToast("$name Signed Up Successfully");
@@ -116,11 +119,11 @@ class _DetailsPageState extends State<DetailsPage> {
             TextFieldController(
                 textEditingController: passwordController,
                 hinttext: PASSWORD_TEXT_FIELD,
-                textInputType: TextInputType.number),
+                textInputType: TextInputType.text),
             TextFieldController(
                 textEditingController: cpasswordController,
                 hinttext: CONFIRM_PASSWORD_TEXT_FIELD,
-                textInputType: TextInputType.number),
+                textInputType: TextInputType.text),
             GestureDetector(
               onTap: _signUp,
               child: Container(
