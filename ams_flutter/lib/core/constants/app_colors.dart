@@ -18,6 +18,8 @@ class AppColors {
   static const Color navIconColor = Colors.white;
   static const Color navActiveIconColor = Colors.white;
   static const Color tabBackgroundColor = Colors.green;
+ 
+
   static const Color navBackgroundColor = Colors.black;
   //signup page color
   static const Color borderColor = Colors.grey;
@@ -39,4 +41,7 @@ class AppColors {
   static const classComponentTimingColor = Color(0xFF909090);
   static const classComponentNotMarkedColor = Color(0xFFDF1F1F);
   static const classComponentOvelBtnColor = Color(0xFF8C8C8C);
+ // ShowAttendancePage Colors
+  static const Color user_tabBackgroundColor = Color.fromRGBO(225, 163, 0, 1);
+  static const Color user_red = Color.fromRGBO(222, 5, 5, 1);
 }

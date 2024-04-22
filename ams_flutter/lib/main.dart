@@ -1,4 +1,4 @@
-import 'package:ams_flutter/features/onboarding/presentation/Admin/pages/whoareyou.dart';
+
 import 'package:ams_flutter/route/app_pages.dart';
 import 'package:ams_flutter/route/custom_navigator.dart';
 import 'package:flutter/material.dart';
@@ -14,9 +14,10 @@ class MainApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       navigatorKey: kNavigatorKey,
+     
       initialRoute: AppPages.appEntry,
+     
       onGenerateRoute: CustomNavigator.controller,
-      home: WhoAreYou(),
     );
   }
 }
