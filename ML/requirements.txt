@@ -1,8 +1,8 @@
-# dlib
-# face_recognition
-# opencv-python
-# pytesseract
-# flask
-# flask_cors
-# streamlit
-# pillow
+dlib
+face_recognition
+opencv-python
+pytesseract
+flask
+flask_cors
+streamlit
+pillow
