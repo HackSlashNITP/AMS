@@ -1,0 +1,76 @@
+Steps: Install Mariadb
+1: Create tables in database with the help of the commands given below:
+
+
+-- Users table
+CREATE TABLE Users (
+    UserID INT AUTO_INCREMENT PRIMARY KEY,
+    Username VARCHAR(100),
+    Password VARCHAR(255), 
+    UserType ENUM('Professor', 'Student')
+);
+
+-- Professors table
+CREATE TABLE Professors (
+    ProfessorID INT PRIMARY KEY,
+    ProfessorName VARCHAR(100),
+    Email VARCHAR(100),
+    FOREIGN KEY (ProfessorID) REFERENCES Users(UserID)
+);
+
+-- Students table
+CREATE TABLE Students (
+    StudentID INT PRIMARY KEY,
+    StudentName VARCHAR(100),
+    Email VARCHAR(100),
+    AttendancePercentage DECIMAL(5,2), 
+    FOREIGN KEY (StudentID) REFERENCES Users(UserID)
+);
+
+-- Classrooms table
+CREATE TABLE Classrooms (
+    ClassroomID INT AUTO_INCREMENT PRIMARY KEY,
+    ProfessorID INT,
+    ClassroomCode VARCHAR(50),
+    Subject VARCHAR(100),
+    FOREIGN KEY (ProfessorID) REFERENCES Professors(ProfessorID)
+);
+
+-- ClassSchedule table
+CREATE TABLE ClassSchedule (
+    ScheduleID INT AUTO_INCREMENT PRIMARY KEY,
+    ClassroomID INT,
+    StartTime DATETIME,
+    EndTime DATETIME,
+    FOREIGN KEY (ClassroomID) REFERENCES Classrooms(ClassroomID)
+);
+
+-- Attendance table
+CREATE TABLE Attendance (
+    AttendanceID INT AUTO_INCREMENT PRIMARY KEY,
+    StudentID INT,
+    ScheduleID INT,
+    AttendanceDateTime DATETIME,
+    IsPresent BOOLEAN,
+    FOREIGN KEY (StudentID) REFERENCES Students(StudentID),
+    FOREIGN KEY (ScheduleID) REFERENCES ClassSchedule(ScheduleID)
+);
+
+-- DashboardNotifications table
+CREATE TABLE DashboardNotifications (
+    NotificationID INT AUTO_INCREMENT PRIMARY KEY,
+    ProfessorID INT,
+    Message TEXT,
+    NotificationDateTime DATETIME,
+    FOREIGN KEY (ProfessorID) REFERENCES Professors(ProfessorID)
+);
+
+-- Assignments table
+CREATE TABLE Assignments (
+    AssignmentID INT AUTO_INCREMENT PRIMARY KEY,
+    ClassroomID INT,
+    AssignmentName VARCHAR(100),
+    Deadline DATE,
+    Description TEXT,
+    FOREIGN KEY (ClassroomID) REFERENCES Classrooms(ClassroomID)
+);
