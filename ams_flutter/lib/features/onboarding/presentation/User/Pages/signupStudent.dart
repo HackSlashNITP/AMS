@@ -1,10 +1,13 @@
 import 'package:ams_flutter/core/constants/app_colors.dart';
+import 'package:ams_flutter/features/onboarding/presentation/User/Pages/providedetailspage.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../core/constants/app_icons.dart';
 import '../../../../../core/constants/app_string.dart';
 import '../../../../../route/app_pages.dart';
 import '../../../../../route/custom_navigator.dart';
+import '../../Admin/widgets/auth_widgets.dart';
 
 class SignUpPageStudent extends StatefulWidget {
   const SignUpPageStudent({super.key});
@@ -14,6 +17,73 @@ class SignUpPageStudent extends StatefulWidget {
 }
 
 class SignUpPageStudentState extends State<SignUpPageStudent> {
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+  final String allowedDomain = "nitp.ac.in";
+
+  bool isChecked = false;
+
+  Future<void> _signIn() async {
+    try {
+      UserCredential userCredential = await _auth.signInWithEmailAndPassword(
+        email: _emailController.text,
+        password: _passwordController.text,
+      );
+      if (userCredential.user != null && userCredential.user!.email != null) {
+        if (userCredential.user!.email!.endsWith("@" + allowedDomain)) {
+          CustomNavigator.pushReplace(
+            context,
+            AppPages.homeStudent, // Pass user type as argument
+          );
+
+          showToast("User Signed In Successfully");
+        } else {
+          _showErrorDialoge("Please use an Valid email of $allowedDomain");
+        }
+      }
+    } catch (e) {
+      _showErrorDialoge(
+          "Error during sign-in: Please check credentials and try again $e");
+    }
+  }
+
+  void _showErrorDialoge(String errorMessage) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text("Error"),
+          content: Text(errorMessage),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: Text("OK"),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  Future<void> _resetPassword(BuildContext context) async {
+    try {
+      await _auth.sendPasswordResetEmail(email: _emailController.text);
+      showSuccessDialog(context);
+    } catch (e) {
+      showErrorDialog(context, e.toString());
+    }
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _emailController.dispose();
+    _passwordController.dispose();
+  }
+
   bool _rememberMe = false;
   bool _obscureText = true;
   @override
@@ -48,6 +118,7 @@ class SignUpPageStudentState extends State<SignUpPageStudent> {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: TextFormField(
+                  controller: _emailController,
                   decoration: InputDecoration(
                       labelText: EMAIL_TEXT_FIELD,
                       border: OutlineInputBorder(
@@ -62,6 +133,7 @@ class SignUpPageStudentState extends State<SignUpPageStudent> {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: TextField(
+                  controller: _passwordController,
                   obscureText: _obscureText,
                   decoration: InputDecoration(
                       labelText: PASSWORD_TEXT_FIELD,
@@ -102,7 +174,9 @@ class SignUpPageStudentState extends State<SignUpPageStudent> {
                   ),
                   Spacer(),
                   TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      _resetPassword(context);
+                    },
                     child: Text(
                       FORGET_PASSWORD_TEXT_FIELD,
                       style:
@@ -114,7 +188,8 @@ class SignUpPageStudentState extends State<SignUpPageStudent> {
               SizedBox(height: 16),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                    backgroundColor: AppColors.studentThemeColor,
+                    foregroundColor: AppColors.navIconColor,
+                    backgroundColor: AppColors.tabBackgroundColor,
                     padding: EdgeInsets.symmetric(horizontal: 120, vertical: 7),
                     textStyle: TextStyle(fontSize: 15),
                     shape: RoundedRectangleBorder(
@@ -125,37 +200,30 @@ class SignUpPageStudentState extends State<SignUpPageStudent> {
                   style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.w700,
-                    color: AppColors.white
                   ),
                 ),
-                onPressed:
-                  (){CustomNavigator.pushTo(
-        context,
-        AppPages.homeStudent, // Pass user type as argument
-        );
-        },
+                onPressed: _signIn,
               ),
               SizedBox(height: 13),
               Row(
                 children: [
-                      Text(
-                        '    New Here ?',
-                        style: TextStyle(fontSize: 13, fontWeight: FontWeight.w700),
-                      ),
-                 GestureDetector(
-                      child:
-                      Text(
-                        CREATE_ACCOUNT_TEXT_FIELD,
-                        style: TextStyle(
-                            color: AppColors.tabBackgroundColor,
-                            fontSize: 13,
-                            fontWeight: FontWeight.w700),
-                      ), onTap: ()
-                      {CustomNavigator.pushTo(
-                    context,
-                    AppPages.createProfile, // Pass user type as argument
-                  );},
-                  )
+                  Text(
+                    '    New Here ?',
+                    style: TextStyle(fontSize: 13, fontWeight: FontWeight.w700),
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => DetailsPage()));
+                    },
+                    child: Text(
+                      CREATE_ACCOUNT_TEXT_FIELD,
+                      style: TextStyle(
+                          color: AppColors.tabBackgroundColor,
+                          fontSize: 13,
+                          fontWeight: FontWeight.w700),
+                    ),
+                  ),
                 ],
               ),
               SizedBox(height: 40),
