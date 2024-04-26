@@ -16,4 +16,5 @@ class AppPages {
   static const String instantClass = '/instantClass';
   static const String forgotPAssword = '/forgotPassword';
   static const String createNewPassword = '/createNewPassword';
+  static const String showAttendance = '/showAttendance';
 }
