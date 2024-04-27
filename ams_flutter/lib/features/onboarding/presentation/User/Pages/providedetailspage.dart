@@ -8,9 +8,7 @@ import 'package:ams_flutter/features/onboarding/presentation/Admin/widgets/eleva
 import 'package:ams_flutter/features/onboarding/presentation/Admin/widgets/text_field_widget.dart';
 import 'package:ams_flutter/route/app_pages.dart';
 import 'package:ams_flutter/route/custom_navigator.dart';
-
 import 'package:flutter/material.dart';
-
 class DetailsPage extends StatefulWidget {
   const DetailsPage({super.key});
 

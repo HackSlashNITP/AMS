@@ -1,5 +1,4 @@
 let admin = [];
-
 const createAdmin = async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -38,7 +37,6 @@ const getAdminById = async (req, res) => {
     res.status(500).json({ error: "Internal server error" });
   }
 };
-
 const updateAdmin = async (req, res) => {
   try {
     // Implementation for updating admin
@@ -48,7 +46,6 @@ const updateAdmin = async (req, res) => {
     res.status(500).json({ error: "Internal server error" });
   }
 };
-
 const deleteAdmin = async (req, res) => {
   try {
     // Implementation for deleting admin
