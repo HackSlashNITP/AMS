@@ -3,12 +3,16 @@ import 'package:ams_flutter/core/constants/app_icons.dart';
 import 'package:ams_flutter/core/constants/app_images.dart';
 import 'package:ams_flutter/core/constants/app_string.dart';
 import 'package:ams_flutter/core/constants/app_text_styles.dart';
-import 'package:ams_flutter/features/onboarding/presentation/Admin/widgets/button.dart';
 import 'package:ams_flutter/features/onboarding/presentation/Admin/widgets/elevated_button.dart';
 import 'package:ams_flutter/features/onboarding/presentation/Admin/widgets/text_field_widget.dart';
 import 'package:ams_flutter/route/app_pages.dart';
 import 'package:ams_flutter/route/custom_navigator.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
+import '../../../../../route/app_pages.dart';
+import '../../../../../route/custom_navigator.dart';
+import '../../Admin/widgets/auth_widgets.dart';
 class DetailsPage extends StatefulWidget {
   const DetailsPage({super.key});
 
@@ -17,22 +21,56 @@ class DetailsPage extends StatefulWidget {
 }
 
 class _DetailsPageState extends State<DetailsPage> {
-  final List<TextEditingController> _controllers = [];
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+  final cpasswordController = TextEditingController();
+  final nameController = TextEditingController();
+  final phoneController = TextEditingController();
+  final rollController = TextEditingController();
+  final String allowedDomain = "nitp.ac.in";
 
-  @override
-  void initState() {
-    super.initState();
-    for (int i = 0; i < 5; i++) {
-      _controllers.add(TextEditingController());
+  Future<void> _signUp() async {
+    if (passwordController.text == cpasswordController.text) {
+      try {
+        UserCredential userCredential =
+            await _auth.createUserWithEmailAndPassword(
+          email: emailController.text,
+          password: passwordController.text,
+        );
+        //checking the email and other signup credential
+        if (userCredential.user != null && userCredential.user!.email != null) {
+          if (userCredential.user!.email!.endsWith("@" + allowedDomain)) {
+            CustomNavigator.pushReplace(
+              context,
+              AppPages.homeStudent, // Pass user type as argument
+            );
+            String name = nameController.text;
+
+            showToast("$name Signed Up Successfully");
+          } else {
+            await userCredential.user!.delete();
+            showErrorDialog(
+                context, "Please use an email from $allowedDomain.");
+          }
+        }
+      } catch (e) {
+        showErrorDialog(context, "Error during sign-up: $e");
+      }
+    } else {
+      showToast("Both passwords should be the same");
     }
   }
 
   @override
   void dispose() {
     super.dispose();
-    for (var controller in _controllers) {
-      controller.dispose();
-    }
+    emailController.dispose();
+    passwordController.dispose();
+    nameController.dispose();
+    rollController.dispose();
+    phoneController.dispose();
+    cpasswordController.dispose();
   }
 
   @override
@@ -64,44 +102,48 @@ class _DetailsPageState extends State<DetailsPage> {
               style: TextStyle(fontSize: 12, color: AppColors.grey),
             ),
             TextFieldController(
-                textEditingController: _controllers[0],
+                textEditingController: nameController,
                 hinttext: NAME,
                 textInputType: TextInputType.name),
             TextFieldController(
-                textEditingController: _controllers[1],
+                textEditingController: emailController,
                 hinttext: EMAIL,
                 textInputType: TextInputType.emailAddress),
             TextFieldController(
-                textEditingController: _controllers[2],
+                textEditingController: phoneController,
                 hinttext: PHONE,
                 textInputType: TextInputType.phone),
             TextFieldController(
-                textEditingController: _controllers[3],
+                textEditingController: rollController,
                 hinttext: ROLL,
                 textInputType: TextInputType.number),
             TextFieldController(
-                textEditingController: _controllers[4],
-                hinttext: ENROLLMENT,
-                textInputType: TextInputType.number),
-    GestureDetector(
-      onTap: (){CustomNavigator.pushReplace(context, AppPages.signUpStudent);},
-      child: Container(
-      height: 45,
-      width: double.infinity,
-      alignment: Alignment.center,
-      decoration: BoxDecoration(
-      borderRadius: BorderRadius.circular(7), color: AppColors.studentThemeColor),
-      margin: EdgeInsets.only(left: 4.5, right: 4.5, top: 30, bottom: 20),
-      child: Text("Next",
-      style: TextStyle(
-      color: AppColors.white,
-      fontWeight: FontWeight.w500,
-      fontSize: 24,
-      )),
-      ),
-    ),
-
-
+                textEditingController: passwordController,
+                hinttext: PASSWORD_TEXT_FIELD,
+                textInputType: TextInputType.text),
+            TextFieldController(
+                textEditingController: cpasswordController,
+                hinttext: CONFIRM_PASSWORD_TEXT_FIELD,
+                textInputType: TextInputType.text),
+            GestureDetector(
+              onTap: _signUp,
+              child: Container(
+                height: 45,
+                width: double.infinity,
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(7),
+                    color: AppColors.secondary),
+                margin:
+                    EdgeInsets.only(left: 4.5, right: 4.5, top: 30, bottom: 20),
+                child: Text('NEXT',
+                    style: TextStyle(
+                      color: AppColors.white,
+                      fontWeight: FontWeight.w500,
+                      fontSize: 24,
+                    )),
+              ),
+            ),
             const Text(
               SIGNIN_TEXT_FIELD,
               style: TextStyle(
