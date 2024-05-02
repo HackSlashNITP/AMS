@@ -171,7 +171,7 @@ class _ClassComponentState extends State<ClassComponent> {
                   children: [
                     Text(
                       'Mark Attendance',
-                      style: TextStyle(fontSize: 15, color: AppColors.white),
+                      style: TextStyle(fontSize: 13, color: AppColors.white),
                     ),
                     Icon(
                       Icons.arrow_forward_rounded,
