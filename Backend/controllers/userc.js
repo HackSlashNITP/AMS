@@ -7,23 +7,18 @@ let tableCreated = false;
 const createUser = async (req, res) => {
   try {
     const { Username, Password, UserType } = req.body;
-    // Validate email and password
     if (!Username || !Password) {
       return res.status(400).json({ error: "Email and password are required" });
     }
-    // Check if email already exists
-    // if (user.includes(Username)) {
-    //   return res.status(400).json({ error: "Email already exists" });
-    // }
+   
 
-    // Check if table exists
+  
     if (!tableCreated) {
       const createTableQuery = await fs.readFile(filePath, "utf-8");
       await pool.query(createTableQuery);
       tableCreated = true;
     }
 
-    // Insert user data
     const insertQuery =
       "INSERT INTO users (Username, Password, UserType) VALUES (?, ?, ?)";
     const result = await pool.query(insertQuery, [
@@ -33,8 +28,7 @@ const createUser = async (req, res) => {
     ]);
     console.log(result);
 
-    // Add user
-    // user.push(Username);
+  
     res.status(201).json({ message: "User created successfully" });
   } catch (error) {
     console.error("Error in createUser:", error);
@@ -46,11 +40,17 @@ const getUserById = async (req, res) => {
   try {
     const id = req.params.userId;
     if (id < 0 || isNaN(id)) {
-      return res.status(404).json({ error: "User not found" });
+      return res
+        .status(404)
+        .json({ error: "User ID must be a positive number" });
     }
 
-    const sqlQuery = "SELECT * FROM users WHERE id = ?";
+    console.log("User ID:", id);
+
+    const sqlQuery = "SELECT * FROM users WHERE UserID = ?";
     const [rows, fields] = await pool.query(sqlQuery, [id]);
+
+    console.log("Rows:", rows);
 
     if (rows.length === 0) {
       return res.status(404).json({ error: "User not found" });
@@ -72,7 +72,7 @@ const updateUser = async (req, res) => {
     }
 
     const updateQuery =
-      "UPDATE your_table_name SET Username=?, Password=?, UserType=? WHERE id=?";
+      "UPDATE users SET Username=?, Password=?, UserType=? WHERE UserID=?";
     const result = await pool.query(updateQuery, [
       Username,
       Password,
@@ -99,7 +99,7 @@ const deleteUser = async (req, res) => {
       return res.status(400).json({ error: "Invalid user ID" });
     }
 
-    const deleteQuery = "DELETE FROM your_table_name WHERE id=?";
+    const deleteQuery = "DELETE FROM users WHERE UserID=?";
     const result = await pool.query(deleteQuery, [userId]);
 
     if (result.affectedRows === 0) {
