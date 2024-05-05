@@ -4,7 +4,8 @@ const bodyParser = require("body-parser");
 const PORT = 3000;
 const userroute = require("./router/userroute");
 const adminroute = require("./router/adminroute");
-
+const classroomroute = require("./router/classroomroute");
+const attendanceroute= require("./router/attendanceroute")
   // INIT
 const app = express();
 app.use(bodyParser.json());
@@ -13,6 +14,8 @@ app.use(bodyParser.json());
 
 app.use("/admin", adminroute);
 app.use("/user", userroute);
+app.use("/classroom", classroomroute);
+app.use("/attendance",attendanceroute)
 
 
 // PORT LISTENING
