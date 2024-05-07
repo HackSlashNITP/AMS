@@ -7,8 +7,9 @@ dotenv.config({ path: ".env-local" });
 const PORT = process.env.PORT || 3000;
 const userroute = require("./router/userroute");
 const adminroute = require("./router/adminroute");
-
-// INIT
+const classroomroute = require("./router/classroomroute");
+const attendanceroute= require("./router/attendanceroute")
+  // INIT
 const app = express();
 app.use(bodyParser.json());
 app.use(express.json());
@@ -17,6 +18,9 @@ app.use(express.json());
 
 app.use("/admin", adminroute);
 app.use("/user", userroute);
+app.use("/classroom", classroomroute);
+app.use("/attendance",attendanceroute)
+
 
 // PORT LISTENING
 

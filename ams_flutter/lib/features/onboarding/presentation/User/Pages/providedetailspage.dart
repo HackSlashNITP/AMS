@@ -5,13 +5,14 @@ import 'package:ams_flutter/core/constants/app_string.dart';
 import 'package:ams_flutter/core/constants/app_text_styles.dart';
 import 'package:ams_flutter/features/onboarding/presentation/Admin/widgets/elevated_button.dart';
 import 'package:ams_flutter/features/onboarding/presentation/Admin/widgets/text_field_widget.dart';
+import 'package:ams_flutter/route/app_pages.dart';
+import 'package:ams_flutter/route/custom_navigator.dart';
+import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-
 import '../../../../../route/app_pages.dart';
 import '../../../../../route/custom_navigator.dart';
 import '../../Admin/widgets/auth_widgets.dart';
-
 class DetailsPage extends StatefulWidget {
   const DetailsPage({super.key});
 
