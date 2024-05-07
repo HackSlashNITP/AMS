@@ -1,3 +1,4 @@
+
 const pool = require("../helpers/database");
 const fs = require("fs").promises;
 
@@ -6,13 +7,13 @@ let tableCreated = false;
 
 const createUser = async (req, res) => {
   try {
-    const { Username, Password, UserType } = req.body;
-    if (!Username || !Password) {
-      return res.status(400).json({ error: "Email and password are required" });
+    const { UserID, Username, Password, UserType } = req.body;
+    if (!UserID || !Username || !Password) {
+      return res
+        .status(400)
+        .json({ error: "UserID, username, and password are required" });
     }
-   
 
-  
     if (!tableCreated) {
       const createTableQuery = await fs.readFile(filePath, "utf-8");
       await pool.query(createTableQuery);
@@ -20,15 +21,15 @@ const createUser = async (req, res) => {
     }
 
     const insertQuery =
-      "INSERT INTO users (Username, Password, UserType) VALUES (?, ?, ?)";
+      "INSERT INTO users (UserID, Username, Password, UserType) VALUES (?, ?, ?, ?)";
     const result = await pool.query(insertQuery, [
+      UserID,
       Username,
       Password,
       UserType,
     ]);
     console.log(result);
 
-  
     res.status(201).json({ message: "User created successfully" });
   } catch (error) {
     console.error("Error in createUser:", error);
@@ -39,10 +40,8 @@ const createUser = async (req, res) => {
 const getUserById = async (req, res) => {
   try {
     const id = req.params.userId;
-    if (id < 0 || isNaN(id)) {
-      return res
-        .status(404)
-        .json({ error: "User ID must be a positive number" });
+    if (!id || typeof id !== "string") {
+      return res.status(400).json({ error: "User ID must be a string" });
     }
 
     console.log("User ID:", id);
@@ -67,7 +66,7 @@ const updateUser = async (req, res) => {
     const userId = req.params.userId;
     const { Username, Password, UserType } = req.body;
 
-    if (userId < 0 || isNaN(userId)) {
+    if (!userId || typeof userId !== "string") {
       return res.status(400).json({ error: "Invalid user ID" });
     }
 
@@ -95,7 +94,7 @@ const deleteUser = async (req, res) => {
   try {
     const userId = req.params.userId;
 
-    if (userId < 0 || isNaN(userId)) {
+    if (!userId || typeof userId !== "string") {
       return res.status(400).json({ error: "Invalid user ID" });
     }
 
