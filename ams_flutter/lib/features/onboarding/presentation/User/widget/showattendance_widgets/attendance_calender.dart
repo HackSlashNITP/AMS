@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:ams_flutter/core/constants/app_colors.dart';
+
 class AttendanceCalendar extends StatefulWidget {
-  final List<bool> attendanceStatus;
+  final List<int> attendanceStatus;
 
   const AttendanceCalendar({Key? key, required this.attendanceStatus}) : super(key: key);
 
@@ -37,17 +38,29 @@ class _AttendanceCalendarState extends State<AttendanceCalendar> {
           titleCentered: true,
         ),
         onDaySelected: (selectedDay, focusedDay) {
-      
         },
         calendarBuilders: CalendarBuilders(
           defaultBuilder: (context, date, _) {
-            final isPresent = widget.attendanceStatus[date.day - 1];
+            final attendanceState = widget.attendanceStatus[date.day - 1];
+            Color? backgroundColor;
+            switch (attendanceState) {
+              case 0:
+                backgroundColor = Colors.grey; // No class
+                break;
+              case 1:
+                backgroundColor = AppColors.primary; // Present
+                break;
+              case 2:
+                backgroundColor = Colors.red; // Absent
+                break;
+              default:
+                backgroundColor = Colors.grey; // Default to grey for any other value
+            }
             return Container(
               margin: EdgeInsets.all(5),
               decoration: BoxDecoration(
-                
                 shape: BoxShape.circle,
-                color: isPresent ? AppColors.studentThemeColor : Colors.red,
+                color: backgroundColor,
               ),
               child: Center(
                 child: Text(

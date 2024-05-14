@@ -18,7 +18,7 @@ class _HomeScreenStudentState extends State<HomeScreenStudent> {
   late String userName = 'Loading1...';
   late String id = 'Loading1..';
   String ip = "192.168.104.119"; //Ip address of local host
-  String userId = 'dfdf11'; //This userId is now being used for reference
+  String userId = 'csdf12'; //This userId is now being used for reference
   @override
   void initState() {
     super.initState();

@@ -49,38 +49,39 @@ class _ShowAttendanceState extends State<ShowAttendance> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
+                    //  0 for no class,1 for present  and 2 for absent
                     AttendanceCalendar(attendanceStatus: [
-                      false,
-                      true,
-                      false,
-                      true,
-                      false,
-                      true,
-                      true,
-                      false,
-                      false,
-                      true,
-                      true,
-                      false,
-                      true,
-                      false,
-                      true,
-                      false,
-                      true,
-                      true,
-                      false,
-                      false,
-                      true,
-                      false,
-                      true,
-                      true,
-                      true,
-                      true,
-                      false,
-                      true,
-                      false,
-                      true,
-                      false
+                      1,
+                      0, 
+                      2, 
+                      1, 
+                      0, 
+                      1, 
+                      1, 
+                      0, 
+                      0, 
+                      1,  
+                      1,  
+                      0, 
+                      1,  
+                      2,
+                      1,  
+                      0, 
+                      1,  
+                      1,  
+                      0,
+                      0, 
+                      1,  
+                      0, 
+                      1,  
+                      1,  
+                      1,  
+                      1, 
+                      0, 
+                      1,  
+                      0, 
+                      1,  
+                      0 
                     ]),
                     SizedBox(height: MediaQuery.of(context).size.height * 0.02),
                   ],
@@ -94,7 +95,7 @@ class _ShowAttendanceState extends State<ShowAttendance> {
       // bottomNavigationBar: const BottomNavBar_user(),
     );
   }
- //Build methods of headers
+  //Build methods of headers
 
   Widget _buildHeader(BuildContext context) {
     return Row(
@@ -103,7 +104,7 @@ class _ShowAttendanceState extends State<ShowAttendance> {
         IconButton(
           icon: Icon(
             Icons.arrow_back,
-            color: AppColors.user_tabBackgroundColor,
+            color: AppColors.primary,
             size: MediaQuery.of(context).size.width * 0.07,
           ),
           onPressed: () {
@@ -113,7 +114,7 @@ class _ShowAttendanceState extends State<ShowAttendance> {
         IconButton(
           icon: Icon(
             Icons.notifications,
-            color: AppColors.user_tabBackgroundColor,
+            color: AppColors.primary,
             size: MediaQuery.of(context).size.width * 0.07,
           ),
           onPressed: () {},
@@ -146,7 +147,7 @@ class _ShowAttendanceState extends State<ShowAttendance> {
             Expanded(
               child: BuildButton(
                 text: Text("B.Tech"),
-                color: AppColors.studentThemeColor,
+                color: AppColors.primary,
                 borderRadius: 16.0,
                 height: 41,
               ),
@@ -156,7 +157,7 @@ class _ShowAttendanceState extends State<ShowAttendance> {
               flex: 2,
               child: BuildButton(
                 text: Text("Subject - 1"),
-                color: AppColors.studentThemeColor,
+                color: AppColors.primary,
                 borderRadius: 16.0,
                 height: 41,
               ),
