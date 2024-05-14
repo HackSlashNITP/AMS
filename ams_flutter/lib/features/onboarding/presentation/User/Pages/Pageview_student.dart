@@ -5,6 +5,9 @@ import 'package:ams_flutter/features/onboarding/presentation/User/Pages/Homescre
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../widget/bottom_navbar.dart';
+import 'profile_student.dart';
+
 class ViewStudentScreen extends StatefulWidget {
   const ViewStudentScreen({Key? key}) : super(key: key);
   @override
@@ -28,6 +31,7 @@ class _ViewStudentScreenState extends State<ViewStudentScreen> {
     setState(() {
       _page = page;
     });
+    pageController.jumpToPage(page);
   }
 
   void navigationtab(int page) {
@@ -40,8 +44,9 @@ class _ViewStudentScreenState extends State<ViewStudentScreen> {
       body: PageView(
         controller: pageController,
         onPageChanged: navigationtab,
-        children: [HomeScreenStudent(), SignUpPage(), Text("Profile")],
+           children: [HomeScreenStudent(), SignUpPage(), ProfilePage1()],
       ),
+      // bottomNavigationBar: const BottomNavBar_user(),
       bottomNavigationBar: Container(
         height: 75,
         decoration: const BoxDecoration(

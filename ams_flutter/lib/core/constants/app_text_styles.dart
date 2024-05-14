@@ -32,5 +32,11 @@ class TextStyles {
       fontWeight: FontWeight.w600,
       height: 1.5 ,
       color: Color(0xff098b06),
+);   
+   static const student_profilePageHeader = TextStyle(
+      fontSize: 18.06 ,
+      fontWeight: FontWeight.w600,
+      height: 1.5 ,
+      color: Color.fromRGBO(185, 198, 0, 1),
 );    
 }

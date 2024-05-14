@@ -1,5 +1,7 @@
 import 'package:ams_flutter/core/constants/app_colors.dart';
 import 'package:ams_flutter/core/constants/app_text_styles.dart';
+import 'package:ams_flutter/route/app_pages.dart';
+import 'package:ams_flutter/route/custom_navigator.dart';
 import 'package:flutter/material.dart';
 
 class StudentClass extends StatefulWidget {
@@ -58,27 +60,35 @@ class _StudentClassState extends State<StudentClass> {
                 ),
               ),
               Center(
-                child: Container(
-                  height: 30,
-                  width: 180,
-                  decoration: BoxDecoration(
-                    color: AppColors.primary,
-                    borderRadius: BorderRadius.circular(36),
-                  ),
-                  child: const Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Text(
-                        "See Your Attendance",
-                        style: TextStyle(
-                            color: AppColors.white,
-                            fontWeight: FontWeight.w600),
-                      ),
-                      Icon(
-                        Icons.arrow_forward,
-                        color: AppColors.white,
-                      )
-                    ],
+                child: GestureDetector(
+                  onTap: () {
+                    CustomNavigator.pushTo(
+                      context,
+                      AppPages.showAttendance,
+                    );
+                  },
+                  child: Container(
+                    height: 30,
+                    width: 180,
+                    decoration: BoxDecoration(
+                      color: AppColors.primary,
+                      borderRadius: BorderRadius.circular(36),
+                    ),
+                    child: const Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Text(
+                          "See Your Attendance",
+                          style: TextStyle(
+                              color: AppColors.white,
+                              fontWeight: FontWeight.w600),
+                        ),
+                        Icon(
+                          Icons.arrow_forward,
+                          color: AppColors.white,
+                        )
+                      ],
+                    ),
                   ),
                 ),
               )

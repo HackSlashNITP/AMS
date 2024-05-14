@@ -1,5 +1,5 @@
 class AppInfo {
-  static List<Map<String, String>> profileDetails = [
+  static List<Map<String, dynamic>> profileDetails = [
     {'title': 'Name', 'value': 'Steve'},
     {'title': 'ID', 'value': '12342143'},
     {'title': 'Email', 'value': 'nit@nit.ac.in'},
