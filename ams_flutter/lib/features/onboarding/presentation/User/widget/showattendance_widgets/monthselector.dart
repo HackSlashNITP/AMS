@@ -51,8 +51,8 @@ class MonthBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
       final double screenWidth = MediaQuery.of(context).size.width;
-    final double itemWidth = screenWidth * 0.12;
-    final double itemHeight = screenWidth * 0.18;
+    final double itemWidth = screenWidth * 0.15;
+    final double itemHeight = screenWidth * 0.20;
       final double fontSize = itemHeight * 0.3;
     return GestureDetector(
       onTap: () {
@@ -67,8 +67,8 @@ class MonthBox extends StatelessWidget {
           borderRadius: BorderRadius.circular(39),
           border: isSelected
               ? Border.all(
-                  color: AppColors.studentThemeColor,
-                  width: 3,
+                  color: AppColors.primary,
+                  width: 1,
                 )
               : null,
         ),
@@ -76,7 +76,7 @@ class MonthBox extends StatelessWidget {
           child: Text(
             month,
             style: TextStyle(fontSize: fontSize,
-              color: isSelected ? AppColors.studentThemeColor :Color.fromRGBO(224,224,224,1),
+              color: isSelected ? AppColors.primary :Color.fromRGBO(224,224,224,1),
               fontWeight: FontWeight.bold,
             ),
           ),

@@ -6,6 +6,7 @@ import 'package:ams_flutter/features/onboarding/presentation/Admin/widgets/botto
 import 'package:flutter/material.dart';
 import '../../../../../route/custom_navigator.dart';
 import '../../../../../core/constants/app_string.dart';
+import '../widget/bottom_navbar.dart';
 
 class ProfilePage1 extends StatefulWidget {
   @override
@@ -33,7 +34,7 @@ class _ProfilePage1State extends State<ProfilePage1> {
           ),
         ),
       ),
-      bottomNavigationBar: BottomNavBar(),
+      //  bottomNavigationBar: const BottomNavBar_user(),
     );
   }
 
@@ -44,19 +45,22 @@ class _ProfilePage1State extends State<ProfilePage1> {
         IconButton(
           icon: Icon(
             Icons.arrow_back,
-            color: Colors.green,
+            color: AppColors.primary,
             size: mq.width * 0.07,
           ),
           onPressed: () {CustomNavigator.pop(context);},
         ),
         Text(
           PROFILE,
-          style: TextStyles.profilePageHeader,
+          style: TextStyles.student_profilePageHeader,
         ),
-        Image.asset(
-          AppImages.bell_image,
-          width: mq.width * 0.06,
-          height: mq.width * 0.06,
+           IconButton(
+          icon: Icon(
+            Icons.notifications,
+            color: AppColors.primary,
+            size: MediaQuery.of(context).size.width * 0.07,
+          ),
+          onPressed: () {},
         ),
       ],
     );
@@ -90,12 +94,6 @@ class _ProfilePage1State extends State<ProfilePage1> {
             ),
           ),
           SizedBox(height: 16.0),
-          // _buildProfileRow('Name', 'Steve'),
-          // _buildProfileRow('ID', '12342143'),
-          // _buildProfileRow('Email', 'nit@nit.ac.in'),
-          // _buildProfileRow('Contact', '78XXXXXXX'),
-          // _buildProfileRow('Designation', 'Teacher'),
-          // _buildProfileRow('Social Media', 'https://www.instagram.com'),
           Column(
             children: AppInfo.profileDetails
                 .map((detail) =>
