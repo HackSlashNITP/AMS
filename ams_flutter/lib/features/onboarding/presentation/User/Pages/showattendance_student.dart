@@ -8,10 +8,12 @@ import 'package:ams_flutter/features/onboarding/presentation/User/widget/showatt
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+
 class ShowAttendance extends StatefulWidget {
   @override
   State<ShowAttendance> createState() => _ShowAttendanceState();
 }
+
 class _ShowAttendanceState extends State<ShowAttendance> {
   @override
   Widget build(BuildContext context) {
@@ -34,7 +36,8 @@ class _ShowAttendanceState extends State<ShowAttendance> {
                   children: [
                     Text(
                       "Your Attendance",
-                      style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+                      style:
+                          TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
                     ),
                   ],
                 ),
@@ -46,54 +49,53 @@ class _ShowAttendanceState extends State<ShowAttendance> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    AttendanceCalendar(attendanceStatus: 
-                    [
-                      true,
-                      true,
-                      false,
-                      true,
-                      false,
-                      true,
-                      true,
-                      false,
-                      false,
-                      true,
-                      true,
-                      false,
-                      true,
-                      false,
-                      true,
-                      false,
-                      true,
-                      true,
-                      false,
-                      false,
-                      true,
-                      false,
-                      true,
-                      true,
-                      true,
-                      true,
-                      false,
-                      true,
-                      false,
-                      true,
-                      false
+                    //  0 for no class,1 for present  and 2 for absent
+                    AttendanceCalendar(attendanceStatus: [
+                      1,
+                      0, 
+                      2, 
+                      1, 
+                      0, 
+                      1, 
+                      1, 
+                      0, 
+                      0, 
+                      1,  
+                      1,  
+                      0, 
+                      1,  
+                      2,
+                      1,  
+                      0, 
+                      1,  
+                      1,  
+                      0,
+                      0, 
+                      1,  
+                      0, 
+                      1,  
+                      1,  
+                      1,  
+                      1, 
+                      0, 
+                      1,  
+                      0, 
+                      1,  
+                      0 
                     ]),
                     SizedBox(height: MediaQuery.of(context).size.height * 0.02),
-                      // Spacer(),
-                    DebarredStatusWidget(isDebarred: true),
-                   
                   ],
                 ),
               ),
             ),
+            DebarredStatusWidget(isDebarred: true),
           ],
         ),
       ),
-      bottomNavigationBar: const BottomNavBar_user(),
+      // bottomNavigationBar: const BottomNavBar_user(),
     );
   }
+  //Build methods of headers
 
   Widget _buildHeader(BuildContext context) {
     return Row(
@@ -102,15 +104,17 @@ class _ShowAttendanceState extends State<ShowAttendance> {
         IconButton(
           icon: Icon(
             Icons.arrow_back,
-            color: AppColors.user_tabBackgroundColor,
+            color: AppColors.primary,
             size: MediaQuery.of(context).size.width * 0.07,
           ),
-          onPressed: () {},
+          onPressed: () {
+            Navigator.pop(context);
+          },
         ),
         IconButton(
           icon: Icon(
             Icons.notifications,
-            color: AppColors.user_tabBackgroundColor,
+            color: AppColors.primary,
             size: MediaQuery.of(context).size.width * 0.07,
           ),
           onPressed: () {},
@@ -121,7 +125,18 @@ class _ShowAttendanceState extends State<ShowAttendance> {
 
   Widget _buildDropDown(BuildContext context) {
     List<String> months = [
-      'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
+      'Jan',
+      'Feb',
+      'Mar',
+      'Apr',
+      'May',
+      'Jun',
+      'Jul',
+      'Aug',
+      'Sep',
+      'Oct',
+      'Nov',
+      'Dec'
     ];
 
     return Column(
@@ -132,7 +147,7 @@ class _ShowAttendanceState extends State<ShowAttendance> {
             Expanded(
               child: BuildButton(
                 text: Text("B.Tech"),
-                color: AppColors.studentThemeColor,
+                color: AppColors.primary,
                 borderRadius: 16.0,
                 height: 41,
               ),
@@ -142,7 +157,7 @@ class _ShowAttendanceState extends State<ShowAttendance> {
               flex: 2,
               child: BuildButton(
                 text: Text("Subject - 1"),
-                color: AppColors.studentThemeColor,
+                color: AppColors.primary,
                 borderRadius: 16.0,
                 height: 41,
               ),

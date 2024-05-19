@@ -11,7 +11,7 @@ class DebarredStatusWidget extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
          color: Colors.black,
-         borderRadius: BorderRadius.circular(83)
+         borderRadius: BorderRadius.circular(63)
       ),
      
       padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
