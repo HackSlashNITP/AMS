@@ -11,6 +11,7 @@ const classroomroute = require("./router/classroomroute");
 const attendanceroute= require("./router/attendanceroute")
   // INIT
 const app = express();
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(express.json());
 
