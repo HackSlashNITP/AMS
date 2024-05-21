@@ -127,7 +127,7 @@ const getAllClassrooms = async (req, res) => {
   }
 };
 
-const addClassroom=async (req, res) => {
+const concatClassroomId=async (req, res) => {
     try{
         let professorCode=req.body.professorCode;
         let studentId=req.body.studentId;
