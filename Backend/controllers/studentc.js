@@ -126,7 +126,10 @@ const getAllClassrooms = async (req, res) => {
     res.status(500).json({ error: "Internal server error" });
   }
 };
-
+/*
+  Code to concat new Classroom IDs in the mergedClassroomId value 
+  The length of mergedClassroomId is set to maximum of 25(5*5) and any extra addition is handled
+*/
 const concatClassroomId=async (req, res) => {
     try{
         let professorCode=req.body.professorCode;
