@@ -1,14 +1,5 @@
 const mariadb = require('mariadb');
-
-// Create a connection pool
-const pool = mariadb.createPool({
-  host: process.env.DB_HOST,
-  user: process.env.DB_USER,
-  password: process.env.DB_PASS,
-  database: process.env.DB_NAME,
-  connectionLimit: 5
-});
-
+const pool = require("../helpers/database");
 // Controller function to get all attendance records
 const getAllAttendance = async (req, res) => {
   let connection;
