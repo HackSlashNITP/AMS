@@ -112,4 +112,21 @@ const deleteUser = async (req, res) => {
   }
 };
 
-module.exports = { createUser, getUserById, updateUser, deleteUser };
+const getAllClassrooms = async (req, res) => {
+  try {
+    let professorID=req.body.classroomID;
+    const sqlQuery = "SELECT mergedClassroomId FROM users WHERE userID = ?";
+    let sqlResponse= await pool.query(sqlQuery, [classroomID]);
+    let firstElement = sqlResponse[0];
+    let mergedClassroomId=firstElement.mergedClassroomId;
+    let allClassrooms=splitFunction(mergedClassroomId,5);
+    // ClassroomID Format: [Branch Code]+[Section]+[Professor Initial] eg: CS1KA
+    res.json({"Classrooms": allClassrooms}); 
+  } catch (error) {
+    console.error("Error in getAllClassrooms:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+};
+
+
+module.exports = { createUser, getUserById, updateUser, deleteUser, getAllClassrooms };
