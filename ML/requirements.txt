@@ -1,9 +1,6 @@
-cmake>=3.0
-dlib
-face_recognition
+tensorflow
 opencv-python
 pytesseract
 flask
 flask_cors
-streamlit
 pillow

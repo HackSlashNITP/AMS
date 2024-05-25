@@ -1,5 +1,4 @@
 
-import face_recognition
 import os
 import numpy as np
 from tensorflow.keras.applications.mobilenet import MobileNet, preprocess_input
