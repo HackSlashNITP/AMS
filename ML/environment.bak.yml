@@ -1,9 +1,0 @@
-name: Facial-Recognition-Attendence-System
-channels:
-  - conda-forge
-  - defaults
-dependencies:
-  - python
-  - cmake
-  - dlib
-  - opencv
