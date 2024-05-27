@@ -6,6 +6,7 @@ const dotenv = require("dotenv");
 dotenv.config({ path: ".env-local" });
 const PORT = process.env.PORT || 3000;
 const userroute = require("./router/userroute");
+const studentroute = require("./router/studentroute");
 const adminroute = require("./router/adminroute");
 const classroomroute = require("./router/classroomroute");
 const attendanceroute= require("./router/attendanceroute")
@@ -19,6 +20,7 @@ app.use(express.json());
 
 app.use("/admin", adminroute);
 app.use("/user", userroute);
+app.use("/student", studentroute);
 app.use("/classroom", classroomroute);
 app.use("/attendance",attendanceroute)
 
