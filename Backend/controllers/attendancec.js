@@ -1,6 +1,43 @@
-const mariadb = require('mariadb');
+const fs = require('fs').promises;
 const pool = require("../helpers/database");
-// Controller function to get all attendance records
+
+let tableCreated = false;
+
+const createAttendance = async (req, res) => {
+  const { AttendanceDateTime, StudentID, ScheduleID, IsPresent } = req.body;
+  let connection;
+  try {
+    if (!tableCreated) {
+      const createTableQuery = await fs.readFile('./helpers/attendance.sql', 'utf-8');
+      connection = await pool.getConnection();
+      await connection.query(createTableQuery);
+      tableCreated = true;
+    } else {
+      connection = await pool.getConnection();
+    }
+
+    const result = await connection.query(
+      "INSERT INTO Attendance (AttendanceDateTime, StudentID, ScheduleID, IsPresent) VALUES (?, ?, ?, ?)",
+      [AttendanceDateTime, StudentID, ScheduleID, IsPresent]
+    );
+    const newAttendance = {
+      AttendanceID: result.insertId,
+      AttendanceDateTime,
+      StudentID,
+      ScheduleID,
+      IsPresent
+    };
+    res.status(201).json(newAttendance);
+  } catch (error) {
+    console.error("Error in createAttendance:", error);
+    res.status(500).json({ error: "Internal server error" });
+  } finally {
+    if (connection) connection.release();
+  }
+};
+
+// Other controller functions
+
 const getAllAttendance = async (req, res) => {
   let connection;
   try {
@@ -15,13 +52,12 @@ const getAllAttendance = async (req, res) => {
   }
 };
 
-// Controller function to get a specific attendance record by ID
 const getAttendanceById = async (req, res) => {
   const { AttendanceID } = req.params;
   let connection;
   try {
     connection = await pool.getConnection();
-    const rows = await connection.query("SELECT * FROM Attendance WHERE id = ?", [AttendanceID]);
+    const rows = await connection.query("SELECT * FROM Attendance WHERE AttendanceID = ?", [AttendanceID]);
     if (rows.length === 0) {
       return res.status(404).json({ error: 'Attendance record not found' });
     }
@@ -34,40 +70,20 @@ const getAttendanceById = async (req, res) => {
   }
 };
 
-// Controller function to create a new attendance record
-const createAttendance = async (req, res) => {
-  const { AttendanceDateTime, StudentID, IsPresent } = req.body;
-  let connection;
-  try {
-    connection = await pool.getConnection();
-    const result = await connection.query("INSERT INTO Attendance (AttendanceDateTime, StudentID, IsPresent) VALUES (?, ?, ?)", [AttendanceDateTime, StudentID, IsPresent]);
-    const newAttendance = {
-      id: result.insertId,
-      AttendanceDateTime,
-      StudentID,
-      IsPresent
-    };
-    res.status(201).json(newAttendance);
-  } catch (error) {
-    console.error("Error in createAttendance:", error);
-    res.status(500).json({ error: "Internal server error" });
-  } finally {
-    if (connection) connection.release();
-  }
-};
-
-// Controller function to update a specific attendance record by ID
 const updateAttendanceById = async (req, res) => {
   const { AttendanceID } = req.params;
-  const {AttendanceDateTime, StudentID, IsPresent} = req.body;
+  const { AttendanceDateTime, StudentID, ScheduleID, IsPresent } = req.body;
   let connection;
   try {
     connection = await pool.getConnection();
-    const result = await connection.query("UPDATE Attendance SET AttendanceDateTime = ?, StudentID = ?, IsPresent = ? WHERE id = ?", [AttendanceDateTime, StudentID, IsPresent ,AttendanceID]);
+    const result = await connection.query(
+      "UPDATE Attendance SET AttendanceDateTime = ?, StudentID = ?, ScheduleID = ?, IsPresent = ? WHERE AttendanceID = ?",
+      [AttendanceDateTime, StudentID, ScheduleID, IsPresent, AttendanceID]
+    );
     if (result.affectedRows === 0) {
       return res.status(404).json({ error: 'Attendance record not found' });
     }
-    res.json({ id: attendanceId, date, studentId, status });
+    res.json({ AttendanceID, AttendanceDateTime, StudentID, ScheduleID, IsPresent });
   } catch (error) {
     console.error("Error in updateAttendanceById:", error);
     res.status(500).json({ error: "Internal server error" });
@@ -76,13 +92,12 @@ const updateAttendanceById = async (req, res) => {
   }
 };
 
-// Controller function to delete a specific attendance record by ID
 const deleteAttendanceById = async (req, res) => {
-  const { AttendanceID} = req.params;
+  const { AttendanceID } = req.params;
   let connection;
   try {
     connection = await pool.getConnection();
-    const result = await connection.query("DELETE FROM Attendance WHERE id = ?", [AttendanceID]);
+    const result = await connection.query("DELETE FROM Attendance WHERE AttendanceID = ?", [AttendanceID]);
     if (result.affectedRows === 0) {
       return res.status(404).json({ error: 'Attendance record not found' });
     }
@@ -95,12 +110,15 @@ const deleteAttendanceById = async (req, res) => {
   }
 };
 
-// Controller function for students to check their attendance percentage
 const getAttendancePercentage = async (req, res) => {
-  const { StudentID } = req.params;  let connection;
+  const { StudentID } = req.params;
+  let connection;
   try {
     connection = await pool.getConnection();
-    const rows = await connection.query("SELECT (SUM(IsPresent = 'present') / COUNT(*)) * 100 AS percentage FROM Attendance WHERE StudentID = ?", [StudentID]);
+    const rows = await connection.query(
+      "SELECT (SUM(IsPresent = true) / COUNT(*)) * 100 AS percentage FROM Attendance WHERE StudentID = ?",
+      [StudentID]
+    );
     if (rows.length === 0) {
       return res.status(404).json({ error: 'No attendance records found' });
     }
@@ -113,7 +131,6 @@ const getAttendancePercentage = async (req, res) => {
   }
 };
 
-// Exporting all controllers
 module.exports = {
   getAllAttendance,
   getAttendanceById,
@@ -122,5 +139,3 @@ module.exports = {
   deleteAttendanceById,
   getAttendancePercentage
 };
-
-
