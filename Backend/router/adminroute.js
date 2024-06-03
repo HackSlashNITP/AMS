@@ -1,9 +1,9 @@
 const express = require("express");
-const usercontroller = require("../controllers/adminc");
+const admincontroller = require("../controllers/adminc");
 
 const router = express.Router();
 
 // show all data
-router.get("/:adminId", usercontroller.getAdminById);
+router.get('/:adminId', admincontroller.getAdminById);
 
 module.exports = router;
