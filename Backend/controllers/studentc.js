@@ -23,10 +23,10 @@ const createStudent = async (req, res) => {
     res.status(500).json({ error: "Internal server error" });
   }
 };
+
 const getStudentById = async (req, res) => {
   try {
     const { studentId } = req.params;
-
 
     if (!studentId || typeof studentId !== "string") {
       return res.status(400).json({ error: "Student ID must be a string" });
@@ -74,7 +74,7 @@ const deleteStudent = async (req, res) => {
 
     if (!studentId || typeof studentId !== "string") {
       return res.status(400).json({ error: "Invalid student ID" });
-    }
+    } 
 
     const deleteQuery = "DELETE FROM students WHERE studentId=?";
     const result = await pool.query(deleteQuery, [studentId]);
