@@ -1,135 +1,108 @@
-const mariadb = require('mariadb');
+const pool = require("../helpers/database");
+const fs = require("fs").promises;
+const filePath = "./helpers/attendance.sql";
+let tableCreated = false;
 
-// Create a connection pool
-const pool = mariadb.createPool({
-  host: process.env.DB_HOST,
-  user: process.env.DB_USER,
-  password: process.env.DB_PASS,
-  database: process.env.DB_NAME,
-  connectionLimit: 5
-});
 
-// Controller function to get all attendance records
-const getAllAttendance = async (req, res) => {
-  let connection;
-  try {
-    connection = await pool.getConnection();
-    const rows = await connection.query("SELECT * FROM Attendance");
-    res.json(rows);
-  } catch (error) {
-    console.error("Error in getAllAttendance:", error);
-    res.status(500).json({ error: "Internal server error" });
-  } finally {
-    if (connection) connection.release();
-  }
-};
+//Create a new student in a subject attendance
+const createStudentAttendance = async (req, res) => {
+  try{
+    const studentID = req.params.studentID;
+    const SubjectCode = req.params.SubjectCode;
+    const tableExists = await pool.query('SHOW TABLES LIKE ?', ['Attendance']);
 
-// Controller function to get a specific attendance record by ID
-const getAttendanceById = async (req, res) => {
-  const { AttendanceID } = req.params;
-  let connection;
-  try {
-    connection = await pool.getConnection();
-    const rows = await connection.query("SELECT * FROM Attendance WHERE id = ?", [AttendanceID]);
-    if (rows.length === 0) {
-      return res.status(404).json({ error: 'Attendance record not found' });
+    if(!tableExists.length) {
+      const createTableQuery = await fs.readFile(filePath, "utf-8");
+      await pool.query(createTableQuery);
     }
-    res.json(rows[0]);
-  } catch (error) {
-    console.error("Error in getAttendanceById:", error);
+    console.log(req.params)
+    const studentExists = await pool.query('SELECT * FROM students WHERE studentID = ?', [studentID]);
+    const courseExists = await pool.query('SELECT * FROM course WHERE SubjectCode = ?', [SubjectCode]);
+
+    if(!studentExists.length || !courseExists.length) {
+      return res.status(400).json({ message: 'Invalid student ID or subject code' });
+     }
+    
+const  insertQuery = "INSERT INTO Attendance (studentID, SubjectCode, AttendanceCount, TotalClasses) VALUES (?, ?, ?, ?)"
+await pool.query(insertQuery, [studentID, SubjectCode, 0, 0]);
+res.status(201).json({ message: 'Attendance marked successfully' });
+
+}
+  catch(error){
+    console.error("Error in createStudentAttendance:", error);
     res.status(500).json({ error: "Internal server error" });
-  } finally {
-    if (connection) connection.release();
   }
 };
 
-// Controller function to create a new attendance record
-const createAttendance = async (req, res) => {
-  const { AttendanceDateTime, StudentID, IsPresent } = req.body;
-  let connection;
-  try {
-    connection = await pool.getConnection();
-    const result = await connection.query("INSERT INTO Attendance (AttendanceDateTime, StudentID, IsPresent) VALUES (?, ?, ?)", [AttendanceDateTime, StudentID, IsPresent]);
-    const newAttendance = {
-      id: result.insertId,
-      AttendanceDateTime,
-      StudentID,
-      IsPresent
-    };
-    res.status(201).json(newAttendance);
-  } catch (error) {
-    console.error("Error in createAttendance:", error);
-    res.status(500).json({ error: "Internal server error" });
-  } finally {
-    if (connection) connection.release();
-  }
-};
-
-// Controller function to update a specific attendance record by ID
-const updateAttendanceById = async (req, res) => {
-  const { AttendanceID } = req.params;
-  const {AttendanceDateTime, StudentID, IsPresent} = req.body;
-  let connection;
-  try {
-    connection = await pool.getConnection();
-    const result = await connection.query("UPDATE Attendance SET AttendanceDateTime = ?, StudentID = ?, IsPresent = ? WHERE id = ?", [AttendanceDateTime, StudentID, IsPresent ,AttendanceID]);
-    if (result.affectedRows === 0) {
-      return res.status(404).json({ error: 'Attendance record not found' });
+const Present = async (req, res) => {
+  try{
+    const studentID  = req.params.studentID;
+    const SubjectCode = req.params.SubjectCode;
+    console.log(req.params)
+    if(!studentID || typeof studentID !== "string"){
+      return res.status(400).json({ error: "Student ID should be a string" });
     }
-    res.json({ id: attendanceId, date, studentId, status });
-  } catch (error) {
-    console.error("Error in updateAttendanceById:", error);
-    res.status(500).json({ error: "Internal server error" });
-  } finally {
-    if (connection) connection.release();
-  }
-};
-
-// Controller function to delete a specific attendance record by ID
-const deleteAttendanceById = async (req, res) => {
-  const { AttendanceID} = req.params;
-  let connection;
-  try {
-    connection = await pool.getConnection();
-    const result = await connection.query("DELETE FROM Attendance WHERE id = ?", [AttendanceID]);
-    if (result.affectedRows === 0) {
-      return res.status(404).json({ error: 'Attendance record not found' });
+    if(!SubjectCode || typeof SubjectCode !== "string"){
+      return res.status(400).json({ error: "Subject Code should be a string" });
     }
-    res.sendStatus(204);
-  } catch (error) {
-    console.error("Error in deleteAttendanceById:", error);
+    const updateQuery = "UPDATE attendance SET AttendanceCount = AttendanceCount + 1, TotalClasses = TotalClasses + 1 WHERE studentID = ? AND SubjectCode = ?";
+    const result = await pool.query(updateQuery, [studentID, SubjectCode]);
+    res.status(200).json({ message: "Student present" });
+  }
+  catch(error){
+    console.error("Error in Present:", error);
     res.status(500).json({ error: "Internal server error" });
-  } finally {
-    if (connection) connection.release();
   }
 };
 
-// Controller function for students to check their attendance percentage
-const getAttendancePercentage = async (req, res) => {
-  const { StudentID } = req.params;  let connection;
-  try {
-    connection = await pool.getConnection();
-    const rows = await connection.query("SELECT (SUM(IsPresent = 'present') / COUNT(*)) * 100 AS percentage FROM Attendance WHERE StudentID = ?", [StudentID]);
-    if (rows.length === 0) {
-      return res.status(404).json({ error: 'No attendance records found' });
+const Absent = async (req, res) => {
+  try{
+    const studentID  = req.params.studentID;
+    const SubjectCode = req.params.SubjectCode;
+    console.log(req.params)
+    if(!studentID || typeof studentID !== "string"){
+      return res.status(400).json({ error: "Student ID should be a string" });
     }
-    res.json({ attendancePercentage: rows[0].percentage });
-  } catch (error) {
-    console.error("Error in getAttendancePercentage:", error);
+    if(!SubjectCode || typeof SubjectCode !== "string"){
+      return res.status(400).json({ error: "Subject Code should be a string" });
+    }
+    const updateQuery = "UPDATE attendance SET TotalClasses = TotalClasses + 1 WHERE studentID = ? AND SubjectCode = ?";
+    const result = await pool.query(updateQuery, [studentID, SubjectCode]);
+    res.status(200).json({ message: "Student absent" });
+  }
+  catch(error){
+    console.error("Error in Absent:", error);
     res.status(500).json({ error: "Internal server error" });
-  } finally {
-    if (connection) connection.release();
   }
 };
 
-// Exporting all controllers
+const getAttendance = async (req, res) => {
+  try{
+    const studentID  = req.params.studentID;
+    const SubjectCode = req.params.SubjectCode;
+    console.log(req.params)
+    if(!studentID || typeof studentID !== "string"){
+      return res.status(400).json({ error: "Student ID should be a string" });
+    }
+    if(!SubjectCode || typeof SubjectCode !== "string"){
+      return res.status(400).json({ error: "Subject Code should be a string" });
+    }
+    const sqlQuery = "SELECT * FROM attendance WHERE studentID = ? AND SubjectCode = ?";
+    const rows = await pool.query(sqlQuery, [studentID, SubjectCode]);
+    if(rows.length === 0){
+      return res.status(404).json({ error: "Attendance not found" });
+    }
+    res.json({ attendance: rows[0] });
+  }
+  catch(error){
+    console.error("Error in getAttendance:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+};
+
 module.exports = {
-  getAllAttendance,
-  getAttendanceById,
-  createAttendance,
-  updateAttendanceById,
-  deleteAttendanceById,
-  getAttendancePercentage
+  createStudentAttendance, Present, Absent, getAttendance
 };
+
 
 

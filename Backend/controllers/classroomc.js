@@ -1,6 +1,6 @@
 const pool = require("../helpers/database");
 const splitFunction = require("../middleware/middleware");
-const app=require("express")();
+const app=require("express");
 
 // Controller function to get all classrooms
 const getAllClassrooms = async (req, res) => {
