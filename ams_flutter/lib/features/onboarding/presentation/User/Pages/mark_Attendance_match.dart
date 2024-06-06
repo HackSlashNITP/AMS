@@ -1,9 +1,15 @@
+import 'dart:io';
+
 import 'package:ams_flutter/core/constants/app_colors.dart';
 import 'package:ams_flutter/core/constants/app_images.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 class MatchWidget extends StatefulWidget {
+  final File? studentImage;
+  final File? teacherImage;
+
+  MatchWidget({this.studentImage, this.teacherImage});
+
   @override
   State<MatchWidget> createState() => _MatchWidgetState();
 }
@@ -33,7 +39,6 @@ class _MatchWidgetState extends State<MatchWidget> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Container(
-              decoration: BoxDecoration(),
               padding: EdgeInsets.symmetric(
                   horizontal: screenWidth * 0.08, vertical: screenHeight * 0.05),
               child: Column(
@@ -43,7 +48,7 @@ class _MatchWidgetState extends State<MatchWidget> {
                   _buildStudentInfo(
                     context,
                     'Steve - 1',
-                    AppImages.student_dummy_image,
+                    widget.studentImage,
                     isStudent1Matched,
                     screenWidth,
                     screenHeight,
@@ -57,7 +62,7 @@ class _MatchWidgetState extends State<MatchWidget> {
                   _buildStudentInfo(
                     context,
                     'Steve - 2',
-                    AppImages.student_dummy_image,
+                    widget.teacherImage,
                     isStudent2Matched,
                     screenWidth,
                     screenHeight,
@@ -89,69 +94,79 @@ class _MatchWidgetState extends State<MatchWidget> {
     );
   }
 
-  Widget _buildStudentInfo(
-      BuildContext context,
-      String name,
-      String imagePath,
-      bool isMatched,
-      double screenWidth,
-      double screenHeight,
-      Function(bool) onMatchChanged) {
-    return Container(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Container(
-            margin: EdgeInsets.only(bottom: screenHeight * 0.01),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(screenWidth * 0.05),
-              color: AppColors.pwhite,
-              image: DecorationImage(
-                image: AssetImage(imagePath),
-                fit: BoxFit.cover,
-              ),
-            ),
-            width: screenWidth * 0.3,
-            height: screenWidth * 0.4,
-          ),
-          Container(
-            margin: EdgeInsets.only(bottom: screenHeight * 0.01),
-            child: Text(
-              name,
-              style: TextStyle(
-                fontWeight: FontWeight.w600,
-                fontSize: screenWidth * 0.05,
-                color: AppColors.black,
-              ),
+Widget _buildStudentInfo(
+  BuildContext context,
+  String name,
+  dynamic imagePath,
+  bool isMatched,
+  double screenWidth,
+  double screenHeight,
+  Function(bool) onMatchChanged,
+) {
+  return Container(
+    child: Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Container(
+          margin: EdgeInsets.only(bottom: screenHeight * 0.01),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(screenWidth * 0.05),
+            color: AppColors.pwhite,
+            image: DecorationImage(
+              image: _getImageProvider(imagePath),
+              fit: BoxFit.cover,
             ),
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              _buildMatchButton(
-                context,
-                'MATCHED',
-                isMatched ? AppColors.primary : AppColors.grey,
-                screenWidth,
-                screenHeight,
-                () => onMatchChanged(true),
-              ),
-              SizedBox(width: screenWidth * 0.02),
-              _buildMatchButton(
-                context,
-                'NOT MATCHED',
-                !isMatched ? AppColors.user_red : AppColors.grey,
-                screenWidth,
-                screenHeight,
-                () => onMatchChanged(false),
-              ),
-            ],
+          width: screenWidth * 0.3,
+          height: screenWidth * 0.4,
+        ),
+        Container(
+          margin: EdgeInsets.only(bottom: screenHeight * 0.01),
+          child: Text(
+            name,
+            style: TextStyle(
+              fontWeight: FontWeight.w600,
+              fontSize: screenWidth * 0.05,
+              color: AppColors.black,
+            ),
           ),
-        ],
-      ),
-    );
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            _buildMatchButton(
+              context,
+              'MATCHED',
+              isMatched ? AppColors.primary : AppColors.grey,
+              screenWidth,
+              screenHeight,
+              () => onMatchChanged(true),
+            ),
+            SizedBox(width: screenWidth * 0.02),
+            _buildMatchButton(
+              context,
+              'NOT MATCHED',
+              !isMatched ? AppColors.user_red : AppColors.grey,
+              screenWidth,
+              screenHeight,
+              () => onMatchChanged(false),
+            ),
+          ],
+        ),
+      ],
+    ),
+  );
+}
+
+ImageProvider _getImageProvider(dynamic imagePath) {
+  if (imagePath is String) {
+    return AssetImage(imagePath);
+  } else if (imagePath is File) {
+    return FileImage(imagePath);
   }
+  return AssetImage(AppImages.student_dummy_image);
+}
 
   Widget _buildMatchButton(BuildContext context, String text, Color color,
       double screenWidth, double screenHeight, Function() onPressed) {
