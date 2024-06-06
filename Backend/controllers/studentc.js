@@ -8,10 +8,11 @@ const createStudent = async (req, res) => {
   try {
     const { studentId, name, department, section, mergedClassroomId } = req.body;
 
-    if (!tableCreated) {
+    const tableExists = await pool.query('SHOW TABLES LIKE ?', ['students']);
+
+    if(!tableExists.length) {
       const createTableQuery = await fs.readFile(filePath, "utf-8");
       await pool.query(createTableQuery);
-      tableCreated = true;
     }
 
     const insertQuery = "INSERT INTO students (studentId, name, department, section, mergedClassroomId) VALUES (?, ?, ?, ?, ?)";
