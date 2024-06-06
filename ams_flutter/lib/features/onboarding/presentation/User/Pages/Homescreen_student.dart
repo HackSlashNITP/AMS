@@ -18,8 +18,8 @@ class _HomeScreenStudentState extends State<HomeScreenStudent> {
   late String department = 'Loading...';
   late String section = 'Loading...';
   late String mergedClassroomId = 'Loading...';
-  String ip = "192.168.242.144"; // Corrected IP address of local host
-  String studentIdParam = 'S1001'; // This studentId is now being used for reference
+  String ip = "192.168.242.144"; 
+  String studentIdParam = 'S1001'; //  studentId 
 
   @override
   void initState() {
@@ -39,7 +39,7 @@ class _HomeScreenStudentState extends State<HomeScreenStudent> {
         log(data.toString());
         setState(() {
           studentName = student['name'];
-          studentId = student['studentID']; // Ensure the key matches exactly
+          studentId = student['studentID']; 
           department = student['department'];
           section = student['section'];
           mergedClassroomId = student['mergedClassroomId'];
