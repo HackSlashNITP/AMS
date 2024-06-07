@@ -1,9 +1,8 @@
 import 'package:ams_flutter/core/constants/app_colors.dart';
-import 'package:ams_flutter/core/constants/app_images.dart';
 import 'package:ams_flutter/features/onboarding/presentation/User/Pages/mark_Attendance_student.dart';
 import 'package:ams_flutter/features/onboarding/presentation/User/Pages/mark_Attendance_teacher.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 
 class MatchWidget extends StatefulWidget {
@@ -14,6 +13,33 @@ class MatchWidget extends StatefulWidget {
 class _MatchWidgetState extends State<MatchWidget> {
   bool isStudent1Matched = true;
   bool isStudent2Matched = false;
+  String _response = '';
+  final ip_address = "";//IP on which the flask Server is running: Command=> flask --app flaskapp run --host=0.0.0.0
+  Future<void> _fetchData() async {
+    try {
+      final file = Provider.of<ImageData>(context, listen: false).imageFile;
+      var request =
+          http.MultipartRequest('POST', Uri.parse('${ip_address}/recognize'));
+      request.files.add(http.MultipartFile.fromBytes(
+          'file', file!.readAsBytesSync(),
+          filename: file.path));
+      var response = await request.send();
+      // final response = await http.post(
+      //   Uri.parse('http://192.168.29.12:5000/recognize'),
+      //   body: {
+      //     'image1': imageData,
+      //     'image2': 'image2',
+      //   },
+      // );
+      setState(() {
+        _response = response.statusCode == 200 ? 'Matched' : 'Not Matched';
+      });
+    } catch (e) {
+      setState(() {
+        _response = 'Error: $e';
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -88,6 +114,7 @@ class _MatchWidgetState extends State<MatchWidget> {
                 ],
               ),
             ),
+            Text(_response)
           ],
         ),
       ),
@@ -313,9 +340,7 @@ class _MatchWidgetState extends State<MatchWidget> {
             horizontal: screenWidth * 0.03,
           ),
           child: GestureDetector(
-            onTap: (){
-              //Image Request
-            },
+            onTap: _fetchData,
             child: Text(
               'Mark',
               style: TextStyle(
