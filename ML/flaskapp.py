@@ -1,4 +1,4 @@
-from facer import Person
+from facer import Person, DeepModel
 from flask import Flask, request, jsonify, render_template
 from textonimg import apply_watermark
 from flask_cors import CORS
@@ -6,6 +6,8 @@ from functools import lru_cache
 
 app = Flask(__name__)
 CORS(app)  
+
+model = DeepModel()
 
 @lru_cache(maxsize=None)
 def get_persons():
@@ -33,7 +35,7 @@ def recognize_person():
     file.save("temp.jpg")
 
     for person in persons:
-        result = person.recognise("temp.jpg")        
+        result = person.recognise("temp.jpg", model)        
         if result is not None:
             print(result)
             info = result.name + " " + result.roll_no

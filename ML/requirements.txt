@@ -1,6 +1,7 @@
-dlib
-face_recognition
+tensorflow
 opencv-python
 pytesseract
 flask
 flask_cors
+pillow
+gunicorn
