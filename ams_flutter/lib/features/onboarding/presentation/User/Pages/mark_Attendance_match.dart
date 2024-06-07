@@ -24,13 +24,6 @@ class _MatchWidgetState extends State<MatchWidget> {
           'file', file!.readAsBytesSync(),
           filename: file.path));
       var response = await request.send();
-      // final response = await http.post(
-      //   Uri.parse('http://192.168.29.12:5000/recognize'),
-      //   body: {
-      //     'image1': imageData,
-      //     'image2': 'image2',
-      //   },
-      // );
       setState(() {
         _response = response.statusCode == 200 ? 'Matched' : 'Not Matched';
       });
