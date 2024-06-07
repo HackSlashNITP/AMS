@@ -25,6 +25,8 @@ dependencies:
   table_calendar: ^3.1.1
   firebase_storage: ^11.7.7
   cloud_firestore: ^4.17.5
+  provider: ^6.1.2
+  cross_file_image: ^1.1.0
 
 dev_dependencies:
   flutter_test:
