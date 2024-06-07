@@ -12,4 +12,5 @@ class AppImages {
   static const String rightarrow_image = "Assets/images/rightarrow.png";
   static const String user_image = "Assets/images/user.jpg";
   static const String student_dummy_image = "Assets/images/student_photo.png";
+
 }
