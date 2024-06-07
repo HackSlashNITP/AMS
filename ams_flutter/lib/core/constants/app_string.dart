@@ -23,9 +23,9 @@ const String PROVIDE_YOUR_DETAIL = "Provide Your Details";
 const String ADD_PHOTO = "Add Your Photo";
 const String NAME = "Name";
 const String EMAIL = "Email";
-const String PHONE = "Phone";
 const String ROLL = "Roll";
-const String ENROLLMENT = "Enrollment No";
+const String BRANCH = "Branch Code(for eg. CS)";
+const String SECTION = "Section(for eg. A)";
 
 //for create_instant_class
 const String CREATE_INSTANT_CLASS = "Create Instant Class";
