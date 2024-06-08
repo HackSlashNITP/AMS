@@ -5,6 +5,7 @@ const pool = mariadb.createPool({
   user: process.env.DB_USER, // Change to your MariaDB username
   password: process.env.DB_PASS, // Change to your MariaDB password
   database: process.env.DB_NAME,
+  allowPublicKeyRetrieval:true,
   connectionLimit: 5 // Adjust as needed
 });
 pool.getConnection()

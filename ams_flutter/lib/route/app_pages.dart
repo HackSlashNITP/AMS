@@ -6,8 +6,7 @@ class AppPages {
   static const String homeStudent = '/homeStudent';
   static const String homeProfessor = '/homeProfessor';
   static const String signUpProfessor = '/signUpProfessor';
-  static const String markAttendance = '/markAttendance';
-
+  static const String markAttendance = '/markAttendance'
   static const String whoAreYou = '/whoAreYou';
   static const String signUpStudent = '/signUpStudent';
 

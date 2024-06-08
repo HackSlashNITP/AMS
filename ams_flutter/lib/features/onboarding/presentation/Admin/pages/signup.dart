@@ -130,8 +130,10 @@ class SignUpPageState extends State<SignUpPage> {
                 ),
                 onPressed:
                      (){CustomNavigator.pushReplace(
-                  context,
-                  AppPages.homeProfessor, // Pass user type as argument
+                       context,
+                       AppPages.homeProfessor,
+                       arguments: 'ID1234', // Pass admin ID as an argument
+                       // Pass user type as argument
                 );
                 },
               ),
