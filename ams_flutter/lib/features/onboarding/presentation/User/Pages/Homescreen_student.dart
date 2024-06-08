@@ -4,6 +4,8 @@ import 'package:ams_flutter/core/constants/app_colors.dart';
 import 'package:ams_flutter/features/onboarding/presentation/User/widget/student_class_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class HomeScreenStudent extends StatefulWidget {
   const HomeScreenStudent({super.key});
@@ -18,13 +20,41 @@ class _HomeScreenStudentState extends State<HomeScreenStudent> {
   late String department = 'Loading...';
   late String section = 'Loading...';
   late String mergedClassroomId = 'Loading...';
-  String ip = "192.168.242.144"; 
-  String studentIdParam = '2206080'; //  studentId 
+  String ip = "192.168.242.144";
+  String studentIdParam = 'Loading...'; //  studentId
 
   @override
   void initState() {
     super.initState();
-    fetchStudentData(studentIdParam);
+    fetchStudentId();
+  }
+
+  Future<void> fetchStudentId() async {
+    try {
+      User? user = FirebaseAuth.instance.currentUser;
+      if (user != null) {
+        String email = user.email!;
+        DocumentSnapshot userDoc = await FirebaseFirestore.instance
+            .collection('student')
+            .where('email', isEqualTo: email)
+            .limit(1)
+            .get()
+            .then((snapshot) => snapshot.docs.first);
+        if (userDoc.exists) {
+          setState(() {
+            studentIdParam = userDoc.id;
+           
+          });
+          fetchStudentData(studentIdParam);
+        } else {
+          log('User document does not exist');
+        }
+      } else {
+        log('No user is currently logged in');
+      }
+    } catch (e) {
+      log('Error fetching student ID: $e');
+    }
   }
 
   Future<void> fetchStudentData(String studentId) async {
@@ -39,7 +69,7 @@ class _HomeScreenStudentState extends State<HomeScreenStudent> {
         log(data.toString());
         setState(() {
           studentName = student['name'];
-          studentId = student['studentID']; 
+          studentId = student['studentID'];
           department = student['department'];
           section = student['section'];
           mergedClassroomId = student['mergedClassroomId'];
