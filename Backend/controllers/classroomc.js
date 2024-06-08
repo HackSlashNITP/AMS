@@ -49,8 +49,9 @@ const getClassroomDetails = async (req, res) => {
       return res.status(404).json({ error: "Classroom not found" });
     }
     console.log("Rows:", rows);
-    res.send(`Classroom ID: ${classroomId}`);
-
+    // res.send(`Classroom ID: ${classroomId}`);
+    res.json({classroom: rows[0]});
+  
   } catch (error) {
     console.error("Error in getting Classrooms Details:", error);
     res.status(500).json({ error: "Internal server error" });
