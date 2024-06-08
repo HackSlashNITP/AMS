@@ -8,6 +8,7 @@ class TextFieldController extends StatelessWidget {
   final Icon? prefixIcon;
   final double borderRadius;
   final border = 1;
+  final bool obscureText;
 
   const TextFieldController({
     super.key,
@@ -16,6 +17,7 @@ class TextFieldController extends StatelessWidget {
     required this.textInputType,
     this.prefixIcon,
     this.borderRadius = 8.0,
+    required this.obscureText,
   });
 
   @override
@@ -25,10 +27,11 @@ class TextFieldController extends StatelessWidget {
       child: Container(
         height: 44,
         child: TextFormField(
+          obscureText: obscureText,
           controller: textEditingController,
           keyboardType: textInputType,
           decoration: InputDecoration(
-              prefixIcon: prefixIcon != null ? prefixIcon : null, 
+              prefixIcon: prefixIcon != null ? prefixIcon : null,
               contentPadding:
                   EdgeInsets.symmetric(vertical: 15, horizontal: 15),
               hintText: hinttext,

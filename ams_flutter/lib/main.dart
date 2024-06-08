@@ -1,3 +1,4 @@
+
 import 'package:ams_flutter/features/onboarding/presentation/User/Pages/mark_Attendance_match.dart';
 import 'package:ams_flutter/features/onboarding/presentation/User/Pages/mark_Attendance_student.dart';
 import 'package:ams_flutter/features/onboarding/presentation/User/Pages/mark_Attendance_teacher.dart';
@@ -32,11 +33,9 @@ class MainApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       navigatorKey: kNavigatorKey,
+      initialRoute: AppPages.appEntry,
+      onGenerateRoute: CustomNavigator.controller,
 
-      // initialRoute: AppPages.appEntry,
-      home: StudentPhotoWidget(),
-
-      // onGenerateRoute: CustomNavigator.controller,
     );
   }
 }
