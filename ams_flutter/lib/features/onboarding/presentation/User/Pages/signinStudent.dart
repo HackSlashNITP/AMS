@@ -1,7 +1,5 @@
 import 'package:ams_flutter/core/constants/app_colors.dart';
 import 'package:ams_flutter/features/onboarding/datasource/auth_methods.dart';
-import 'package:ams_flutter/features/onboarding/presentation/Admin/pages/home_page.dart';
-import 'package:ams_flutter/features/onboarding/presentation/User/Pages/Homescreen_student.dart';
 import 'package:ams_flutter/features/onboarding/presentation/User/Pages/SignUp.dart';
 import 'package:ams_flutter/route/app_pages.dart';
 import 'package:ams_flutter/route/custom_navigator.dart';
