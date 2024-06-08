@@ -9,9 +9,11 @@ import '../../../../../route/custom_navigator.dart';
 
 class ClassComponent extends StatefulWidget {
   final bool isMarked;
+  final String classroomId;
   const ClassComponent({
     Key? key,
     required this.isMarked,
+    required this.classroomId
   }) : super(key: key);
 
   @override
@@ -39,7 +41,7 @@ class _ClassComponentState extends State<ClassComponent> {
         children: [
           ListTile(
             title: const Text(
-              'B.Tech (Mechanical Engg.)',
+              widget.classroomId,
               style: TextStyle(
                   fontWeight: FontWeight.bold, color: AppColors.white),
             ),

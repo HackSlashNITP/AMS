@@ -151,18 +151,11 @@ class _HomePageState extends State<HomePage> {
               const SizedBox(
                 height: 20,
               ),
-              const ClassComponent(
-                isMarked: true,
-              ),
-              const ClassComponent(
-                isMarked: false,
-              ),
-              const ClassComponent(
-                isMarked: false,
-              ),
-            ],
-          ),
-        ),
+            ...classrooms.map((classroom) => ClassComponent(
+         isMarked: false,
+        classroomId: classroom['ClassroomID'],
+
+      )).toList(),
         floatingActionButton: IconButton(
           color: AppColors.professorThemeColor,
           onPressed: () {
