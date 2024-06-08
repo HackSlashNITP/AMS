@@ -19,14 +19,24 @@ class _MatchWidgetState extends State<MatchWidget> {
     try {
       final file = Provider.of<ImageData>(context, listen: false).imageFile;
       var request =
-          http.MultipartRequest('POST', Uri.parse('${ip_address}/recognize'));
+          http.MultipartRequest('POST', Uri.parse('http://${ip_address}:5000/recognize'));
       request.files.add(http.MultipartFile.fromBytes(
           'file', file!.readAsBytesSync(),
           filename: file.path));
       var response = await request.send();
-      setState(() {
-        _response = response.statusCode == 200 ? 'Matched' : 'Not Matched';
-      });
+      if(response.statusCode==200){
+        setState(() {
+          _response = 'Matched';
+        });
+        final String url = 'http://${ip_address}:8001/attendance/present/id12345/CS45102';
+        final response = await http.put(Uri.parse(url));
+      }else{
+        setState(() {
+          _response = 'Not Matched';
+        });
+        final String url = 'http://${ip_address}:8001/attendance/id12345/CS45102/absent';
+        final response = await http.put(Uri.parse(url));
+      }
     } catch (e) {
       setState(() {
         _response = 'Error: $e';

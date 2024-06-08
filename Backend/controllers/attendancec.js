@@ -66,7 +66,7 @@ const Absent = async (req, res) => {
     if(!SubjectCode || typeof SubjectCode !== "string"){
       return res.status(400).json({ error: "Subject Code should be a string" });
     }
-    const updateQuery = "UPDATE attendance SET TotalClasses = TotalClasses + 1 WHERE studentID = ? AND SubjectCode = ?";
+    const updateQuery = "UPDATE Attendance SET TotalClasses = TotalClasses + 1 WHERE studentID = ? AND SubjectCode = ?";
     const result = await pool.query(updateQuery, [studentID, SubjectCode]);
     res.status(200).json({ message: "Student absent" });
   }
