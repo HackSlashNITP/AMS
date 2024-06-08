@@ -19,7 +19,7 @@ class _HomeScreenStudentState extends State<HomeScreenStudent> {
   late String section = 'Loading...';
   late String mergedClassroomId = 'Loading...';
   String ip = "192.168.242.144"; 
-  String studentIdParam = 'S1001'; //  studentId 
+  String studentIdParam = '2206080'; //  studentId 
 
   @override
   void initState() {

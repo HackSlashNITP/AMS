@@ -2,7 +2,6 @@
 import 'package:ams_flutter/features/onboarding/presentation/User/Pages/mark_Attendance_match.dart';
 import 'package:ams_flutter/features/onboarding/presentation/User/Pages/mark_Attendance_student.dart';
 import 'package:ams_flutter/features/onboarding/presentation/User/Pages/mark_Attendance_teacher.dart';
-import 'package:ams_flutter/features/onboarding/presentation/User/Pages/signupStudent.dart';
 import 'package:ams_flutter/route/app_pages.dart';
 import 'package:ams_flutter/route/custom_navigator.dart';
 import 'package:firebase_core/firebase_core.dart';
