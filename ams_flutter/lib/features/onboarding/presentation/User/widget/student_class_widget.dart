@@ -5,7 +5,16 @@ import 'package:ams_flutter/route/custom_navigator.dart';
 import 'package:flutter/material.dart';
 
 class StudentClass extends StatefulWidget {
-  const StudentClass({super.key});
+  final String subject;
+  final String professor;
+  final String classId;
+
+  const StudentClass({
+    Key? key,
+    required this.subject,
+    required this.professor,
+    required this.classId,
+  }) : super(key: key);
 
   @override
   State<StudentClass> createState() => _StudentClassState();
@@ -31,30 +40,35 @@ class _StudentClassState extends State<StudentClass> {
               Container(
                 height: 40,
                 color: AppColors.black,
-                child: const Row(
+                child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     Text(
-                      "Subject-1",
+                      widget.subject,
                       style: TextStyle(
-                          color: AppColors.white,
-                          fontWeight: FontWeight.w700,
-                          fontSize: 18,
-                          fontFamily: AppFontFamily.poppins),
+                        color: AppColors.white,
+                        fontWeight: FontWeight.w700,
+                        fontSize: 18,
+                        fontFamily: AppFontFamily.poppins,
+                      ),
                     ),
-                    Text("By Prof",
-                        style: TextStyle(
-                            color: AppColors.white,
-                            fontWeight: FontWeight.w600,
-                            fontSize: 15,
-                            fontFamily: AppFontFamily.poppins)),
                     Text(
-                      "EC45101",
+                      "Prof: ${widget.professor}",
                       style: TextStyle(
-                          color: AppColors.white,
-                          fontWeight: FontWeight.w700,
-                          fontSize: 18,
-                          fontFamily: AppFontFamily.poppins),
+                        color: AppColors.white,
+                        fontWeight: FontWeight.w600,
+                        fontSize: 15,
+                        fontFamily: AppFontFamily.poppins,
+                      ),
+                    ),
+                    Text(
+                      widget.classId,
+                      style: TextStyle(
+                        color: AppColors.white,
+                        fontWeight: FontWeight.w700,
+                        fontSize: 18,
+                        fontFamily: AppFontFamily.poppins,
+                      ),
                     )
                   ],
                 ),
@@ -74,24 +88,25 @@ class _StudentClassState extends State<StudentClass> {
                       color: AppColors.primary,
                       borderRadius: BorderRadius.circular(36),
                     ),
-                    child: const Row(
+                    child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         Text(
                           "See Your Attendance",
                           style: TextStyle(
-                              color: AppColors.white,
-                              fontWeight: FontWeight.w600),
+                            color: AppColors.white,
+                            fontWeight: FontWeight.w600,
+                          ),
                         ),
                         Icon(
                           Icons.arrow_forward,
                           color: AppColors.white,
-                        )
+                        ),
                       ],
                     ),
                   ),
                 ),
-              )
+              ),
             ],
           ),
         ),

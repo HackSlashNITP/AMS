@@ -4,11 +4,9 @@ import 'package:ams_flutter/core/constants/app_colors.dart';
 import 'package:ams_flutter/features/onboarding/presentation/User/widget/student_class_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 
 class HomeScreenStudent extends StatefulWidget {
-  const HomeScreenStudent({super.key});
+  const HomeScreenStudent({Key? key}) : super(key: key);
 
   @override
   State<HomeScreenStudent> createState() => _HomeScreenStudentState();
@@ -20,41 +18,16 @@ class _HomeScreenStudentState extends State<HomeScreenStudent> {
   late String department = 'Loading...';
   late String section = 'Loading...';
   late String mergedClassroomId = 'Loading...';
-  String ip = "192.168.242.144";
-  String studentIdParam = 'Loading...'; //  studentId
+  List<String> classroomIds = []; 
+  List<Map<String, dynamic>> classrooms = []; 
+  String ip = "192.168.1.4"; //  IP address
+  String studentIdParam = 'id12345'; // student ID
 
   @override
   void initState() {
     super.initState();
-    fetchStudentId();
-  }
-
-  Future<void> fetchStudentId() async {
-    try {
-      User? user = FirebaseAuth.instance.currentUser;
-      if (user != null) {
-        String email = user.email!;
-        DocumentSnapshot userDoc = await FirebaseFirestore.instance
-            .collection('student')
-            .where('email', isEqualTo: email)
-            .limit(1)
-            .get()
-            .then((snapshot) => snapshot.docs.first);
-        if (userDoc.exists) {
-          setState(() {
-            studentIdParam = userDoc.id;
-           
-          });
-          fetchStudentData(studentIdParam);
-        } else {
-          log('User document does not exist');
-        }
-      } else {
-        log('No user is currently logged in');
-      }
-    } catch (e) {
-      log('Error fetching student ID: $e');
-    }
+    fetchStudentData(studentIdParam);
+    fetchClassroomsData(studentIdParam);
   }
 
   Future<void> fetchStudentData(String studentId) async {
@@ -79,6 +52,50 @@ class _HomeScreenStudentState extends State<HomeScreenStudent> {
       }
     } catch (e) {
       log('Error loading student data: $e');
+    }
+  }
+
+  Future<void> fetchClassroomsData(String studentId) async {
+    try {
+      log("Fetching classrooms data\n");
+      final String url = 'http://$ip:8001/student/$studentId/classrooms';
+      final response = await http.get(Uri.parse(url));
+
+      if (response.statusCode == 200) {
+        final List<dynamic> data = jsonDecode(response.body)['classrooms'];
+        log(data.toString());
+        setState(() {
+          classroomIds = List<String>.from(data);
+        });
+        await fetchClassroomDetails(classroomIds);
+      } else {
+        log('Failed to load classrooms data: ${response.statusCode}');
+      }
+    } catch (e) {
+      log('Error loading classrooms data: $e');
+    }
+  }
+
+  Future<void> fetchClassroomDetails(List<String> classroomIds) async {
+    try {
+      List<Map<String, dynamic>> classroomsData = [];
+      for (String classroomId in classroomIds) {
+        final String url = 'http://$ip:8001/classroom/$classroomId';
+        final response = await http.get(Uri.parse(url));
+
+        if (response.statusCode == 200) {
+          final Map<String, dynamic> classroom = jsonDecode(response.body)['classroom'];
+          log(classroom.toString());
+          classroomsData.add(classroom);
+        } else {
+          log('Failed to load classroom details: ${response.statusCode}');
+        }
+      }
+      setState(() {
+        classrooms = classroomsData;
+      });
+    } catch (e) {
+      log('Error loading classroom details: $e');
     }
   }
 
@@ -133,9 +150,14 @@ class _HomeScreenStudentState extends State<HomeScreenStudent> {
               Container(
                 height: MediaQuery.of(context).size.height * 0.72,
                 child: ListView.builder(
-                  itemCount: 5,
+                  itemCount: classrooms.length,
                   itemBuilder: (context, index) {
-                    return StudentClass();
+                    final classroom = classrooms[index];
+                    return StudentClass(
+                      subject: classroom['SubjectCode'],
+                      professor: classroom['professorID'], // Replace with actual professor ID
+                      classId: classroom['ClassroomID'],
+                    );
                   },
                 ),
               ),

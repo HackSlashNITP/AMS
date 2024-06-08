@@ -4,6 +4,7 @@ const router = express.Router();
 // show all data
 // router.post("/create", classroomcontroller.createClassroom);
 router.get("/:professorId/classrooms", classroomcontroller.getAllClassrooms);
+router.get("/:classroomId", classroomcontroller.getClassroomDetails);
 // router.delete("/:classroomId", classroomcontroller.deleteClassroomById);
 
 module.exports = router;
