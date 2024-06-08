@@ -31,6 +31,7 @@ class _MarkAttendanceState extends State<MarkAttendance> {
             _buildDropDown(context),
             SizedBox(height: 4),
             TextFieldController(
+                obscureText: false,
                 textEditingController: TextEditingController(),
                 hinttext: "SearchStudent",
                 textInputType: TextInputType.name,
@@ -56,6 +57,7 @@ class _MarkAttendanceState extends State<MarkAttendance> {
       bottomNavigationBar: BottomNavBar(),
     );
   }
+
   Widget _buildHeader(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -71,7 +73,9 @@ class _MarkAttendanceState extends State<MarkAttendance> {
             color: Colors.green,
             size: mq.width * 0.07,
           ),
-          onPressed: () {CustomNavigator.pop(context);},
+          onPressed: () {
+            CustomNavigator.pop(context);
+          },
         ),
         // Image.asset(
         //   AppImages.bell_image,

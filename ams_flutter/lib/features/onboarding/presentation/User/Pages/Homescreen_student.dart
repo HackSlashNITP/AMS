@@ -1,11 +1,11 @@
 import 'dart:convert';
 import 'dart:developer';
-import 'package:ams_flutter/core/constants/dummy_models.dart';
-import 'package:http/http.dart' as http;
 import 'package:ams_flutter/core/constants/app_colors.dart';
-import 'package:ams_flutter/core/constants/app_text_styles.dart';
 import 'package:ams_flutter/features/onboarding/presentation/User/widget/student_class_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class HomeScreenStudent extends StatefulWidget {
   const HomeScreenStudent({super.key});
@@ -15,97 +15,134 @@ class HomeScreenStudent extends StatefulWidget {
 }
 
 class _HomeScreenStudentState extends State<HomeScreenStudent> {
-  late String userName = 'Loading1...';
-  late String id = 'Loading1..';
-  String ip = "192.168.104.119"; //Ip address of local host
-  String userId = 'csdf12'; //This userId is now being used for reference
+  late String studentName = 'Loading...';
+  late String studentId = 'Loading...';
+  late String department = 'Loading...';
+  late String section = 'Loading...';
+  late String mergedClassroomId = 'Loading...';
+  String ip = "192.168.242.144";
+  String studentIdParam = 'Loading...'; //  studentId
+
   @override
   void initState() {
     super.initState();
-    fetchUserData(userId);
+    fetchStudentId();
   }
 
-  Future<void> fetchUserData(String userId) async {
+  Future<void> fetchStudentId() async {
     try {
-      log("Fetching user data\n");
-      final String url = 'http://$ip:8001/user/$userId';
-      final response = await http.get(Uri.parse(url));
-      if (response.statusCode == 200) {
-        final Map<String, dynamic> data = jsonDecode(response.body);
-        final user = data['user'];
-        log(data.toString());
-        log(user['Username'].toString());
-        log(user['UserID'].toString());
-        setState(() {
-          userName = user['Username'];
-          id = user['UserID'];
-          AppInfo.profileDetails[0]['value'] = user['Username'];
-          AppInfo.profileDetails[1]['value'] = user['UserID'];
-        });
+      User? user = FirebaseAuth.instance.currentUser;
+      if (user != null) {
+        String email = user.email!;
+        DocumentSnapshot userDoc = await FirebaseFirestore.instance
+            .collection('student')
+            .where('email', isEqualTo: email)
+            .limit(1)
+            .get()
+            .then((snapshot) => snapshot.docs.first);
+        if (userDoc.exists) {
+          setState(() {
+            studentIdParam = userDoc.id;
+           
+          });
+          fetchStudentData(studentIdParam);
+        } else {
+          log('User document does not exist');
+        }
       } else {
-        print('Failed to load user data: ${response.statusCode}');
+        log('No user is currently logged in');
       }
     } catch (e) {
-      log('there is error');
-      print('Error loading user data: $e');
+      log('Error fetching student ID: $e');
     }
   }
 
+  Future<void> fetchStudentData(String studentId) async {
+    try {
+      log("Fetching student data\n");
+      final String url = 'http://$ip:8001/student/$studentId';
+      final response = await http.get(Uri.parse(url));
+
+      if (response.statusCode == 200) {
+        final Map<String, dynamic> data = jsonDecode(response.body);
+        final student = data['student'];
+        log(data.toString());
+        setState(() {
+          studentName = student['name'];
+          studentId = student['studentID'];
+          department = student['department'];
+          section = student['section'];
+          mergedClassroomId = student['mergedClassroomId'];
+        });
+      } else {
+        log('Failed to load student data: ${response.statusCode}');
+      }
+    } catch (e) {
+      log('Error loading student data: $e');
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     return SafeArea(
       top: false,
       child: Scaffold(
-          body: SingleChildScrollView(
-              child: Column(children: [
-        const SizedBox(
-          height: 20,
-        ),
-        ListTile(
-          leading: CircleAvatar(
-            radius: 20,
-          ),
-          title: Text(
-            userName,
-            style: TextStyle(
-              color: AppColors.primary,
-              fontSize: 30,
-              fontWeight: FontWeight.w600,
-            ),
-          ),
-          subtitle: Row(
+        body: SingleChildScrollView(
+          child: Column(
             children: [
-              Text(
-                "B.Tech (Electronics Engineering)",
-                style: TextStyle(fontSize: 12, color: AppColors.primary),
-              )
+              const SizedBox(
+                height: 20,
+              ),
+              ListTile(
+                leading: CircleAvatar(
+                  radius: 20,
+                ),
+                title: Text(
+                  studentName,
+                  style: TextStyle(
+                    color: AppColors.primary,
+                    fontSize: 30,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                subtitle: Row(
+                  children: [
+                    Text(
+                      "$department (Section $section)",
+                      style: TextStyle(fontSize: 12, color: AppColors.primary),
+                    ),
+                  ],
+                ),
+                trailing: Icon(
+                  Icons.notifications_active_outlined,
+                  color: AppColors.primary,
+                  size: 25,
+                ),
+              ),
+              const Padding(
+                padding: EdgeInsets.only(top: 15, right: 195),
+                child: Text(
+                  'My Classes',
+                  textAlign: TextAlign.left,
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 25,
+                  ),
+                ),
+              ),
+              Container(
+                height: MediaQuery.of(context).size.height * 0.72,
+                child: ListView.builder(
+                  itemCount: 5,
+                  itemBuilder: (context, index) {
+                    return StudentClass();
+                  },
+                ),
+              ),
             ],
           ),
-          trailing: Icon(
-            Icons.notifications_active_outlined,
-            color: AppColors.primary,
-            size: 25,
-          ),
         ),
-        const Padding(
-          padding: EdgeInsets.only(top: 15, right: 195),
-          child: Text(
-            'My Classes',
-            textAlign: TextAlign.left,
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 25,
-            ),
-          ),
-        ),
-        Container(
-          height: MediaQuery.of(context).size.height * 0.72,
-          child: ListView.builder(
-              itemCount: 5,
-              itemBuilder: (context, index) {
-                return StudentClass();
-              }),
-        )
-      ]))),
+      ),
     );
   }
 }

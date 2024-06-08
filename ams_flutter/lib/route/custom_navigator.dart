@@ -2,13 +2,13 @@ import 'package:ams_flutter/features/onboarding/presentation/Admin/pages/create_
 import 'package:ams_flutter/features/onboarding/presentation/Admin/pages/home_page.dart';
 import 'package:ams_flutter/features/onboarding/presentation/Admin/pages/instant_class.dart';
 import 'package:ams_flutter/features/onboarding/presentation/Admin/pages/markAttendance.dart';
-import 'package:ams_flutter/features/onboarding/presentation/User/Pages/providedetailspage.dart';
+import 'package:ams_flutter/features/onboarding/presentation/User/Pages/SignUp.dart';
 import 'package:ams_flutter/features/onboarding/presentation/Admin/pages/signup.dart';
 import 'package:ams_flutter/features/onboarding/presentation/Admin/pages/splash.dart';
 import 'package:ams_flutter/features/onboarding/presentation/Admin/pages/whoareyou.dart';
 import 'package:ams_flutter/features/onboarding/presentation/User/Pages/Pageview_student.dart';
 import 'package:ams_flutter/features/onboarding/presentation/User/Pages/showattendance_student.dart';
-import 'package:ams_flutter/features/onboarding/presentation/User/Pages/signupStudent.dart';
+import 'package:ams_flutter/features/onboarding/presentation/User/Pages/signinStudent.dart';
 
 import 'package:flutter/material.dart';
 
@@ -53,7 +53,7 @@ class CustomNavigator {
       case AppPages.showAttendance:
         return MaterialPageRoute(
           builder: (context) => ShowAttendance(),
-            settings: settings,
+          settings: settings,
         );
       case AppPages.homeProfessor:
         return MaterialPageRoute(
@@ -65,7 +65,7 @@ class CustomNavigator {
           builder: (context) => SignUpPageStudent(),
           settings: settings,
         );
-       case AppPages.markAttendance:
+      case AppPages.markAttendance:
         return MaterialPageRoute(
           builder: (context) => MarkAttendance(),
           settings: settings,
