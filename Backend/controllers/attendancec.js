@@ -45,7 +45,7 @@ const Present = async (req, res) => {
     if(!SubjectCode || typeof SubjectCode !== "string"){
       return res.status(400).json({ error: "Subject Code should be a string" });
     }
-    const updateQuery = "UPDATE attendance SET AttendanceCount = AttendanceCount + 1, TotalClasses = TotalClasses + 1 WHERE studentID = ? AND SubjectCode = ?";
+    const updateQuery = "UPDATE Attendance SET AttendanceCount = AttendanceCount + 1, TotalClasses = TotalClasses + 1 WHERE studentID = ? AND SubjectCode = ?";
     const result = await pool.query(updateQuery, [studentID, SubjectCode]);
     res.status(200).json({ message: "Student present" });
   }
@@ -87,7 +87,7 @@ const getAttendance = async (req, res) => {
     if(!SubjectCode || typeof SubjectCode !== "string"){
       return res.status(400).json({ error: "Subject Code should be a string" });
     }
-    const sqlQuery = "SELECT * FROM attendance WHERE studentID = ? AND SubjectCode = ?";
+    const sqlQuery = "SELECT * FROM Attendance WHERE studentID = ? AND SubjectCode = ?";
     const rows = await pool.query(sqlQuery, [studentID, SubjectCode]);
     if(rows.length === 0){
       return res.status(404).json({ error: "Attendance not found" });
