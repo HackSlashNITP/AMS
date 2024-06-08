@@ -4,6 +4,8 @@ import 'package:ams_flutter/core/constants/app_colors.dart';
 import 'package:ams_flutter/features/onboarding/presentation/User/widget/student_class_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class HomeScreenStudent extends StatefulWidget {
   const HomeScreenStudent({Key? key}) : super(key: key);
@@ -18,16 +20,44 @@ class _HomeScreenStudentState extends State<HomeScreenStudent> {
   late String department = 'Loading...';
   late String section = 'Loading...';
   late String mergedClassroomId = 'Loading...';
-  List<String> classroomIds = []; 
-  List<Map<String, dynamic>> classrooms = []; 
+  List<String> classroomIds = [];
+  List<Map<String, dynamic>> classrooms = [];
   String ip = "192.168.1.4"; //  IP address
   String studentIdParam = 'id12345'; // student ID
 
   @override
   void initState() {
     super.initState();
+    fetchStudentId();
     fetchStudentData(studentIdParam);
     fetchClassroomsData(studentIdParam);
+  }
+
+  Future<void> fetchStudentId() async {
+    try {
+      User? user = FirebaseAuth.instance.currentUser;
+      if (user != null) {
+        String email = user.email!;
+        DocumentSnapshot userDoc = await FirebaseFirestore.instance
+            .collection('student')
+            .where('email', isEqualTo: email)
+            .limit(1)
+            .get()
+            .then((snapshot) => snapshot.docs.first);
+        if (userDoc.exists) {
+          setState(() {
+            studentIdParam = userDoc.id;
+          });
+          fetchStudentData(studentIdParam);
+        } else {
+          log('User document does not exist');
+        }
+      } else {
+        log('No user is currently logged in');
+      }
+    } catch (e) {
+      log('Error fetching student ID: $e');
+    }
   }
 
   Future<void> fetchStudentData(String studentId) async {
@@ -84,7 +114,8 @@ class _HomeScreenStudentState extends State<HomeScreenStudent> {
         final response = await http.get(Uri.parse(url));
 
         if (response.statusCode == 200) {
-          final Map<String, dynamic> classroom = jsonDecode(response.body)['classroom'];
+          final Map<String, dynamic> classroom =
+              jsonDecode(response.body)['classroom'];
           log(classroom.toString());
           classroomsData.add(classroom);
         } else {
@@ -155,7 +186,8 @@ class _HomeScreenStudentState extends State<HomeScreenStudent> {
                     final classroom = classrooms[index];
                     return StudentClass(
                       subject: classroom['SubjectCode'],
-                      professor: classroom['professorID'], // Replace with actual professor ID
+                      professor: classroom[
+                          'professorID'], // Replace with actual professor ID
                       classId: classroom['ClassroomID'],
                     );
                   },
