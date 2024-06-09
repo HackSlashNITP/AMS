@@ -1,5 +1,4 @@
 import 'dart:typed_data';
-
 import 'package:ams_flutter/core/constants/app_colors.dart';
 import 'package:ams_flutter/core/constants/app_icons.dart';
 import 'package:ams_flutter/core/constants/app_images.dart';
@@ -12,7 +11,6 @@ import 'package:ams_flutter/features/onboarding/presentation/Admin/widgets/text_
 import 'package:ams_flutter/route/app_pages.dart';
 import 'package:ams_flutter/route/custom_navigator.dart';
 import 'package:flutter/material.dart';
-
 import 'package:image_picker/image_picker.dart';
 
 class DetailsPage extends StatefulWidget {

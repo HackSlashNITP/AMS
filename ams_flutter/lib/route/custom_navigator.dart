@@ -57,9 +57,18 @@ class CustomNavigator {
         );
       case AppPages.homeProfessor:
         return MaterialPageRoute(
-          builder: (context) => HomePage(),
+          builder: (context) {
+            final args = settings.arguments;
+            if (args != null && args is String) {
+              return HomePage(adminId: args);
+            } else {
+              // Handle error or default case
+              return Container();
+            }
+          },
           settings: settings,
         );
+
       case AppPages.signUpStudent:
         return MaterialPageRoute(
           builder: (context) => SignUpPageStudent(),
