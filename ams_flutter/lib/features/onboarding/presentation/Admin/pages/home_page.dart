@@ -21,7 +21,8 @@ class _HomePageState extends State<HomePage> {
   late String adminName = 'Loading...';
   late String department = 'Loading...';
   List<String> classrooms = [];
-  String ip =  "192.168.116.252"; // Update this to your actual IP
+  // String ip = "192.168.116.252"; // Update this to your actual IP
+  String ip = "192.168.1.4";
 
   @override
   void initState() {
@@ -36,13 +37,17 @@ class _HomePageState extends State<HomePage> {
       final response = await http.get(Uri.parse(url));
       if (response.statusCode == 200) {
         final Map<String, dynamic> data = jsonDecode(response.body);
-        final admin = data['admin'];
-        setState(() {
-          adminName = admin['name'];
-          department = admin['department'];
-        });
-      } else {
-        log('Failed to load admin data: ${response.statusCode}');
+        // final admin = data['admin'];
+        final List<dynamic> adminList = data['admin'];
+        if (adminList.isNotEmpty) {
+          final admin = adminList[0];
+          setState(() {
+            adminName = admin['name'];
+            department = admin['department'];
+          });
+        } else {
+          log('Failed to load admin data: ${response.statusCode}');
+        }
       }
     } catch (e) {
       log('Error loading admin data: $e');
@@ -55,7 +60,8 @@ class _HomePageState extends State<HomePage> {
       final response = await http.get(Uri.parse(url));
       if (response.statusCode == 200) {
         final Map<String, dynamic> data = jsonDecode(response.body);
-        final List<String> fetchedClassrooms = List<String>.from(data['Classrooms']);
+        final List<String> fetchedClassrooms =
+            List<String>.from(data['Classrooms']);
         setState(() {
           classrooms = fetchedClassrooms;
         });
@@ -66,6 +72,7 @@ class _HomePageState extends State<HomePage> {
       log('Error loading classrooms: $e');
     }
   }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -96,13 +103,15 @@ class _HomePageState extends State<HomePage> {
               ),
               const SizedBox(height: 20),
               Container(
-                margin: const EdgeInsets.symmetric(horizontal: 35, vertical: 15),
+                margin:
+                    const EdgeInsets.symmetric(horizontal: 35, vertical: 15),
                 height: 47,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(30),
                   boxShadow: [
                     BoxShadow(
-                      color: const Color.fromARGB(255, 194, 190, 190).withOpacity(0.3),
+                      color: const Color.fromARGB(255, 194, 190, 190)
+                          .withOpacity(0.3),
                       spreadRadius: 1,
                       blurRadius: 5,
                       offset: const Offset(0, 3),
@@ -151,22 +160,39 @@ class _HomePageState extends State<HomePage> {
               const SizedBox(
                 height: 20,
               ),
-            ...classrooms.map((classroom) => ClassComponent(
-         isMarked: false,
-        classroomId: classroom['ClassroomID'],
-
-      )).toList(),
-        floatingActionButton: IconButton(
-          color: AppColors.professorThemeColor,
-          onPressed: () {
-            CustomNavigator.pushTo(
-              context,
-              AppPages.instantClass, // Pass user type as argument
-            );
-          },
-          icon: const Icon(
-            Icons.add_circle_outline_outlined,
-            size: 40,
+              ...classrooms
+                  .map((classroom) => ClassComponent(
+                        isMarked: false,
+                        // classroomId: classroom['ClassroomID'],
+                        classroomId: classroom,
+                      ))
+                  .toList(),
+              FloatingActionButton(
+                onPressed: () {},
+                child: IconButton(
+                    color: AppColors.professorThemeColor,
+                    onPressed: () {
+                      CustomNavigator.pushTo(context, AppPages.instantClass);
+                    },
+                    icon: const Icon(
+                      Icons.add_circle_outline_outlined,
+                      size: 40,
+                    )),
+              )
+              // FloatingActionButton: IconButton(
+              //   color: AppColors.professorThemeColor,
+              //   onPressed: () {
+              //     CustomNavigator.pushTo(
+              //       context,
+              //       AppPages.instantClass, // Pass user type as argument
+              //     );
+              //   },
+              //   icon: const Icon(
+              //     Icons.add_circle_outline_outlined,
+              //     size: 40,
+              //   ),
+              // ),
+            ],
           ),
         ),
       ),

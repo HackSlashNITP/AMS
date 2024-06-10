@@ -40,7 +40,7 @@ class _ClassComponentState extends State<ClassComponent> {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           ListTile(
-            title: const Text(
+            title:  Text(
               widget.classroomId,
               style: TextStyle(
                   fontWeight: FontWeight.bold, color: AppColors.white),
