@@ -52,9 +52,8 @@ class _DetailsPageState extends State<DetailsPage> {
       );
 
       // if (res == "Success")
-      if(true)
-       {
-        print("Success");
+      // if (true) {
+        // print("Success");
         String studentID = rollController.text;
         String name = nameController.text;
         String department = branchController.text;
@@ -72,10 +71,19 @@ class _DetailsPageState extends State<DetailsPage> {
             setState(() {
               _isLoading = false;
             });
-            CustomNavigator.pushReplace(
-              context,
-              AppPages.homeStudent,
-            );
+            if (res == "Success") {
+              CustomNavigator.pushReplace(
+                context,
+                AppPages.homeStudent,
+              );
+            }else {
+        setState(() {
+          _isLoading = false;
+        });
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(res)),
+        );
+      }
           } else {
             setState(() {
               _isLoading = false;
@@ -92,14 +100,7 @@ class _DetailsPageState extends State<DetailsPage> {
             SnackBar(content: Text("Failed to create student")),
           );
         }
-      } else {
-        setState(() {
-          _isLoading = false;
-        });
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(res)),
-        );
-      }
+      
     } catch (e) {
       setState(() {
         _isLoading = false;
