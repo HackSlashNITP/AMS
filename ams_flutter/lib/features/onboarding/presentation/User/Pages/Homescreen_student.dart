@@ -22,8 +22,9 @@ class _HomeScreenStudentState extends State<HomeScreenStudent> {
   late String mergedClassroomId = 'Loading...';
   List<String> classroomIds = [];
   List<Map<String, dynamic>> classrooms = [];
+  // String ip = "192.168.1.4";
   String ip = "192.168.1.4"; //  IP address
-  String studentIdParam = 'id12345'; // student ID
+  late String studentIdParam = 'Loading';
 
   @override
   void initState() {
@@ -49,6 +50,7 @@ class _HomeScreenStudentState extends State<HomeScreenStudent> {
             studentIdParam = userDoc.id;
           });
           fetchStudentData(studentIdParam);
+          fetchClassroomsData(studentIdParam);
         } else {
           log('User document does not exist');
         }
@@ -65,6 +67,7 @@ class _HomeScreenStudentState extends State<HomeScreenStudent> {
       log("Fetching student data\n");
       final String url = 'http://$ip:8001/student/$studentId';
       final response = await http.get(Uri.parse(url));
+      log(studentId + "this is student id");
 
       if (response.statusCode == 200) {
         final Map<String, dynamic> data = jsonDecode(response.body);
@@ -87,13 +90,14 @@ class _HomeScreenStudentState extends State<HomeScreenStudent> {
 
   Future<void> fetchClassroomsData(String studentId) async {
     try {
-      log("Fetching classrooms data\n");
+      log("Fetching classrooms data for student ID: $studentId");
       final String url = 'http://$ip:8001/student/$studentId/classrooms';
       final response = await http.get(Uri.parse(url));
 
       if (response.statusCode == 200) {
         final List<dynamic> data = jsonDecode(response.body)['classrooms'];
-        log(data.toString());
+        // log(data.toString());
+         log("Classroom IDs: $data");
         setState(() {
           classroomIds = List<String>.from(data);
         });
@@ -116,7 +120,8 @@ class _HomeScreenStudentState extends State<HomeScreenStudent> {
         if (response.statusCode == 200) {
           final Map<String, dynamic> classroom =
               jsonDecode(response.body)['classroom'];
-          log(classroom.toString());
+          // log(classroom.toString());
+          log("Classroom details for ID $classroomId: $classroom");
           classroomsData.add(classroom);
         } else {
           log('Failed to load classroom details: ${response.statusCode}');
