@@ -33,13 +33,11 @@ class _DetailsPageState extends State<DetailsPage> {
   Uint8List? _image;
   final String allowedDomain = "nitp.ac.in";
   bool _isLoading = false;
-  final String ip = "192.168.1.4"; // Ensure this is defined only once
-
+  final String ip = "192.168.1.4"; //this must me same in home page also
   void signUpUser() async {
     setState(() {
       _isLoading = true;
     });
-
     try {
       String res = await Authmethods().SignUpStudent(
         name: nameController.text,
@@ -52,55 +50,63 @@ class _DetailsPageState extends State<DetailsPage> {
       );
 
       // if (res == "Success")
-      // if (true) {
-        // print("Success");
-        String studentID = rollController.text;
-        String name = nameController.text;
-        String department = branchController.text;
-        String section = sectionController.text;
-        String mergedClassroomId = "CS102CS103CS104";
+      String studentID = rollController.text;
+      String name = nameController.text;
+      String department = branchController.text;
+      String section = sectionController.text;
+      String mergedClassroomId =
+          "CS102CS103CS104"; // replace with actual mergedClassroomId and these must be in db.classroom
 
-        bool studentCreated = await createStudent(
-            studentID, name, department, section, mergedClassroomId);
+      bool studentCreated = await createStudent(
+          studentID, name, department, section, mergedClassroomId);
 
-        if (studentCreated) {
-          List<String> subjectCodes = ["CS45102", "CS45103", "CS45104"];
-          bool attendanceMarked = await markAttendance(studentID, subjectCodes);
+      if (studentCreated) {
+        ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text("Student Creation succesful")));
+        List<String> subjectCodes = [
+          "CS45102",
+          "CS45103",
+          "CS45104"
+        ]; //These must be in db.course
+        bool attendanceMarked = await markAttendance(studentID, subjectCodes);
 
-          if (attendanceMarked) {
-            setState(() {
-              _isLoading = false;
-            });
-            if (res == "Success") {
+        if (attendanceMarked) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text("create attendance succesful")));
+          {
+            if (res == "Success")
+            // if(true)
+            {
               CustomNavigator.pushReplace(
                 context,
                 AppPages.homeStudent,
               );
-            }else {
-        setState(() {
-          _isLoading = false;
-        });
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(res)),
-        );
-      }
-          } else {
-            setState(() {
-              _isLoading = false;
-            });
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text("Failed to mark attendance")),
-            );
+            } else {
+              setState(() {
+                _isLoading = false;
+              });
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(content: Text("Cannot go to home page")),
+              );
+            }
           }
         } else {
           setState(() {
             _isLoading = false;
           });
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text("Failed to create student")),
+            SnackBar(content: Text("Failed to mark attendance")),
           );
         }
-      
+      } else {
+        setState(() {
+          _isLoading = false;
+        });
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text("Failed to create student")),
+        );
+      }
+      // }
     } catch (e) {
       setState(() {
         _isLoading = false;
@@ -119,11 +125,11 @@ class _DetailsPageState extends State<DetailsPage> {
         Uri.parse('http://$ip:8001/student/register'),
         headers: {'Content-Type': 'application/json'},
         body: jsonEncode({
-          "studentId": studentID,
-          "name": name,
-          "department": department,
-          "section": section,
-          "mergedClassroomId": mergedClassroomId,
+          'studentId': studentID,
+          'name': name,
+          'department': department,
+          'section': section,
+          'mergedClassroomId': mergedClassroomId,
         }),
       );
 
@@ -187,12 +193,13 @@ class _DetailsPageState extends State<DetailsPage> {
               width: 48,
             ),
             const Padding(
-                padding: EdgeInsets.only(top: 15, bottom: 10),
-                child: Text(PROVIDE_YOUR_DETAIL,
-                    style: TextStyle(
-                        fontSize: 28,
-                        fontWeight: FontWeight.w700,
-                        fontFamily: AppFontFamily.poppins))),
+              padding: EdgeInsets.only(top: 15, bottom: 10),
+              child: Text(PROVIDE_YOUR_DETAIL,
+                  style: TextStyle(
+                      fontSize: 28,
+                      fontWeight: FontWeight.w700,
+                      fontFamily: AppFontFamily.poppins)),
+            ),
             Stack(
               children: [
                 _image != null
@@ -273,8 +280,8 @@ class _DetailsPageState extends State<DetailsPage> {
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(7),
                     color: AppColors.secondary),
-                margin: const EdgeInsets.only(
-                    left: 4.5, right: 4.5, top: 30, bottom: 20),
+                margin:
+                    EdgeInsets.only(left: 4.5, right: 4.5, top: 30, bottom: 20),
                 child: _isLoading
                     ? const CircularProgressIndicator()
                     : const Text('SignUp',
